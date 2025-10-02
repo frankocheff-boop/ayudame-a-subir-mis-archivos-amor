@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Información de Huéspedes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+        :root {
+            --brand-teal: #003C3C;
+            --brand-bg: #FBF7F0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--brand-bg);
+            color: #333;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--brand-teal);
+        }
+
+        .form-section {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+        }
+
+        .input-field {
+            font-family: 'Montserrat', sans-serif;
+            border: 1px solid #D1D5DB;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .input-field:focus {
+            border-color: var(--brand-teal);
+            box-shadow: 0 0 0 2px rgba(0, 60, 60, 0.2);
+        }
+
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-teal);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #002a2a;
+        }
+
+        .btn-secondary {
+            background-color: #4c7c7c;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #3d6363;
+        }
+
+        .btn-tertiary {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-tertiary:hover {
+            background-color: #d1d5db;
+        }
+
+        #roomAssignmentTable tbody tr:nth-child(odd) {
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Encabezado con logo -->
+    <header class="text-center py-10 px-4">
+
+        <p class="text-xl sm:text-2xl tracking-widest text-[var(--brand-teal)] mt-4 font-semibold">VERANO ESTATE</p>
+        <h1 class="text-3xl sm:text-4xl mt-2">Formulario de Información de Huéspedes</h1>
+        <p class="text-sm text-gray-500 mt-2">by Chef Franko</p>
+    </header>
+
+    <!-- WiFi Info Section -->
+    <div class="max-w-md mx-auto my-8 px-4">
+        <img src="https://i.imgur.com/1CQ3BSd.png" alt="Información de WiFi" class="w-full h-auto rounded-lg shadow-md">
+    </div>
+
+    <!-- Status Message Container -->
+    <div id="statusMessage" class="hidden fixed top-5 right-5 z-50 transition-transform transform translate-x-full">
+        <div id="statusMessageContent" class="max-w-sm rounded-lg shadow-2xl p-4 text-white flex items-center">
+            <span id="statusMessageIcon" class="mr-3"></span>
+            <p id="statusMessageText" class="flex-grow"></p>
+            <button onclick="closeStatusMessage()"
+                class="ml-4 -mx-1.5 -my-1.5 p-1.5 rounded-lg inline-flex h-8 w-8 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white">
+                <span class="sr-only">Cerrar</span>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-6 pb-12">
+        <form id="guestForm" action="https://formspree.io/f/xvgqddpg" method="POST">
+            <!-- Basic Information -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span
+                        class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">1</span>
+                    Información Básica
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="group_name" class="block text-sm font-medium text-gray-700 mb-2">Nombre del
+                            Grupo</label>
+                        <input type="text" id="group_name" name="group_name"
+                            class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                    <div>
+                        <label for="contact_leader"
+                            class="block text-sm font-medium text-gray-700 mb-2">Contacto/Líder</label>
+                        <input type="text" id="contact_leader" name="contact_leader"
+                            class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg input-field"
+                            required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transportation -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span
+                        class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">2</span>
+                    Transporte del Aeropuerto a la Villa
+                </h2>
+                <div class="space-y-3">
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input type="radio"
+                            name="transportation" value="vip_roundtrip"
+                            class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>VIP SUV Transfer
+                            del Aeropuerto: Viaje redondo</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input type="radio"
+                            name="transportation" value="vip_arrival"
+                            class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Solo
+                            llegada</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input type="radio"
+                            name="transportation" value="vip_departure"
+                            class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Solo
+                            salida</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input type="radio"
+                            name="transportation" value="taxi"
+                            class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Taxi por su
+                            cuenta</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input type="radio"
+                            name="transportation" value="other"
+                            class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Otro</span></label>
+                </div>
+            </section>
+
+            <!-- Room Information -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span
+                        class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">3</span>
+                    Información de Estadía y Habitaciones
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 border-b pb-6">
+                    <div>
+                        <label for="main_arrival_date" class="block text-sm font-medium text-gray-700 mb-2">Fecha
+                            Principal de Llegada del Grupo</label>
+                        <input type="date" id="main_arrival_date" name="main_arrival_date"
+                            class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                    <div>
+                        <label for="main_departure_date" class="block text-sm font-medium text-gray-700 mb-2">Fecha
+                            Principal de Salida del Grupo</label>
+                        <input type="date" id="main_departure_date" name="main_departure_date"
+                            class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <label for="rooms_reserved" class="block text-sm font-medium text-gray-700 mb-2">Número de
+                            habitaciones reservadas</label>
+                        <input type="number" id="rooms_reserved" name="rooms_reserved"
+                            class="w-full px-4 py-3 rounded-lg input-field" min="1" max="11">
+                    </div>
+                    <div>
+                        <label for="total_adults" class="block text-sm font-medium text-gray-700 mb-2">Total de
+                            Adultos</label>
+                        <input type="number" id="total_adults" name="total_adults"
+                            class="w-full px-4 py-3 rounded-lg input-field" min="1">
+                    </div>
+                    <div>
+                        <label for="children_ages" class="block text-sm font-medium text-gray-700 mb-2">Niños
+                            (edades)</label>
+                        <input type="text" id="children_ages" name="children_ages"
+                            placeholder="ej: 2 niños (8, 12 años)" class="w-full px-4 py-3 rounded-lg input-field">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <p class="text-sm font-medium text-gray-700 mb-3">¿Prefiere pre-asignar habitaciones y registrar
+                        llegadas/salidas individuales?</p>
+                    <div class="flex space-x-6">
+                        <label class="flex items-center"><input type="radio" name="preassign_rooms" value="yes"
+                                class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"
+                                onchange="toggleRoomAssignment(true)"><span>SÍ</span></label>
+                        <label class="flex items-center"><input type="radio" name="preassign_rooms" value="no"
+                                class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"
+                                onchange="toggleRoomAssignment(false)" checked><span>NO</span></label>
+                    </div>
+                </div>
+                <div id="roomAssignment" class="hidden">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Registro Individual de Huéspedes</h3>
+                    <div class="overflow-x-auto rounded-lg border border-gray-200">
+                        <table id="roomAssignmentTable" class="w-full">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Hab.#</th>
+                                    <th
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Huésped</th>
+                                    <th
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Llegada</th>
+                                    <th
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Salida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows are generated dynamically in JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Services -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span
+                        class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">4</span>
+                    Servicios Adicionales
+                </h2>
+                <div class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="text-sm font-medium text-gray-700 mb-3">¿Le gustaría Servicio de Comida los
+                                Domingos?</p>
+                            <div class="flex space-x-6">
+                                <label class="flex items-center"><input type="radio" name="sunday_meal_service"
+                                        value="yes" class="mr-2 text-[var(--brand-teal)]"><span>SÍ (costos adicionales
+                                        aplican)</span></label>
+                                <label class="flex items-center"><input type="radio" name="sunday_meal_service"
+                                        value="no" class="mr-2 text-[var(--brand-teal)]"><span>NO</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-700 mb-3">¿Le gustaría Servicio de Limpieza los
+                                Domingos?</p>
+                            <div class="flex space-x-6">
+                                <label class="flex items-center"><input type="radio" name="sunday_maid_service"
+                                        value="yes" class="mr-2 text-[var(--brand-teal)]"><span>SÍ (costos adicionales
+                                        aplican)</span></label>
+                                <label class="flex items-center"><input type="radio" name="sunday_maid_service"
+                                        value="no" class="mr-2 text-[var(--brand-teal)]"><span>NO</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="special_requests" class="block text-sm font-medium text-gray-700 mb-2">¿Alguna
+                            solicitud especial al llegar?</label>
+                        <textarea id="special_requests" name="special_requests" rows="3"
+                            class="w-full px-4 py-3 rounded-lg input-field"></textarea>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="special_occasion" class="block text-sm font-medium text-gray-700 mb-2">¿Alguien
+                                celebrando una ocasión especial?</label>
+                            <input type="text" id="special_occasion" name="special_occasion"
+                                placeholder="ej: Cumpleaños, Aniversario"
+                                class="w-full px-4 py-3 rounded-lg input-field">
+                        </div>
+                        <div>
+                            <label for="occasion_date" class="block text-sm font-medium text-gray-700 mb-2">Fecha del
+                                evento</label>
+                            <input type="date" id="occasion_date" name="occasion_date"
+                                class="w-full px-4 py-3 rounded-lg input-field">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Special Activities -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span
+                        class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">5</span>
+                    Servicios y Actividades Especiales
+                </h2>
+                <p class="text-sm text-gray-600 mb-4">¿Le gustaría información o pre-reservar alguno de estos servicios
+                    y actividades especiales?</p>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="flowers"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Flores</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="mariachi"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Banda de
+                            Mariachi-trío</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="atv"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Tour en
+                            ATV</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="city_tour"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Tour privado de
+                            la ciudad</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="zipline"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Tours de
+                            Tirolesa</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="yoga"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Clase de
+                            Yoga</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="salsa"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Lección de
+                            Salsa</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="yacht"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Tour privado en
+                            Yate</span></label>
+                    <label class="flex items-center p-2 rounded-md hover:bg-gray-50 cursor-pointer"><input
+                            type="checkbox" name="activities" value="spa"
+                            class="mr-2 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]"><span>Servicios de
+                            SPA</span></label>
+                </div>
+            </section>
+
+            <!-- Provisions -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span
+                        class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">6</span>
+                    Provisiones y Bebidas
+                </h2>
+                <p class="text-sm text-gray-600 mb-6">Por favor indique la cantidad y su marca preferida. El costo de
+                    los artículos más un cargo por servicio se agregará a su factura.</p>
+                <div id="provisionListContainer" class="space-y-8">
+                    <!-- Provision items will be generated by JS -->
+                </div>
+                <div class="mt-8">
+                    <label for="additional_info" class="block text-sm font-medium text-gray-700 mb-2">Información
+                        adicional o restricciones dietéticas que debamos saber:</label>
+                    <textarea id="additional_info" name="additional_info" rows="4"
+                        class="w-full px-4 py-3 rounded-lg input-field"></textarea>
+                </div>
+            </section>
+
+            <!-- Submit Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <button type="submit"
+                    class="btn btn-primary font-semibold py-4 px-8 rounded-lg shadow-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    <span>Enviar Formulario</span>
+                </button>
+                <button type="button" onclick="sendToWhatsApp()"
+                    class="btn btn-secondary font-semibold py-4 px-8 rounded-lg shadow-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.63z" />
+                    </svg>
+                    <span>Enviar por WhatsApp</span>
+                </button>
+                <button type="reset"
+                    class="btn btn-tertiary font-semibold py-4 px-8 rounded-lg shadow-lg flex items-center justify-center">
+                    <span>Limpiar Formulario</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="bg-[var(--brand-teal)] text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="font-bold text-lg tracking-wide">VERANO STATE by chef franko</p>
+            <div class="flex justify-center my-5 space-x-6">
+                <a href="https://www.instagram.com/veranostate/" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-300 hover:text-white transition-colors duration-300">
+                    <span class="sr-only">Instagram</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.44c-3.115 0-3.486.011-4.71.066-2.783.127-3.995 1.33-4.122 4.122-.056 1.223-.066 1.594-.066 4.709 0 3.115.011 3.486.066 4.71.127 2.783 1.339 3.995 4.122 4.122 1.223.056 1.594.066 4.709.066 3.115 0 3.486-.011 4.71-.066 2.783-.127 3.995-1.33 4.122-4.122.056-1.223.066-1.594.066-4.709 0-3.115-.011-3.486-.066-4.71-.127-2.783-1.339-3.995-4.122-4.122-1.224-.055-1.595-.066-4.71-.066zm0 2.88c-1.802 0-3.262 1.46-3.262 3.262s1.46 3.262 3.262 3.262 3.262-1.46 3.262-3.262-1.46-3.262-3.262-3.262zm0 5.08c-.997 0-1.812-.815-1.812-1.812s.815-1.812 1.812-1.812 1.812.815 1.812 1.812-.815 1.812-1.812 1.812zm4.332-5.182c-.378 0-.683.305-.683.683s.305.683.683.683.683-.305.683-.683-.305-.683-.683-.683z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+                    <span class="sr-only">Facebook</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-white transition-colors duration-300">
+                    <span class="sr-only">TikTok</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12.525.02c1.31-.02 2.61-.01 3.91.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.84-.95-6.43-2.88-1.59-1.93-2.12-4.66-1.5-7.05.62-2.39 2.48-4.25 4.88-5.01.6-.19 1.2-.3 1.8-.31.01 2.11-.01 4.21-.01 6.32 0 .6-.03 1.2-.04 1.79-.01.59-.18 1.16-.44 1.66-.27.5-.66.93-1.13 1.21-.47.28-.99.43-1.52.47-.53.04-1.07-.02-1.57-.22-.5-.19-.94-.5-1.28-.9-.32-.38-.56-.83-.7-1.31-.13-.44-.19-.92-.18-1.4v-3.47c.02-1.12.33-2.21.89-3.19.92-1.61 2.53-2.67 4.36-2.95.71-.11 1.42-.16 2.13-.16v4.61c-.34-.02-.68-.04-1.02-.04-1.13 0-2.25.1-3.36.29-.5.09-1 .24-1.46.47-.46.23-.86.53-1.19.89-.33.36-.59.78-.76 1.24-.17.46-.25.96-.24 1.47.02.5.13 1 .33 1.44.2.44.49.81.86 1.1.37.29.79.49 1.24.6.45.11.92.14 1.39.11.96-.05 1.85-.41 2.55-1.02.69-.61 1.12-1.45 1.27-2.38.07-.46.09-.92.09-1.39.01-4.27-.01-8.54-.02-12.81z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="text-gray-300 space-y-1">
+                <p>+52 322 160 6843</p>
+                <p>franko@veranostate.com</p>
+            </div>
+            <div class="mt-6 border-t border-gray-700 pt-6">
+                <p class="text-sm text-gray-400">&copy; 2025 VERANO STATE. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // --- DATA FOR DYNAMIC CONTENT ---
+            const roomData = [
+                { number: 1, type: "Una Cama King" }, { number: 2, type: "2 Camas Queen" },
+                { number: 3, type: "2 Camas Queen" }, { number: 4, type: "Una Cama King" },
+                { number: 5, type: "2 Camas Queen" }, { number: 6, type: "2 Camas Queen" },
+                { number: 7, type: "2 Camas Queen" }, { number: 8, type: "2 Camas Queen" },
+                { number: 9, type: "Una Cama King" }, { number: 10, type: "2 Camas Queen" },
+                { number: 11, type: "Una Cama King" }
+            ];
+
+            const provisionData = [
+                {
+                    category: 'Bebidas Alcohólicas',
+                    items: [
+                        { name: 'Cerveza' }, { name: 'Tequila' }, { name: 'Vodka' }, { name: 'Whiskey' }, { name: 'Ron' },
+                        { name: 'Vino Tinto (Cabernet)' }, { name: 'Vino Blanco (Chardonnay)' }, { name: 'Vino Rosado' },
+                    ]
+                },
+                {
+                    category: 'Bebidas No Alcohólicas',
+                    items: [
+                        { name: 'Agua Embotellada' }, { name: 'Refrescos', brand_label: 'Marca(s) preferida(s)' },
+                        { name: 'Jugo', brand_label: 'Sabor(es) preferido(s)' },
+                    ]
+                },
+                {
+                    category: 'Comida y Snacks',
+                    items: [
+                        { name: 'Cereales' }, { name: 'Pan', brand_label: 'Tipo preferido' }, { name: 'Vegetales', brand_label: 'Tipos preferidos' },
+                        { name: 'Frutas', brand_label: 'Tipos preferidos' }, { name: 'Café' }, { name: 'Leche', brand_label: 'Tipo preferido' },
+                        { name: 'Botanas (papas, nueces)', brand_label: 'Tipos preferidos' }
+                    ]
+                },
+                {
+                    category: 'Artículos de Aseo Personal',
+                    items: [
+                        { name: 'Cepillos de dientes', type: 'info', text: 'Incluidos en su estancia' },
+                        { name: 'Pasta de dientes', type: 'info', text: 'Incluida en su estancia' },
+                        { name: 'Bloqueador Solar' }, { name: 'Repelente de insectos' },
+                    ]
+                }
+            ];
+
+            // --- DYNAMIC CONTENT GENERATION ---
+            function generateProvisionList() {
+                const container = document.getElementById('provisionListContainer');
+                container.innerHTML = ''; // Clear existing content
+
+                provisionData.forEach(categoryObj => {
+                    const categoryWrapper = document.createElement('div');
+
+                    const categoryTitle = document.createElement('h3');
+                    categoryTitle.className = "text-xl font-bold text-gray-800 mb-4";
+                    categoryTitle.textContent = categoryObj.category;
+                    categoryWrapper.appendChild(categoryTitle);
+
+                    const itemsGrid = document.createElement('div');
+                    itemsGrid.className = 'grid md:grid-cols-2 gap-x-8 gap-y-4';
+
+                    categoryObj.items.forEach(item => {
+                        const item_id = item.name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+
+                        if (item.type === 'info') {
+                            itemsGrid.innerHTML += `<div class="md:col-span-2 grid grid-cols-2 gap-3 items-center"><label class="block text-sm text-gray-700">${item.name}</label><p class="text-sm text-gray-500">${item.text}</p></div>`;
+                        } else {
+                            itemsGrid.innerHTML += `<div class="grid grid-cols-2 gap-3"><div><label for="${item_id}_amount" class="block text-xs text-gray-600 mb-1">${item.name} - Cantidad</label><input type="text" id="${item_id}_amount" name="${item_id}_amount" class="w-full px-3 py-2 text-sm rounded input-field"></div><div><label for="${item_id}_brand" class="block text-xs text-gray-600 mb-1">${item.brand_label || 'Marca preferida'}</label><input type="text" id="${item_id}_brand" name="${item_id}_brand" class="w-full px-3 py-2 text-sm rounded input-field"></div></div>`;
+                        }
+                    });
+                    categoryWrapper.appendChild(itemsGrid);
+                    container.appendChild(categoryWrapper);
+                });
+            }
+
+            const roomTableBody = document.querySelector('#roomAssignmentTable tbody');
+            roomData.forEach(room => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-4 py-3 border-t border-gray-200 align-top text-sm">
+                        <span class="font-semibold">${room.number}</span>
+                        <p class="text-xs text-gray-500 whitespace-nowrap">${room.type}</p>
+                    </td>
+                    <td class="px-4 py-3 border-t border-gray-200 align-top">
+                        <input type="text" name="room_${room.number}_guest" placeholder="Nombre del Huésped" class="w-full text-sm p-2 border border-gray-200 rounded-md focus:ring-1 focus:ring-[var(--brand-teal)] bg-transparent">
+                    </td>
+                    <td class="px-4 py-3 border-t border-gray-200 align-top">
+                        <input type="date" name="room_${room.number}_arrival_date" class="block w-full text-sm p-2 border border-gray-200 rounded-md focus:ring-1 focus:ring-[var(--brand-teal)]">
+                        <input type="time" name="room_${room.number}_arrival_time" class="block w-full text-sm mt-1 p-2 border border-gray-200 rounded-md focus:ring-1 focus:ring-[var(--brand-teal)]">
+                        <input type="text" name="room_${room.number}_arrival_flight" placeholder="Vuelo" class="block w-full text-sm mt-1 p-2 border border-gray-200 rounded-md focus:ring-1 focus:ring-[var(--brand-teal)]">
+                    </td>
+                    <td class="px-4 py-3 border-t border-gray-200 align-top">
+                        <input type="date" name="room_${room.number}_departure_date" class="block w-full text-sm p-2 border border-gray-200 rounded-md focus:ring-1 focus:ring-[var(--brand-teal)]">
+                        <input type="time" name="room_${room.number}_departure_time" class="block w-full text-sm mt-1 p-2 border border-gray-200 rounded-md focus:ring-1 focus:ring-[var(--brand-teal)]">
+                        <input type="text" name="room_${room.number}_departure_flight" placeholder="Vuelo" class="block w-full text-sm mt-1 p-2 border border-gray-200 rounded-md focus:ring-1 focus:ring-[var(--brand-teal)]">
+                    </td>
+                `;
+                roomTableBody.appendChild(row);
+            });
+
+            generateProvisionList();
+
+            // --- EVENT LISTENERS & FORM LOGIC ---
+            document.getElementById('guestForm').addEventListener('submit', handleFormSubmit);
+
+            // --- UI TOGGLE FUNCTIONS (made available globally) ---
+            window.toggleRoomAssignment = (show) => {
+                document.getElementById('roomAssignment').classList.toggle('hidden', !show);
+            };
+
+            // --- WHATSAPP INTEGRATION ---
+            window.sendToWhatsApp = () => {
+                const formData = new FormData(document.getElementById('guestForm'));
+                let message = "🏝️ *FORMULARIO DE INFORMACIÓN DE HUÉSPEDES* 🏝️\n\n";
+                const getVal = (name) => formData.get(name) || 'N/A';
+
+                // Sections
+                message += `*1. INFORMACIÓN BÁSICA*\n• Grupo: ${getVal('group_name')}\n• Líder: ${getVal('contact_leader')}\n• Teléfono: ${getVal('phone')}\n\n`;
+                message += `*2. TRANSPORTE*\n• Opción: ${getVal('transportation')}\n\n`;
+                message += `*3. ESTADÍA Y HABITACIONES*\n• Llegada Grupo: ${getVal('main_arrival_date')}\n• Salida Grupo: ${getVal('main_departure_date')}\n• # Habitaciones: ${getVal('rooms_reserved')}\n• Adultos: ${getVal('total_adults')}\n• Niños: ${getVal('children_ages')}\n• Registrar Individualmente: ${getVal('preassign_rooms')}\n`;
+
+                if (getVal('preassign_rooms') === 'yes') {
+                    message += "\n*REGISTRO INDIVIDUAL:*\n";
+                    for (let i = 1; i <= 11; i++) {
+                        const guest = getVal(`room_${i}_guest`);
+                        if (guest && guest.trim() !== '' && guest !== 'N/A') {
+                            const arrDate = getVal(`room_${i}_arrival_date`) || 's/f';
+                            const arrTime = getVal(`room_${i}_arrival_time`) || '';
+                            const arrFlight = getVal(`room_${i}_arrival_flight`) || 's/v';
+                            const depDate = getVal(`room_${i}_departure_date`) || 's/f';
+                            const depTime = getVal(`room_${i}_departure_time`) || '';
+                            const depFlight = getVal(`room_${i}_departure_flight`) || 's/v';
+
+                            message += `\n*Hab. ${i}: ${guest}*\n`;
+                            message += `  Llegada: ${arrDate} ${arrTime} (Vuelo: ${arrFlight})\n`;
+                            message += `  Salida: ${depDate} ${depTime} (Vuelo: ${depFlight})\n`;
+                        }
+                    }
+                }
+                message += "\n";
+
+                message += `*4. SERVICIOS ADICIONALES*\n• Comida Domingo: ${getVal('sunday_meal_service')}\n• Limpieza Domingo: ${getVal('sunday_maid_service')}\n• Solicitudes: ${getVal('special_requests')}\n• Ocasión: ${getVal('special_occasion')} (${getVal('occasion_date')})\n\n`;
+
+                const activities = formData.getAll('activities');
+                if (activities.length > 0) {
+                    message += `*5. ACTIVIDADES DE INTERÉS*\n• ${activities.join(', ')}\n\n`;
+                }
+
+                message += `*6. PROVISIONES SOLICITADAS*\n`;
+                let provisionsRequested = false;
+                provisionData.forEach(category => {
+                    category.items.forEach(item => {
+                        if (item.type !== 'info') {
+                            const item_id = item.name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                            const amount = getVal(`${item_id}_amount`);
+                            const brand = getVal(`${item_id}_brand`);
+                            if (amount && amount.trim() !== '' && amount !== 'N/A') {
+                                provisionsRequested = true;
+                                message += `• ${item.name}: ${amount} (Marca: ${brand})\n`;
+                            }
+                        }
+                    });
+                });
+                if (!provisionsRequested) { message += "• Ninguna solicitud especial.\n"; }
+                message += "\n";
+
+                const additionalInfo = getVal('additional_info');
+                if (additionalInfo && additionalInfo.trim() !== '' && additionalInfo !== 'N/A') {
+                    message += `*INFORMACIÓN ADICIONAL*\n${additionalInfo}\n\n`;
+                }
+
+                message += "¡Gracias por completar el formulario! 🌴";
+                const phoneNumber = "523221606843";
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            };
+        });
+
+        // --- FORM SUBMISSION HANDLING ---
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('span');
+            const originalText = btnText.textContent;
+
+            btnText.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    showStatusMessage('¡Formulario enviado exitosamente! Gracias.');
+                    form.reset();
+                    toggleRoomAssignment(false);
+                    document.querySelector('input[name="preassign_rooms"][value="no"]').checked = true;
+                } else {
+                    const data = await response.json();
+                    throw new Error(data.errors?.map(e => e.message).join(', ') || 'Error en el envío.');
+                }
+            } catch (error) {
+                showStatusMessage(`Hubo un error: ${error.message}`, true);
+            } finally {
+                btnText.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        // --- STATUS MESSAGE UI ---
+        let statusTimeout;
+        function showStatusMessage(message, isError = false) {
+            const statusMessage = document.getElementById('statusMessage');
+            const content = document.getElementById('statusMessageContent');
+            const text = document.getElementById('statusMessageText');
+            const icon = document.getElementById('statusMessageIcon');
+
+            clearTimeout(statusTimeout);
+
+            text.textContent = message;
+            content.className = `max-w-sm rounded-lg shadow-2xl p-4 text-white flex items-center ${isError ? 'bg-red-500' : 'bg-green-500'}`;
+            icon.innerHTML = isError
+                ? `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
+                : `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
+
+            statusMessage.classList.remove('hidden');
+            setTimeout(() => statusMessage.classList.remove('translate-x-full'), 10);
+
+            statusTimeout = setTimeout(closeStatusMessage, 5000);
+        }
+
+        function closeStatusMessage() {
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.classList.add('translate-x-full');
+            clearTimeout(statusTimeout);
+        }
+    </script>
+</body>
+
+</html>
