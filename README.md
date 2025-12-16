@@ -1,19 +1,19 @@
 # Chef Franko - Verano Estate
 
-Sistema de gestión para Chef Franko en Verano Estate, Puerto Vallarta.
+Sistema de gestión unificado para Chef Franko en Verano Estate, Puerto Vallarta.
 
-## 📋 Páginas Disponibles
+## 📋 Sistema Unificado
 
-Este repositorio contiene las siguientes páginas web:
+Este repositorio contiene un sistema unificado que integra todas las aplicaciones de gestión en una sola interfaz con pestañas:
 
-### 🏠 [Menú Principal](index.html)
-Página de inicio con navegación a todas las aplicaciones disponibles.
+### 🏠 [Sistema Unificado](index.html)
+Plataforma central con navegación por pestañas que incluye:
 
-### 🍽️ [Sistema POS](pos.html)
-Sistema de Punto de Venta (Point of Sale) para gestionar:
+#### 🍽️ Sistema POS (Punto de Venta)
+Sistema para gestionar:
 - Menú de productos del restaurante
 - Comandas y órdenes
-- Procesamiento de pagos
+- Procesamiento de pagos (Efectivo, Tarjeta, Cargo Habitación, Transferencia)
 - Historial de transacciones
 - Impresión de tickets
 
@@ -24,8 +24,8 @@ Sistema de Punto de Venta (Point of Sale) para gestionar:
 - Múltiples métodos de pago
 - Persistencia de datos en localStorage
 
-### 📝 [Formulario de Huéspedes](formulario%20guest%20form.html)
-Formulario para registro de información de huéspedes que incluye:
+#### 📝 Formulario de Huéspedes
+Formulario para registro de información que incluye:
 - Información básica del grupo
 - Transporte desde/hacia aeropuerto
 - Asignación de habitaciones
@@ -42,8 +42,9 @@ Formulario para registro de información de huéspedes que incluye:
 ## 🚀 Uso
 
 1. Abrir `index.html` en cualquier navegador web
-2. Seleccionar la aplicación deseada
-3. Las páginas funcionan sin necesidad de servidor (archivos estáticos)
+2. Usar las pestañas superiores para cambiar entre el Sistema POS y el Formulario de Huéspedes
+3. Todas las funcionalidades están integradas en una sola página
+4. Las páginas funcionan sin necesidad de servidor (archivos estáticos)
 
 ## 🎨 Tecnologías
 
@@ -52,6 +53,7 @@ Formulario para registro de información de huéspedes que incluye:
 - JavaScript (Vanilla)
 - Ionicons
 - Formspree (para formularios)
+- iframes para integración modular
 
 ## 📱 Contacto
 
