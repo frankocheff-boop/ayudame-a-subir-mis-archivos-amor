@@ -1,0 +1,41 @@
+{
+  "header": {
+    "title": "VERANO ESTATE",
+    "subtitle": "Formulario de Información de Huéspedes",
+    "by": "by Chef Franko"
+  },
+  "form": {
+    "contactInfo": "Información de Contacto",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "checkIn": "Fecha de Check-in",
+    "checkOut": "Fecha de Check-out",
+    "roomAssignment": "Asignación de Habitaciones",
+    "addGuest": "Agregar Huésped",
+    "guestName": "Nombre del Huésped",
+    "roomNumber": "Número de Habitación",
+    "adults": "Adultos",
+    "children": "Niños",
+    "services": "Servicios Adicionales",
+    "breakfast": "Desayuno",
+    "lunch": "Comida",
+    "dinner": "Cena Premium",
+    "openBar": "Barra Libre",
+    "submit": "Enviar por WhatsApp",
+    "clear": "Limpiar Formulario",
+    "totalGuests": "Total de Huéspedes"
+  },
+  "validation": {
+    "required": "Este campo es obligatorio",
+    "invalidEmail": "Correo electrónico inválido",
+    "invalidPhone": "Número de teléfono inválido"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "posNeon": "POS Neon",
+    "posRestaurant": "POS Restaurant",
+    "guestForm": "Formulario de Huéspedes",
+    "language": "Idioma"
+  }
+}

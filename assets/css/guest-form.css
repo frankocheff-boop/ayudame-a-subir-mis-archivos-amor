@@ -1,0 +1,144 @@
+/* Guest Form - Estilos */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+    --brand-teal: #003C3C;
+    --brand-bg: #FBF7F0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--brand-bg);
+    color: #333;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--brand-teal);
+}
+
+.form-section {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+}
+
+.input-field {
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #D1D5DB;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-field:focus {
+    border-color: var(--brand-teal);
+    box-shadow: 0 0 0 2px rgba(0, 60, 60, 0.2);
+    outline: none;
+}
+
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--brand-teal);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #002a2a;
+}
+
+.btn-secondary {
+    background-color: #4c7c7c;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #3d6363;
+}
+
+.btn-tertiary {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.btn-tertiary:hover {
+    background-color: #d1d5db;
+}
+
+.btn-danger {
+    background-color: #dc2626;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+}
+
+#roomAssignmentTable tbody tr:nth-child(odd) {
+    background-color: #f9fafb;
+}
+
+/* Guest assignment table styles */
+.guest-row {
+    transition: all 0.2s ease;
+}
+
+.guest-row:hover {
+    background-color: #f3f4f6;
+}
+
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.success-message {
+    color: #059669;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    min-width: 300px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast.success {
+    background-color: #10b981;
+    color: white;
+}
+
+.toast.error {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* Service summary */
+.service-item {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #f9fafb;
+    margin-bottom: 0.5rem;
+}

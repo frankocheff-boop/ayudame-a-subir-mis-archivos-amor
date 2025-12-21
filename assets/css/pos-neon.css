@@ -1,0 +1,90 @@
+/* VERANO NEON POS - Estilos */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+
+:root {
+    --neon-bg: #050b14;
+    --neon-card: #0f172a;
+    --neon-cyan: #06b6d4;
+    --neon-bright: #22d3ee;
+    --neon-pink: #f472b6;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--neon-bg);
+    color: #e2e8f0;
+}
+
+h1, h2, h3, .titular {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Scrollbar Cyberpunk */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--neon-card);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0e7490;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-bright);
+}
+
+.neon-border {
+    border: 1px solid #1e293b;
+    transition: all 0.3s ease;
+}
+
+.neon-card:hover {
+    border-color: var(--neon-bright);
+    box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+    transform: translateY(-2px);
+}
+
+.active-cat {
+    background-color: rgba(6, 182, 212, 0.15) !important;
+    border-color: var(--neon-bright) !important;
+    color: var(--neon-bright) !important;
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+    text-shadow: 0 0 5px var(--neon-bright);
+}
+
+.shadow-neon-blue {
+    box-shadow: 0 0 5px var(--neon-cyan), 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+.shadow-neon-hover {
+    box-shadow: 0 0 10px var(--neon-bright), 0 0 30px rgba(34, 211, 238, 0.6);
+}
+
+.shadow-neon-red {
+    box-shadow: 0 0 5px #ef4444, 0 0 15px rgba(239, 68, 68, 0.5);
+}
+
+@keyframes pulse-once {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.animate-pulse-once {
+    animation: pulse-once 0.3s ease-out;
+}

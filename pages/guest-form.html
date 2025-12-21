@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Información de Huéspedes - VERANO ESTATE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/guest-form.css">
+</head>
+<body class="antialiased">
+
+    <!-- Encabezado con logo -->
+    <header class="text-center py-10 px-4">
+        <div class="flex justify-between items-center max-w-6xl mx-auto mb-4">
+            <a href="../index.html" class="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Volver al inicio
+            </a>
+            <div id="language-selector-container" class="flex gap-2">
+                <button onclick="changeLanguage('es')" data-lang-btn="es" class="px-3 py-1 rounded border text-sm font-medium active">ES</button>
+                <button onclick="changeLanguage('en')" data-lang-btn="en" class="px-3 py-1 rounded border text-sm font-medium">EN</button>
+            </div>
+        </div>
+        <p class="text-xl sm:text-2xl tracking-widest text-[var(--brand-teal)] mt-4 font-semibold" data-i18n="header.title">VERANO ESTATE</p>
+        <h1 class="text-3xl sm:text-4xl mt-2" data-i18n="header.subtitle">Formulario de Información de Huéspedes</h1>
+        <p class="text-sm text-gray-500 mt-2" data-i18n="header.by">by Chef Franko</p>
+    </header>
+
+    <!-- WiFi Info Section -->
+    <div class="max-w-md mx-auto my-8 px-4">
+        <img src="https://i.imgur.com/1CQ3BSd.png" alt="Información de WiFi" class="w-full h-auto rounded-lg shadow-md">
+    </div>
+
+    <main class="max-w-6xl mx-auto px-6 pb-12">
+        <form id="guestForm">
+            <!-- Basic Information -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">1</span>
+                    <span data-i18n="form.contactInfo">Información de Contacto</span>
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.fullName">Nombre Completo</label>
+                        <input type="text" id="fullName" name="fullName" class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dates -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">2</span>
+                    Fechas de Estadía
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="checkIn" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.checkIn">Fecha de Check-in</label>
+                        <input type="date" id="checkIn" name="checkIn" class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                    <div>
+                        <label for="checkOut" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.checkOut">Fecha de Check-out</label>
+                        <input type="date" id="checkOut" name="checkOut" class="w-full px-4 py-3 rounded-lg input-field" required>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Room Assignment -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">3</span>
+                    <span data-i18n="form.roomAssignment">Asignación de Habitaciones</span>
+                </h2>
+                
+                <!-- Add Guest Form -->
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                    <div class="grid md:grid-cols-5 gap-4">
+                        <div class="md:col-span-2">
+                            <label for="guestName" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.guestName">Nombre del Huésped</label>
+                            <input type="text" id="guestName" class="w-full px-4 py-2 rounded-lg input-field">
+                        </div>
+                        <div>
+                            <label for="roomNumber" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.roomNumber">Habitación</label>
+                            <select id="roomNumber" class="w-full px-4 py-2 rounded-lg input-field">
+                                <option value="">Seleccione...</option>
+                                <option value="1">Habitación 1</option>
+                                <option value="2">Habitación 2</option>
+                                <option value="3">Habitación 3</option>
+                                <option value="4">Habitación 4</option>
+                                <option value="5">Habitación 5</option>
+                                <option value="6">Habitación 6</option>
+                                <option value="7">Habitación 7</option>
+                                <option value="8">Habitación 8</option>
+                                <option value="9">Habitación 9</option>
+                                <option value="10">Habitación 10</option>
+                                <option value="11">Habitación 11</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="guestAdults" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.adults">Adultos</label>
+                            <input type="number" id="guestAdults" value="1" min="0" class="w-full px-4 py-2 rounded-lg input-field">
+                        </div>
+                        <div>
+                            <label for="guestChildren" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form.children">Niños</label>
+                            <input type="number" id="guestChildren" value="0" min="0" class="w-full px-4 py-2 rounded-lg input-field">
+                        </div>
+                    </div>
+                    <button type="button" id="addGuestBtn" class="mt-4 btn btn-secondary py-2 px-6 rounded-lg font-semibold">
+                        <span data-i18n="form.addGuest">+ Agregar Huésped</span>
+                    </button>
+                </div>
+
+                <!-- Guests Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse border border-gray-200 rounded-lg">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase" data-i18n="form.roomNumber">Habitación</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase" data-i18n="form.guestName">Huésped</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase" data-i18n="form.adults">Adultos</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase" data-i18n="form.children">Niños</th>
+                                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guestsTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-gray-500">No hay huéspedes agregados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 text-right">
+                    <p class="text-sm font-medium text-gray-700">
+                        <span data-i18n="form.totalGuests">Total de Huéspedes</span>: 
+                        <span id="totalGuests" class="font-bold text-lg">0</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Additional Services -->
+            <section class="form-section rounded-lg p-6 mb-8 shadow-md">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="bg-[var(--brand-teal)] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm flex-shrink-0 font-sans">4</span>
+                    <span data-i18n="form.services">Servicios Adicionales</span>
+                </h2>
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <label class="flex items-center p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+                        <input type="checkbox" name="services" value="breakfast" class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]">
+                        <span>
+                            <span class="font-medium" data-i18n="form.breakfast">Desayuno</span>
+                            <span class="text-sm text-gray-500"> - $120 por persona</span>
+                        </span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+                        <input type="checkbox" name="services" value="lunch" class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]">
+                        <span>
+                            <span class="font-medium" data-i18n="form.lunch">Comida</span>
+                            <span class="text-sm text-gray-500"> - $180 por persona</span>
+                        </span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+                        <input type="checkbox" name="services" value="dinner" class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]">
+                        <span>
+                            <span class="font-medium" data-i18n="form.dinner">Cena Premium</span>
+                            <span class="text-sm text-gray-500"> - $595 por persona</span>
+                        </span>
+                    </label>
+                    <label class="flex items-center p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+                        <input type="checkbox" name="services" value="openBar" class="mr-3 text-[var(--brand-teal)] focus:ring-[var(--brand-teal)]">
+                        <span>
+                            <span class="font-medium" data-i18n="form.openBar">Barra Libre</span>
+                            <span class="text-sm text-gray-500"> - $110 por persona</span>
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Services Summary -->
+                <div id="servicesSummary" class="mt-6">
+                    <p class="text-gray-500">No hay servicios seleccionados</p>
+                </div>
+            </section>
+
+            <!-- Submit Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <button type="button" id="whatsappBtn" class="btn btn-primary font-semibold py-4 px-8 rounded-lg shadow-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.63z" />
+                    </svg>
+                    <span data-i18n="form.submit">Enviar por WhatsApp</span>
+                </button>
+                <button type="button" id="clearFormBtn" class="btn btn-tertiary font-semibold py-4 px-8 rounded-lg shadow-lg flex items-center justify-center">
+                    <span data-i18n="form.clear">Limpiar Formulario</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="bg-[var(--brand-teal)] text-white py-8 mt-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="font-bold text-lg tracking-wide">VERANO ESTATE by chef franko</p>
+            <div class="text-gray-300 space-y-1 mt-4">
+                <p>+52 322 160 6843</p>
+                <p>franko@veranostate.com</p>
+            </div>
+            <div class="mt-6 border-t border-gray-700 pt-6">
+                <p class="text-sm text-gray-400">&copy; 2025 VERANO ESTATE. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/i18n.js"></script>
+    <script src="../assets/js/guest-form.js"></script>
+    <script>
+        // Initialize i18n system
+        async function initApp() {
+            await i18n.init();
+            setupLanguageSelector();
+        }
+
+        function setupLanguageSelector() {
+            const buttons = document.querySelectorAll('[data-lang-btn]');
+            buttons.forEach(btn => {
+                const lang = btn.getAttribute('data-lang-btn');
+                if (lang === i18n.getCurrentLanguage()) {
+                    btn.classList.add('bg-[var(--brand-teal)]', 'text-white', 'border-[var(--brand-teal)]');
+                } else {
+                    btn.classList.add('bg-white', 'text-gray-700', 'border-gray-300');
+                }
+            });
+        }
+
+        async function changeLanguage(lang) {
+            await i18n.changeLanguage(lang);
+            setupLanguageSelector();
+        }
+
+        // Start the app
+        initApp();
+    </script>
+</body>
+</html>
