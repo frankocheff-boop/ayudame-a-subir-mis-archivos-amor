@@ -1,0 +1,41 @@
+{
+  "header": {
+    "title": "VERANO ESTATE",
+    "subtitle": "Guest Information Form",
+    "by": "by Chef Franko"
+  },
+  "form": {
+    "contactInfo": "Contact Information",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "checkIn": "Check-in Date",
+    "checkOut": "Check-out Date",
+    "roomAssignment": "Room Assignment",
+    "addGuest": "Add Guest",
+    "guestName": "Guest Name",
+    "roomNumber": "Room Number",
+    "adults": "Adults",
+    "children": "Children",
+    "services": "Additional Services",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Premium Dinner",
+    "openBar": "Open Bar",
+    "submit": "Send via WhatsApp",
+    "clear": "Clear Form",
+    "totalGuests": "Total Guests"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "invalidPhone": "Invalid phone number"
+  },
+  "navigation": {
+    "home": "Home",
+    "posNeon": "POS Neon",
+    "posRestaurant": "POS Restaurant",
+    "guestForm": "Guest Form",
+    "language": "Language"
+  }
+}
