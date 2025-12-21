@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franko POS - Restaurant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/pos-restaurant.css">
+</head>
+<body class="bg-gray-100 h-screen overflow-hidden flex text-gray-800">
+
+    <div class="flex-1 flex flex-col h-full relative">
+
+        <div class="bg-white p-4 shadow-sm flex justify-between items-center z-10">
+            <div>
+                <h1 class="text-2xl font-extrabold text-indigo-700 tracking-tight">FRANKO POS ⚡</h1>
+                <p class="text-xs text-gray-500" id="datetime">Cargando fecha...</p>
+            </div>
+            <div class="flex gap-2">
+                <a href="../index.html" class="px-3 py-1 rounded border border-gray-300 bg-gray-50 text-gray-600 text-xs font-bold hover:bg-gray-200 transition">
+                    ← Inicio
+                </a>
+                <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold flex items-center">
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span> Online
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 p-2 border-b flex gap-2 overflow-x-auto whitespace-nowrap" id="category-container">
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 bg-gray-100">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="menu-grid">
+            </div>
+        </div>
+    </div>
+
+    <div class="w-96 bg-white shadow-2xl h-full flex flex-col border-l border-gray-200 relative z-20">
+
+        <div class="p-4 bg-indigo-50 border-b border-indigo-100">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="font-bold text-lg">Orden #<span id="order-id">001</span></h2>
+                <button onclick="clearCart()" class="text-red-500 text-sm hover:text-red-700 font-semibold">🗑️ Borrar</button>
+            </div>
+            <div class="flex gap-2">
+                <button class="flex-1 bg-white border border-indigo-200 text-indigo-600 py-1 rounded text-sm hover:bg-indigo-100">Mesa 4</button>
+                <button class="flex-1 bg-white border border-indigo-200 text-indigo-600 py-1 rounded text-sm hover:bg-indigo-100">Llevar</button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cart-items">
+            <div class="h-full flex flex-col items-center justify-center text-gray-400 opacity-50">
+                <span class="text-6xl mb-2">🛒</span>
+                <p>No hay productos</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 p-4 border-t border-gray-200">
+            <div class="space-y-1 mb-4 text-sm">
+                <div class="flex justify-between text-gray-600">
+                    <span>Subtotal</span>
+                    <span id="subtotal-display">$0.00</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                    <span>IVA (16%)</span>
+                    <span id="tax-display">$0.00</span>
+                </div>
+                <div class="flex justify-between font-bold text-xl text-gray-900 mt-2 pt-2 border-t border-gray-300">
+                    <span>Total</span>
+                    <span id="total-display">$0.00</span>
+                </div>
+            </div>
+
+            <button onclick="openCheckout()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transform transition hover:-translate-y-1 flex justify-between px-6">
+                <span>COBRAR</span>
+                <span id="btn-total">$0.00</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 transform transition-all scale-100">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Procesar Pago</h3>
+                <button onclick="closeCheckout()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-gray-500 uppercase text-xs font-bold tracking-wider">Total a Pagar</p>
+                <p class="text-4xl font-extrabold text-indigo-600" id="modal-total">$0.00</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <button onclick="processPayment('Efectivo')" class="p-4 border-2 border-gray-100 rounded-xl hover:border-green-500 hover:bg-green-50 transition flex flex-col items-center gap-2 group">
+                    <span class="text-2xl group-hover:scale-110 transition">💵</span>
+                    <span class="font-bold text-gray-600 group-hover:text-green-600">Efectivo</span>
+                </button>
+                <button onclick="processPayment('Tarjeta')" class="p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition flex flex-col items-center gap-2 group">
+                    <span class="text-2xl group-hover:scale-110 transition">💳</span>
+                    <span class="font-bold text-gray-600 group-hover:text-blue-600">Tarjeta</span>
+                </button>
+            </div>
+
+            <button onclick="closeCheckout()" class="w-full py-3 text-gray-500 font-semibold hover:bg-gray-100 rounded-lg">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="../assets/js/pos-restaurant.js"></script>
+</body>
+</html>
