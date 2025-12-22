@@ -4,6 +4,48 @@
     "subtitle": "Guest Information Form",
     "by": "by Chef Franko"
   },
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "guests": "Guests",
+    "pos": "POS",
+    "about": "About"
+  },
+  "home": {
+    "welcome": "Welcome to Verano Estate",
+    "subtitle": "Your complete digital ecosystem for culinary excellence",
+    "quickAccess": "Quick Access",
+    "featured": "Featured This Week"
+  },
+  "stats": {
+    "menuItems": "Menu Items",
+    "guests": "Active Guests",
+    "sales": "Today's Sales",
+    "rating": "Rating"
+  },
+  "access": {
+    "menu": "Explore Menu",
+    "menuDesc": "Interactive menu with gourmet dishes",
+    "booking": "New Booking",
+    "bookingDesc": "Register guest information",
+    "pos": "POS System",
+    "posDesc": "Process orders and payments",
+    "chef": "Meet Chef Franko",
+    "chefDesc": "Our culinary philosophy"
+  },
+  "pos": {
+    "selectSystem": "Select POS System",
+    "selectDesc": "Choose the point of sale system that best fits your needs",
+    "neonDesc": "Modern cyberpunk design for bars and events",
+    "restaurantDesc": "Professional classic system for restaurants",
+    "open": "Open System"
+  },
+  "about": {
+    "title": "Executive Chef & Founder",
+    "philosophy": "Culinary Philosophy",
+    "bio": "With over 20 years of experience in Mexican and international cuisine, Chef Franko Salgado brings authentic flavors and innovative techniques to every dish at Verano Estate. His passion for culinary excellence and exceptional service is reflected in every gastronomic experience.",
+    "contact": "Get in Touch"
+  },
   "form": {
     "contactInfo": "Contact Information",
     "fullName": "Full Name",

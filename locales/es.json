@@ -4,6 +4,48 @@
     "subtitle": "Formulario de Información de Huéspedes",
     "by": "by Chef Franko"
   },
+  "nav": {
+    "home": "Inicio",
+    "menu": "Menú",
+    "guests": "Huéspedes",
+    "pos": "POS",
+    "about": "Acerca"
+  },
+  "home": {
+    "welcome": "Bienvenido a Verano Estate",
+    "subtitle": "Tu ecosistema digital completo para excelencia culinaria",
+    "quickAccess": "Acceso Rápido",
+    "featured": "Destacado Esta Semana"
+  },
+  "stats": {
+    "menuItems": "Platillos del Menú",
+    "guests": "Huéspedes Activos",
+    "sales": "Ventas Hoy",
+    "rating": "Calificación"
+  },
+  "access": {
+    "menu": "Explorar Menú",
+    "menuDesc": "Menú interactivo con platillos gourmet",
+    "booking": "Nueva Reserva",
+    "bookingDesc": "Registrar información de huésped",
+    "pos": "Sistema POS",
+    "posDesc": "Procesar órdenes y pagos",
+    "chef": "Conoce a Chef Franko",
+    "chefDesc": "Nuestra filosofía culinaria"
+  },
+  "pos": {
+    "selectSystem": "Seleccionar Sistema POS",
+    "selectDesc": "Elige el sistema de punto de venta que mejor se adapte a tus necesidades",
+    "neonDesc": "Diseño cyberpunk moderno para bares y eventos",
+    "restaurantDesc": "Sistema clásico profesional para restaurantes",
+    "open": "Abrir Sistema"
+  },
+  "about": {
+    "title": "Chef Ejecutivo y Fundador",
+    "philosophy": "Filosofía Culinaria",
+    "bio": "Con más de 20 años de experiencia en cocina mexicana e internacional, el Chef Franko Salgado aporta sabores auténticos y técnicas innovadoras a cada platillo en Verano Estate. Su pasión por la excelencia culinaria y el servicio excepcional se refleja en cada experiencia gastronómica.",
+    "contact": "Ponerse en Contacto"
+  },
   "form": {
     "contactInfo": "Información de Contacto",
     "fullName": "Nombre Completo",
