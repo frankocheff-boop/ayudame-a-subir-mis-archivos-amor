@@ -216,10 +216,10 @@
     <div class="tabs-container">
         <!-- Tabs Navigation -->
         <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('pos')">
+            <button class="tab-btn active" onclick="switchTab('pos', event)">
                 💳 Sistema POS
             </button>
-            <button class="tab-btn" onclick="switchTab('guests')">
+            <button class="tab-btn" onclick="switchTab('guests', event)">
                 📋 Formulario de Huéspedes
             </button>
         </div>
@@ -264,7 +264,7 @@
     
     <script>
         // Switch between tabs
-        function switchTab(tabName) {
+        function switchTab(tabName, event) {
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -290,15 +290,6 @@
             document.getElementById(section + '-loading').style.display = 'none';
             document.getElementById(section + '-iframe-container').style.display = 'block';
         }
-        
-        // Preload guest form when hovering over tab
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                if (!document.querySelector('#guests-tab iframe').src) {
-                    // Preload iframe
-                }
-            });
-        });
     </script>
 </body>
 </html>
