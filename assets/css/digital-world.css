@@ -194,14 +194,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .world-section {
   display: none;
-  opacity: 0;
   min-height: calc(100vh - 80px);
   padding: var(--spacing-xl) var(--spacing-lg);
 }
 
 .world-section.active {
   display: block;
-  animation: fadeIn var(--transition-normal) ease forwards;
+  opacity: 1;
+  animation: fadeIn var(--transition-normal) ease;
+}
+
+.world-section.fade-in {
+  opacity: 1;
 }
 
 .world-section.fade-out {
