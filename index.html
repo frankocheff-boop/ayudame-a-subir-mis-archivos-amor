@@ -3,266 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VERANO ESTATE - Digital World</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/digital-world.css">
-</head>
-<body>
-    
-    <!-- Unified Header -->
-    <header class="unified-header">
-        <div class="logo-section">
-            <div>
-                <h1>VERANO ESTATE</h1>
-                <p class="tagline">Digital Experience</p>
-            </div>
-        </div>
-        
-        <nav class="main-nav">
-            <button data-section="home" class="nav-btn active">
-                <span class="icon">🏠</span>
-                <span data-i18n="nav.home">Home</span>
-            </button>
-            <button data-section="menu" class="nav-btn">
-                <span class="icon">🍽️</span>
-                <span data-i18n="nav.menu">Menu</span>
-            </button>
-            <button data-section="guests" class="nav-btn">
-                <span class="icon">📋</span>
-                <span data-i18n="nav.guests">Guests</span>
-            </button>
-            <button data-section="pos" class="nav-btn">
-                <span class="icon">💳</span>
-                <span data-i18n="nav.pos">POS</span>
-            </button>
-            <button data-section="about" class="nav-btn">
-                <span class="icon">ℹ️</span>
-                <span data-i18n="nav.about">About</span>
-            </button>
-        </nav>
-        
-        <div class="header-actions">
-            <button id="lang-toggle" class="btn-icon">
-                <span class="flag">🇪🇸</span>
-                <span class="lang-text">ES</span>
-            </button>
-            <button id="theme-toggle" class="btn-icon">
-                <span class="icon">🌙</span>
-            </button>
-        </div>
-    </header>
-
-    <!-- Digital World Container -->
-    <main class="digital-world">
-        
-        <!-- Home Section -->
-        <section id="home-section" class="world-section active">
-            <div class="content-container">
-                <div class="hero-dashboard">
-                    <div class="hero-content">
-                        <h1 class="hero-title" data-i18n="home.welcome">Bienvenido a Verano Estate</h1>
-                        <p class="hero-subtitle" data-i18n="home.subtitle">
-                            Tu ecosistema digital completo para excelencia culinaria
-                        </p>
-                    </div>
-                    
-                    <div class="hero-image">
-                        <svg viewBox="0 0 400 300" style="width: 100%; height: auto;">
-                            <defs>
-                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#D69E2E;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#C05621;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <rect width="400" height="300" rx="20" fill="url(#grad1)" opacity="0.1"/>
-                            <text x="200" y="150" font-size="80" text-anchor="middle" fill="#003C3C" opacity="0.3">🍽️</text>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="quick-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">🍽️</div>
-                        <div class="stat-value">23</div>
-                        <div class="stat-label" data-i18n="stats.menuItems">Platillos del Menú</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">📋</div>
-                        <div class="stat-value" id="total-guests">0</div>
-                        <div class="stat-label" data-i18n="stats.guests">Huéspedes Activos</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">💳</div>
-                        <div class="stat-value" id="today-sales">$0</div>
-                        <div class="stat-label" data-i18n="stats.sales">Ventas Hoy</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-value">5.0</div>
-                        <div class="stat-label" data-i18n="stats.rating">Calificación</div>
-                    </div>
-                </div>
-
-                <div class="quick-access">
-                    <h2 class="section-title" data-i18n="home.quickAccess">Acceso Rápido</h2>
-                    
-                    <div class="access-grid">
-                        <button class="access-card" onclick="digitalWorld.navigateTo('menu')">
-                            <span class="access-icon">🍽️</span>
-                            <h3 data-i18n="access.menu">Explorar Menú</h3>
-                            <p data-i18n="access.menuDesc">Menú interactivo con platillos gourmet</p>
-                        </button>
-                        
-                        <button class="access-card" onclick="digitalWorld.navigateTo('guests')">
-                            <span class="access-icon">📋</span>
-                            <h3 data-i18n="access.booking">Nueva Reserva</h3>
-                            <p data-i18n="access.bookingDesc">Registrar información de huésped</p>
-                        </button>
-                        
-                        <button class="access-card" onclick="digitalWorld.navigateTo('pos')">
-                            <span class="access-icon">💳</span>
-                            <h3 data-i18n="access.pos">Sistema POS</h3>
-                            <p data-i18n="access.posDesc">Procesar órdenes y pagos</p>
-                        </button>
-                        
-                        <button class="access-card" onclick="digitalWorld.navigateTo('about')">
-                            <span class="access-icon">👨‍🍳</span>
-                            <h3 data-i18n="access.chef">Conoce a Chef Franko</h3>
-                            <p data-i18n="access.chefDesc">Nuestra filosofía culinaria</p>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="featured-section">
-                    <h2 class="section-title" data-i18n="home.featured">Destacado Esta Semana</h2>
-                    
-                    <div class="featured-grid">
-                        <div class="featured-dish">
-                            <svg viewBox="0 0 400 200" style="width: 100%; height: 200px;">
-                                <rect width="400" height="200" fill="#C05621" opacity="0.2"/>
-                                <text x="200" y="120" font-size="60" text-anchor="middle" fill="#003C3C">🥘</text>
-                            </svg>
-                            <h3>Paella Valenciana</h3>
-                            <p>Arroz tradicional español con mariscos frescos</p>
-                        </div>
-                        
-                        <div class="featured-dish">
-                            <svg viewBox="0 0 400 200" style="width: 100%; height: 200px;">
-                                <rect width="400" height="200" fill="#2F855A" opacity="0.2"/>
-                                <text x="200" y="120" font-size="60" text-anchor="middle" fill="#003C3C">🥩</text>
-                            </svg>
-                            <h3>Ribeye Premium</h3>
-                            <p>Carne de res selecta con guarniciones gourmet</p>
-                        </div>
-                        
-                        <div class="featured-dish">
-                            <svg viewBox="0 0 400 200" style="width: 100%; height: 200px;">
-                                <rect width="400" height="200" fill="#D69E2E" opacity="0.2"/>
-                                <text x="200" y="120" font-size="60" text-anchor="middle" fill="#003C3C">🍰</text>
-                            </svg>
-                            <h3>Tiramisú Casero</h3>
-                            <p>Postre italiano tradicional con café expreso</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Menu Section -->
-        <section id="menu-section" class="world-section">
-            <div class="content-container">
-                <h2 class="section-title text-center mb-xl" data-i18n="nav.menu">Menú</h2>
-                <div class="text-center" style="padding: 4rem; background: var(--bg-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);">
-                    <p style="font-size: 4rem; margin-bottom: 2rem;">🍽️</p>
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--brand-teal);">Coming Soon</h3>
-                    <p style="color: var(--text-muted); font-size: 1.1rem;">Interactive menu system with 23 gourmet dishes</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Guest Services Section -->
-        <section id="guests-section" class="world-section">
-            <div class="content-container">
-                <!-- Content loaded dynamically -->
-            </div>
-        </section>
-        
-        <!-- POS Systems Section -->
-        <section id="pos-section" class="world-section">
-            <div class="content-container">
-                <!-- Content loaded dynamically -->
-            </div>
-        </section>
-        
-        <!-- About & Contact Section -->
-        <section id="about-section" class="world-section">
-            <div class="content-container">
-                <div class="about-container">
-                    <div class="chef-profile">
-                        <svg viewBox="0 0 200 200" style="width: 200px; height: 200px; margin: 0 auto 2rem;">
-                            <circle cx="100" cy="100" r="98" fill="#D69E2E" opacity="0.2"/>
-                            <text x="100" y="130" font-size="80" text-anchor="middle" fill="#003C3C">👨‍🍳</text>
-                        </svg>
-                        <h2>Chef Franko Salgado</h2>
-                        <p class="chef-title" data-i18n="about.title">Chef Ejecutivo y Fundador</p>
-                    </div>
-                    
-                    <div class="chef-bio">
-                        <h3 data-i18n="about.philosophy">Filosofía Culinaria</h3>
-                        <p data-i18n="about.bio">
-                            Con más de 20 años de experiencia en cocina mexicana e internacional,
-                            el Chef Franko Salgado aporta sabores auténticos y técnicas innovadoras
-                            a cada platillo en Verano Estate. Su pasión por la excelencia culinaria
-                            y el servicio excepcional se refleja en cada experiencia gastronómica.
-                        </p>
-                    </div>
-                    
-                    <div class="contact-info">
-                        <h3 data-i18n="about.contact">Ponerse en Contacto</h3>
-                        <div class="contact-grid">
-                            <a href="tel:+523221606843" class="contact-item">
-                                📞 +52 322 160 6843
-                            </a>
-                            <a href="mailto:franko@veranostate.com" class="contact-item">
-                                📧 franko@veranostate.com
-                            </a>
-                            <a href="https://wa.me/523221606843" class="contact-item" target="_blank">
-                                💬 WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-    </main>
-
-    <!-- Scripts -->
-    <script src="./assets/js/i18n.js"></script>
-    <script src="./assets/js/theme-manager.js"></script>
-    <script src="./assets/js/digital-world.js"></script>
-    
+    <title>Verano Estate NEON POS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <script>
-        // Initialize everything when DOM is ready
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Initialize i18n
-            await i18n.init();
-            
-            // Update language button
-            const currentLang = i18n.getCurrentLanguage();
-            const flag = document.querySelector('#lang-toggle .flag');
-            const text = document.querySelector('#lang-toggle .lang-text');
-            if (currentLang === 'es') {
-                flag.textContent = '🇪🇸';
-                text.textContent = 'ES';
-            } else {
-                flag.textContent = '🇺🇸';
-                text.textContent = 'EN';
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neon: {
+                            bg: '#050b14',      // Azul muy oscuro
+                            card: '#0f172a',    // Azul oscuro tarjetas
+                            cyan: '#06b6d4',    // Turquesa base
+                            bright: '#22d3ee',  // Turquesa brillante
+                            pink: '#f472b6'     // Acento rosa
+                        }
+                    },
+                    boxShadow: {
+                        'neon-blue': '0 0 5px #06b6d4, 0 0 20px rgba(6, 182, 212, 0.4)',
+                        'neon-hover': '0 0 10px #22d3ee, 0 0 30px rgba(34, 211, 238, 0.6)',
+                        'neon-red': '0 0 5px #ef4444, 0 0 15px rgba(239, 68, 68, 0.5)',
+                    }
+                }
             }
+        }
+    </script>
+    <style>
+        body { font-family: 'Rajdhani', sans-serif; background-color: #050b14; color: #e2e8f0; }
+        h1, h2, h3, .titular { font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
+        
+        /* Scrollbar Cyberpunk */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #0e7490; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
+
+        .neon-border {
+            border: 1px solid #1e293b;
+            transition: all 0.3s ease;
+        }
+        
+        .neon-card:hover {
+            border-color: #22d3ee;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .active-cat {
+            background-color: rgba(6, 182, 212, 0.15) !important;
+            border-color: #22d3ee !important;
+            color: #22d3ee !important;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+            text-shadow: 0 0 5px #22d3ee;
+        }
+    </style>
+</head>
+<body class="h-screen overflow-hidden flex">
+
+    <!-- SECCIÓN IZQUIERDA: MENÚ -->
+    <div class="flex-1 flex flex-col h-full relative border-r border-slate-800">
+        
+        <!-- Header -->
+        <div class="bg-neon-card p-4 shadow-lg z-10 border-b border-cyan-900 flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold text-white titular">
+                    VERANO <span class="text-cyan-400 drop-shadow-[0_0_5px_rgba(34,211,238,0.8)]">NEON</span>
+                </h1>
+                <p class="text-xs text-cyan-600 font-bold tracking-widest uppercase mt-1" id="datetime">SYSTEM INITIALIZING...</p>
+            </div>
+            
+            <div class="flex-1 max-w-md mx-6">
+                <input type="text" id="search-input" placeholder="🔍 BUSCAR PLATO..." 
+                    class="w-full bg-[#050b14] border border-cyan-900 text-cyan-100 text-lg font-medium rounded p-2 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 outline-none transition placeholder-slate-600">
+            </div>
+
+            <div class="flex items-center gap-2">
+                <div class="px-3 py-1 rounded border border-green-900 bg-green-900/20 text-green-400 text-xs font-bold flex items-center shadow-[0_0_10px_rgba(74,222,128,0.2)]">
+                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse shadow-[0_0_5px_#4ade80]"></span> ONLINE
+                </div>
+            </div>
+        </div>
+
+        <!-- Categorías -->
+        <div class="bg-[#020617] p-3 border-b border-slate-800 flex gap-3 overflow-x-auto whitespace-nowrap" id="category-container">
+            <!-- JS Renders here -->
+        </div>
+
+        <!-- Grid de Productos -->
+        <div class="flex-1 overflow-y-auto p-4 bg-neon-bg">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="menu-grid">
+                <!-- JS Renders here -->
+            </div>
+            
+            <div id="no-results" class="hidden h-full flex flex-col items-center justify-center text-slate-600 mt-10">
+                <span class="text-6xl mb-4 opacity-20">📡</span>
+                <p class="text-xl tracking-widest uppercase">No data found</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DERECHA: CARRITO -->
+    <div class="w-96 bg-neon-card shadow-2xl h-full flex flex-col border-l border-cyan-900/50 relative z-20">
+        
+        <div class="p-5 bg-[#0a101f] border-b border-cyan-900/50">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="font-bold text-2xl text-white titular tracking-widest">ORDEN <span class="text-cyan-400">#<span id="order-id">1024</span></span></h2>
+                <button onclick="clearCart()" class="text-red-400 hover:text-red-200 hover:bg-red-900/30 border border-red-900/50 px-3 py-1 rounded transition text-xs font-bold tracking-wider hover:shadow-neon-red">
+                    BORRAR
+                </button>
+            </div>
+            <div class="flex gap-2">
+                <button class="flex-1 bg-slate-800 border border-slate-600 text-slate-300 py-2 rounded text-sm hover:border-cyan-400 hover:text-cyan-400 transition uppercase font-bold tracking-wide">Mesa</button>
+                <button class="flex-1 bg-slate-800 border border-slate-600 text-slate-300 py-2 rounded text-sm hover:border-cyan-400 hover:text-cyan-400 transition uppercase font-bold tracking-wide">Llevar</button>
+            </div>
+        </div>
+
+        <!-- Lista de Items -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-3 bg-[#050b14]" id="cart-items">
+            <div class="h-full flex flex-col items-center justify-center text-slate-700 opacity-40">
+                <span class="text-6xl mb-2 grayscale">🛒</span>
+                <p class="titular tracking-widest">TERMINAL VACÍA</p>
+            </div>
+        </div>
+
+        <!-- Totales -->
+        <div class="bg-[#0f172a] p-6 border-t border-cyan-900/50 shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
+            <div class="space-y-2 mb-4 text-sm font-mono text-cyan-200/70">
+                <div class="flex justify-between">
+                    <span>SUBTOTAL</span>
+                    <span id="subtotal-display" class="text-cyan-100">$0.00</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>IVA (16%)</span>
+                    <span id="tax-display" class="text-cyan-100">$0.00</span>
+                </div>
+                <div class="flex justify-between font-bold text-2xl text-white mt-2 pt-2 border-t border-slate-700 titular">
+                    <span class="text-cyan-400 drop-shadow-[0_0_2px_#22d3ee]">TOTAL</span>
+                    <span id="total-display" class="drop-shadow-[0_0_5px_rgba(34,211,238,0.5)]">$0.00</span>
+                </div>
+            </div>
+
+            <button onclick="openCheckout()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 rounded shadow-neon-blue transform transition hover:-translate-y-1 flex justify-between px-6 items-center group border border-cyan-400">
+                <span class="titular tracking-[0.2em] text-lg">COBRAR</span>
+                <span id="btn-total" class="text-xl font-mono group-hover:text-black transition-colors">$0.00</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE COBRO -->
+    <div id="checkout-modal" class="fixed inset-0 bg-[#000]/80 hidden items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-[#0f172a] border border-cyan-500 rounded shadow-neon-blue w-full max-w-md overflow-hidden relative">
+            <div class="bg-cyan-900/20 p-4 flex justify-between items-center border-b border-cyan-800">
+                <h3 class="text-xl font-bold text-cyan-400 titular tracking-wider">PROCESANDO PAGO</h3>
+                <button onclick="closeCheckout()" class="text-slate-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <p class="text-cyan-600 uppercase text-xs font-bold tracking-[0.3em] mb-2">MONTO FINAL</p>
+                    <p class="text-5xl font-bold text-white font-mono drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" id="modal-total">$0.00</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <button onclick="processPayment('Efectivo')" class="p-6 border border-slate-600 bg-slate-800/50 rounded hover:border-green-400 hover:bg-green-900/20 hover:shadow-[0_0_15px_rgba(74,222,128,0.3)] transition group flex flex-col items-center gap-2">
+                        <span class="text-3xl group-hover:scale-110 transition grayscale group-hover:grayscale-0">💵</span>
+                        <span class="font-bold text-slate-300 group-hover:text-green-400 titular">EFECTIVO</span>
+                    </button>
+                    <button onclick="processPayment('Tarjeta')" class="p-6 border border-slate-600 bg-slate-800/50 rounded hover:border-cyan-400 hover:bg-cyan-900/20 hover:shadow-neon-blue transition group flex flex-col items-center gap-2">
+                        <span class="text-3xl group-hover:scale-110 transition grayscale group-hover:grayscale-0">💳</span>
+                        <span class="font-bold text-slate-300 group-hover:text-cyan-400 titular">TARJETA</span>
+                    </button>
+                </div>
+
+                <button onclick="closeCheckout()" class="w-full py-3 text-slate-500 font-bold hover:text-white hover:bg-slate-800 rounded transition uppercase tracking-widest text-xs">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, title: "Seasonal Fruits", price: 12.00, category: "Breakfast", description: "Fresh selection of seasonal fruits.", emoji: "🍉" },
+            { id: 2, title: "Eggs Your Way", price: 14.00, category: "Breakfast", description: "Ranchero, Mexican style, poached, or custom omelet.", emoji: "🍳" },
+            { id: 3, title: "Mexican Burritos", price: 16.00, category: "Breakfast", description: "Chicken, Beef, or Shrimp. With Guacamole.", emoji: "🌯" },
+            { id: 4, title: "Black Bean Soup", price: 11.00, category: "Soup", description: "Red onion, epazote, tortilla strips, bacon.", emoji: "🥣" },
+            { id: 5, title: "Spinach Soup", price: 12.00, category: "Soup", description: "Organic spinach and field mushrooms.", emoji: "🍄" },
+            { id: 6, title: "Tortilla Soup", price: 11.50, category: "Soup", description: "Avocado, fresh mint, Manchego cheese.", emoji: "🥑" },
+            { id: 7, title: "Organic Salad", price: 13.00, category: "Salad", description: "Jicama, endives, apple ginger honey dressing.", emoji: "🥗" },
+            { id: 8, title: "Villa Salad", price: 14.50, category: "Salad", description: "Three bean medley, Panela cheese.", emoji: "🧀" },
+            { id: 9, title: "Spinach Salad", price: 15.00, category: "Salad", description: "Bacon, garlic croutons, Swiss cheese.", emoji: "🥬" },
+            { id: 10, title: "Caprese Salad", price: 14.00, category: "Salad", description: "Roma Tomatoes, Mozzarella, organic basil.", emoji: "🍅" },
+            { id: 11, title: "Catch of the Day", price: 26.00, category: "Main", description: "Pan fried, white wine sauce, saffron pilaf.", emoji: "🐟" },
+            { id: 12, title: "Giant Shrimp", price: 29.00, category: "Main", description: "Garlic butter, pilaf, seasonal vegetables.", emoji: "🦐" },
+            { id: 13, title: "Paella Valenciana", price: 28.00, category: "Main", description: "Saffron rice and mixed meats/seafood.", emoji: "🥘" },
+            { id: 14, title: "Homemade Lasagna", price: 22.00, category: "Main", description: "Our guest's favorite homemade Lasagna.", emoji: "🍝" },
+            { id: 15, title: "Barbeque Night", price: 27.00, category: "Main", description: "Ribs and Chicken in exotic BBQ sauce.", emoji: "🍖" },
+            { id: 16, title: "Cheese Platter", price: 16.00, category: "Sweet", description: "Selection of fine artisan cheeses.", emoji: "🧀" },
+            { id: 17, title: "Vanilla Flan", price: 9.00, category: "Sweet", description: "Served with dark Caramel.", emoji: "🍮" },
+            { id: 18, title: "Tiramisu", price: 10.00, category: "Sweet", description: "Classic coffee-flavoured dessert.", emoji: "🍰" },
+            { id: 19, title: "Chocolate Cake", price: 11.00, category: "Sweet", description: "Served with French Vanilla ice cream.", emoji: "🍫" },
+            { id: 20, title: "Almond Cake", price: 12.00, category: "Sweet", description: "Chef Felipe's special with berry coulis.", emoji: "🎂" },
+        ];
+
+        const categories = [
+            { id: "All", name: "ALL SYSTEM", icon: "💠" },
+            { id: "Breakfast", name: "BREAKFAST", icon: "🍳" },
+            { id: "Soup", name: "SOUPS", icon: "🥣" },
+            { id: "Salad", name: "SALADS", icon: "🥗" },
+            { id: "Main", name: "MAINS", icon: "🥩" },
+            { id: "Sweet", name: "DESSERTS", icon: "🍰" }
+        ];
+
+        let cart = [];
+        let currentCategory = 'All';
+        let searchQuery = '';
+        let orderCount = 1024;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategories();
+            renderMenu();
+            updateDateTime();
+            
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                renderMenu();
+            });
+
+            setInterval(updateDateTime, 1000);
         });
+
+        function updateDateTime() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('es-MX', { weekday: 'short', day: 'numeric', month: 'short' });
+            const timeStr = now.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('datetime').innerText = `${dateStr} [${timeStr}]`;
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('category-container');
+            container.innerHTML = categories.map(cat => `
+                <button onclick="filterMenu('${cat.id}')" 
+                    class="px-6 py-3 rounded font-bold text-sm transition tracking-widest border border-slate-700
+                    ${currentCategory === cat.id 
+                        ? 'active-cat' 
+                        : 'bg-[#0f172a] text-slate-400 hover:text-cyan-400 hover:border-cyan-400'}">
+                    ${cat.icon} ${cat.name}
+                </button>
+            `).join('');
+        }
+
+        function filterMenu(catId) {
+            currentCategory = catId;
+            renderCategories();
+            renderMenu();
+        }
+
+        function renderMenu() {
+            const grid = document.getElementById('menu-grid');
+            const noResults = document.getElementById('no-results');
+
+            const filtered = products.filter(p => {
+                const matchesCategory = currentCategory === 'All' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+
+            grid.innerHTML = filtered.map(product => `
+                <div onclick="addToCart(${product.id})" class="neon-card bg-neon-card p-4 rounded border border-slate-700 cursor-pointer relative overflow-hidden group h-36 flex flex-col justify-between select-none">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-bl-full"></div>
+                    
+                    <div class="flex justify-between items-start z-10">
+                        <span class="text-3xl drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">${product.emoji}</span>
+                        <span class="font-mono text-cyan-400 font-bold text-lg drop-shadow-[0_0_3px_rgba(34,211,238,0.5)]">$${product.price}</span>
+                    </div>
+                    
+                    <div class="z-10">
+                        <h3 class="font-bold text-gray-100 text-sm uppercase tracking-wide leading-tight group-hover:text-cyan-300 transition">${product.title}</h3>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-slate-700 opacity-40">
+                        <span class="text-6xl mb-2 grayscale">🛒</span>
+                        <p class="titular tracking-widest">TERMINAL VACÍA</p>
+                    </div>`;
+            } else {
+                container.innerHTML = cart.map((item) => `
+                    <div class="flex justify-between items-center bg-[#0f172a] p-3 rounded border-l-2 border-cyan-500 shadow-lg">
+                        <div class="flex-1 pr-2">
+                            <h4 class="font-bold text-sm text-cyan-100 uppercase tracking-wide">${item.title}</h4>
+                            <p class="text-[10px] text-cyan-600 font-mono">$${item.price.toFixed(2)} x ${item.qty}</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <p class="font-bold text-white font-mono">$${(item.price * item.qty).toFixed(2)}</p>
+                            <div class="flex flex-col gap-1">
+                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 bg-slate-800 rounded text-xs hover:bg-cyan-900 text-cyan-400 border border-slate-600 transition">+</button>
+                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 bg-slate-800 rounded text-xs hover:bg-red-900/40 text-red-400 border border-slate-600 transition">-</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const tax = subtotal * 0.16;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal-display').innerText = formatMoney(subtotal);
+            document.getElementById('tax-display').innerText = formatMoney(tax);
+            document.getElementById('total-display').innerText = formatMoney(total);
+            document.getElementById('btn-total').innerText = formatMoney(total);
+            document.getElementById('modal-total').innerText = formatMoney(total);
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            const existing = cart.find(c => c.id === id);
+            if (existing) { existing.qty++; } else { cart.push({ ...product, qty: 1 }); }
+            updateCartUI();
+        }
+
+        function changeQty(id, delta) {
+            const itemIndex = cart.findIndex(c => c.id === id);
+            if (itemIndex === -1) return;
+            cart[itemIndex].qty += delta;
+            if (cart[itemIndex].qty <= 0) { cart.splice(itemIndex, 1); }
+            updateCartUI();
+        }
+
+        function clearCart() {
+            if (cart.length > 0 && confirm('¿RESET SYSTEM DATA?')) {
+                cart = [];
+                updateCartUI();
+            }
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) return;
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            document.getElementById('checkout-modal').classList.add('flex');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+            document.getElementById('checkout-modal').classList.remove('flex');
+        }
+
+        function processPayment(method) {
+            const total = document.getElementById('total-display').innerText;
+            alert(`⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${total}`);
+            cart = [];
+            orderCount++;
+            document.getElementById('order-id').innerText = orderCount;
+            closeCheckout();
+            updateCartUI();
+        }
+
+        function formatMoney(amount) {
+            return '$' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
     </script>
 </body>
 </html>
