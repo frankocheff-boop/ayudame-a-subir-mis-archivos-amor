@@ -145,12 +145,7 @@ class DigitalWorld {
     // Show new section with fade in
     const next = document.getElementById(`${section}-section`);
     if (next) {
-      next.classList.add('active', 'fade-in');
-      
-      // Remove fade-in class after animation
-      setTimeout(() => {
-        next.classList.remove('fade-in');
-      }, 300);
+      next.classList.add('active');
     }
 
     // Update navigation buttons
