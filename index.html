@@ -3,266 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VERANO ESTATE - Digital World</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/css/digital-world.css">
+    <title>VERANO ESTATE - Sistema Unificado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        /* Header con gradiente teal y dorado */
+        .header {
+            background: linear-gradient(135deg, #2d7a7b 0%, #1a5f5f 100%);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            color: #ffd700;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            color: #fff;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Tabs Navigation */
+        .tabs-container {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 1400px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #2d7a7b;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(45, 122, 123, 0.1);
+            color: #2d7a7b;
+        }
+        
+        .tab-btn.active {
+            color: #2d7a7b;
+            background: white;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #ffd700;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            position: relative;
+            min-height: 600px;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Loading Spinner */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2d7a7b;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* iFrame Container */
+        .iframe-container {
+            width: 100%;
+            height: 800px;
+            border: none;
+            display: block;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2d7a7b;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-info a {
+            color: #ffd700;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: opacity 0.3s;
+        }
+        
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .tab-btn {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            
+            .tabs-container {
+                margin: 1rem;
+                border-radius: 8px;
+            }
+            
+            .iframe-container {
+                height: 600px;
+            }
+            
+            .contact-info a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    
-    <!-- Unified Header -->
-    <header class="unified-header">
-        <div class="logo-section">
-            <div>
-                <h1>VERANO ESTATE</h1>
-                <p class="tagline">Digital Experience</p>
-            </div>
-        </div>
-        
-        <nav class="main-nav">
-            <button data-section="home" class="nav-btn active">
-                <span class="icon">🏠</span>
-                <span data-i18n="nav.home">Home</span>
-            </button>
-            <button data-section="menu" class="nav-btn">
-                <span class="icon">🍽️</span>
-                <span data-i18n="nav.menu">Menu</span>
-            </button>
-            <button data-section="guests" class="nav-btn">
-                <span class="icon">📋</span>
-                <span data-i18n="nav.guests">Guests</span>
-            </button>
-            <button data-section="pos" class="nav-btn">
-                <span class="icon">💳</span>
-                <span data-i18n="nav.pos">POS</span>
-            </button>
-            <button data-section="about" class="nav-btn">
-                <span class="icon">ℹ️</span>
-                <span data-i18n="nav.about">About</span>
-            </button>
-        </nav>
-        
-        <div class="header-actions">
-            <button id="lang-toggle" class="btn-icon">
-                <span class="flag">🇪🇸</span>
-                <span class="lang-text">ES</span>
-            </button>
-            <button id="theme-toggle" class="btn-icon">
-                <span class="icon">🌙</span>
-            </button>
-        </div>
+    <!-- Header -->
+    <header class="header">
+        <h1>🌴 VERANO ESTATE 🌴</h1>
+        <p>Sistema de Gestión Integral</p>
     </header>
-
-    <!-- Digital World Container -->
-    <main class="digital-world">
+    
+    <!-- Tabs Container -->
+    <div class="tabs-container">
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('pos', event)">
+                💳 Sistema POS
+            </button>
+            <button class="tab-btn" onclick="switchTab('guests', event)">
+                📋 Formulario de Huéspedes
+            </button>
+        </div>
         
-        <!-- Home Section -->
-        <section id="home-section" class="world-section active">
-            <div class="content-container">
-                <div class="hero-dashboard">
-                    <div class="hero-content">
-                        <h1 class="hero-title" data-i18n="home.welcome">Bienvenido a Verano Estate</h1>
-                        <p class="hero-subtitle" data-i18n="home.subtitle">
-                            Tu ecosistema digital completo para excelencia culinaria
-                        </p>
-                    </div>
-                    
-                    <div class="hero-image">
-                        <svg viewBox="0 0 400 300" style="width: 100%; height: auto;">
-                            <defs>
-                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#D69E2E;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#C05621;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <rect width="400" height="300" rx="20" fill="url(#grad1)" opacity="0.1"/>
-                            <text x="200" y="150" font-size="80" text-anchor="middle" fill="#003C3C" opacity="0.3">🍽️</text>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="quick-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">🍽️</div>
-                        <div class="stat-value">23</div>
-                        <div class="stat-label" data-i18n="stats.menuItems">Platillos del Menú</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">📋</div>
-                        <div class="stat-value" id="total-guests">0</div>
-                        <div class="stat-label" data-i18n="stats.guests">Huéspedes Activos</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">💳</div>
-                        <div class="stat-value" id="today-sales">$0</div>
-                        <div class="stat-label" data-i18n="stats.sales">Ventas Hoy</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-value">5.0</div>
-                        <div class="stat-label" data-i18n="stats.rating">Calificación</div>
-                    </div>
-                </div>
-
-                <div class="quick-access">
-                    <h2 class="section-title" data-i18n="home.quickAccess">Acceso Rápido</h2>
-                    
-                    <div class="access-grid">
-                        <button class="access-card" onclick="digitalWorld.navigateTo('menu')">
-                            <span class="access-icon">🍽️</span>
-                            <h3 data-i18n="access.menu">Explorar Menú</h3>
-                            <p data-i18n="access.menuDesc">Menú interactivo con platillos gourmet</p>
-                        </button>
-                        
-                        <button class="access-card" onclick="digitalWorld.navigateTo('guests')">
-                            <span class="access-icon">📋</span>
-                            <h3 data-i18n="access.booking">Nueva Reserva</h3>
-                            <p data-i18n="access.bookingDesc">Registrar información de huésped</p>
-                        </button>
-                        
-                        <button class="access-card" onclick="digitalWorld.navigateTo('pos')">
-                            <span class="access-icon">💳</span>
-                            <h3 data-i18n="access.pos">Sistema POS</h3>
-                            <p data-i18n="access.posDesc">Procesar órdenes y pagos</p>
-                        </button>
-                        
-                        <button class="access-card" onclick="digitalWorld.navigateTo('about')">
-                            <span class="access-icon">👨‍🍳</span>
-                            <h3 data-i18n="access.chef">Conoce a Chef Franko</h3>
-                            <p data-i18n="access.chefDesc">Nuestra filosofía culinaria</p>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="featured-section">
-                    <h2 class="section-title" data-i18n="home.featured">Destacado Esta Semana</h2>
-                    
-                    <div class="featured-grid">
-                        <div class="featured-dish">
-                            <svg viewBox="0 0 400 200" style="width: 100%; height: 200px;">
-                                <rect width="400" height="200" fill="#C05621" opacity="0.2"/>
-                                <text x="200" y="120" font-size="60" text-anchor="middle" fill="#003C3C">🥘</text>
-                            </svg>
-                            <h3>Paella Valenciana</h3>
-                            <p>Arroz tradicional español con mariscos frescos</p>
-                        </div>
-                        
-                        <div class="featured-dish">
-                            <svg viewBox="0 0 400 200" style="width: 100%; height: 200px;">
-                                <rect width="400" height="200" fill="#2F855A" opacity="0.2"/>
-                                <text x="200" y="120" font-size="60" text-anchor="middle" fill="#003C3C">🥩</text>
-                            </svg>
-                            <h3>Ribeye Premium</h3>
-                            <p>Carne de res selecta con guarniciones gourmet</p>
-                        </div>
-                        
-                        <div class="featured-dish">
-                            <svg viewBox="0 0 400 200" style="width: 100%; height: 200px;">
-                                <rect width="400" height="200" fill="#D69E2E" opacity="0.2"/>
-                                <text x="200" y="120" font-size="60" text-anchor="middle" fill="#003C3C">🍰</text>
-                            </svg>
-                            <h3>Tiramisú Casero</h3>
-                            <p>Postre italiano tradicional con café expreso</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- Tab Content: POS -->
+        <div id="pos-tab" class="tab-content active">
+            <div class="loading" id="pos-loading">
+                <div class="spinner"></div>
+                <p>Cargando Sistema POS...</p>
             </div>
-        </section>
-        
-        <!-- Menu Section -->
-        <section id="menu-section" class="world-section">
-            <div class="content-container">
-                <h2 class="section-title text-center mb-xl" data-i18n="nav.menu">Menú</h2>
-                <div class="text-center" style="padding: 4rem; background: var(--bg-card); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);">
-                    <p style="font-size: 4rem; margin-bottom: 2rem;">🍽️</p>
-                    <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--brand-teal);">Coming Soon</h3>
-                    <p style="color: var(--text-muted); font-size: 1.1rem;">Interactive menu system with 23 gourmet dishes</p>
-                </div>
+            <div class="iframe-container" style="display: none;" id="pos-iframe-container">
+                <iframe src="pos.html" onload="hideLoading('pos')"></iframe>
             </div>
-        </section>
+        </div>
         
-        <!-- Guest Services Section -->
-        <section id="guests-section" class="world-section">
-            <div class="content-container">
-                <!-- Content loaded dynamically -->
+        <!-- Tab Content: Guests -->
+        <div id="guests-tab" class="tab-content">
+            <div class="loading" id="guests-loading">
+                <div class="spinner"></div>
+                <p>Cargando Formulario...</p>
             </div>
-        </section>
-        
-        <!-- POS Systems Section -->
-        <section id="pos-section" class="world-section">
-            <div class="content-container">
-                <!-- Content loaded dynamically -->
+            <div class="iframe-container" style="display: none;" id="guests-iframe-container">
+                <iframe src="formulario guest form.html" onload="hideLoading('guests')"></iframe>
             </div>
-        </section>
-        
-        <!-- About & Contact Section -->
-        <section id="about-section" class="world-section">
-            <div class="content-container">
-                <div class="about-container">
-                    <div class="chef-profile">
-                        <svg viewBox="0 0 200 200" style="width: 200px; height: 200px; margin: 0 auto 2rem;">
-                            <circle cx="100" cy="100" r="98" fill="#D69E2E" opacity="0.2"/>
-                            <text x="100" y="130" font-size="80" text-anchor="middle" fill="#003C3C">👨‍🍳</text>
-                        </svg>
-                        <h2>Chef Franko Salgado</h2>
-                        <p class="chef-title" data-i18n="about.title">Chef Ejecutivo y Fundador</p>
-                    </div>
-                    
-                    <div class="chef-bio">
-                        <h3 data-i18n="about.philosophy">Filosofía Culinaria</h3>
-                        <p data-i18n="about.bio">
-                            Con más de 20 años de experiencia en cocina mexicana e internacional,
-                            el Chef Franko Salgado aporta sabores auténticos y técnicas innovadoras
-                            a cada platillo en Verano Estate. Su pasión por la excelencia culinaria
-                            y el servicio excepcional se refleja en cada experiencia gastronómica.
-                        </p>
-                    </div>
-                    
-                    <div class="contact-info">
-                        <h3 data-i18n="about.contact">Ponerse en Contacto</h3>
-                        <div class="contact-grid">
-                            <a href="tel:+523221606843" class="contact-item">
-                                📞 +52 322 160 6843
-                            </a>
-                            <a href="mailto:franko@veranostate.com" class="contact-item">
-                                📧 franko@veranostate.com
-                            </a>
-                            <a href="https://wa.me/523221606843" class="contact-item" target="_blank">
-                                💬 WhatsApp
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>VERANO ESTATE</h3>
+            <p>Tu experiencia, nuestra pasión</p>
+            <div class="contact-info">
+                <a href="tel:+523221606843">📞 +52 322 160 6843</a>
+                <a href="mailto:franko@veranostate.com">✉️ franko@veranostate.com</a>
             </div>
-        </section>
-        
-    </main>
-
-    <!-- Scripts -->
-    <script src="./assets/js/i18n.js"></script>
-    <script src="./assets/js/theme-manager.js"></script>
-    <script src="./assets/js/digital-world.js"></script>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                © 2025 VERANO ESTATE. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
     
     <script>
-        // Initialize everything when DOM is ready
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Initialize i18n
-            await i18n.init();
+        // Switch between tabs
+        function switchTab(tabName, event) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            // Update language button
-            const currentLang = i18n.getCurrentLanguage();
-            const flag = document.querySelector('#lang-toggle .flag');
-            const text = document.querySelector('#lang-toggle .lang-text');
-            if (currentLang === 'es') {
-                flag.textContent = '🇪🇸';
-                text.textContent = 'ES';
-            } else {
-                flag.textContent = '🇺🇸';
-                text.textContent = 'EN';
-            }
-        });
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Hide loading spinner when iframe loads
+        function hideLoading(section) {
+            document.getElementById(section + '-loading').style.display = 'none';
+            document.getElementById(section + '-iframe-container').style.display = 'block';
+        }
     </script>
 </body>
 </html>
