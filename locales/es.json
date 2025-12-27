@@ -79,5 +79,19 @@
     "posRestaurant": "POS Restaurant",
     "guestForm": "Formulario de Huéspedes",
     "language": "Idioma"
+  },
+  "login": {
+    "title": "Iniciar Sesión",
+    "subtitle": "Sistema de Gestión",
+    "username": "Usuario",
+    "usernamePlaceholder": "Ingrese su usuario",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingrese su contraseña",
+    "rememberMe": "Recordarme",
+    "submit": "Iniciar Sesión",
+    "defaultInfo": "Usuario por defecto: admin / Contraseña: verano2025",
+    "emptyFields": "Por favor complete todos los campos",
+    "invalidCredentials": "Usuario o contraseña incorrectos",
+    "logout": "Cerrar Sesión"
   }
 }

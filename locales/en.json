@@ -79,5 +79,19 @@
     "posRestaurant": "POS Restaurant",
     "guestForm": "Guest Form",
     "language": "Language"
+  },
+  "login": {
+    "title": "Sign In",
+    "subtitle": "Management System",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "rememberMe": "Remember Me",
+    "submit": "Sign In",
+    "defaultInfo": "Default user: admin / Password: verano2025",
+    "emptyFields": "Please fill in all fields",
+    "invalidCredentials": "Invalid username or password",
+    "logout": "Sign Out"
   }
 }

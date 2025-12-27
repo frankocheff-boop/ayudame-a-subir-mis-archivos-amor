@@ -23,6 +23,7 @@
             padding: 2rem;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         
         .header h1 {
@@ -36,6 +37,37 @@
             color: #fff;
             font-size: 1.1rem;
             opacity: 0.9;
+        }
+        
+        /* User Info and Logout */
+        .user-info {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+        
+        .user-name {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .btn-logout {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-logout:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
         
         /* Tabs Navigation */
@@ -184,6 +216,22 @@
                 font-size: 1.8rem;
             }
             
+            .user-info {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+                flex-wrap: wrap;
+            }
+            
+            .user-name {
+                font-size: 0.85rem;
+            }
+            
+            .btn-logout {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
             .tab-btn {
                 font-size: 1rem;
                 padding: 1rem;
@@ -208,6 +256,10 @@
 <body>
     <!-- Header -->
     <header class="header">
+        <div class="user-info">
+            <span class="user-name">👤 <span id="currentUser"></span></span>
+            <button class="btn-logout" onclick="logout()">🚪 Cerrar Sesión</button>
+        </div>
         <h1>🌴 VERANO ESTATE 🌴</h1>
         <p>Sistema de Gestión Integral</p>
     </header>
@@ -262,7 +314,27 @@
         </div>
     </footer>
     
+    <script src="assets/js/auth.js"></script>
     <script>
+        // Check authentication on page load
+        if (!AuthService.isAuthenticated()) {
+            window.location.href = 'pages/login.html';
+        }
+        
+        // Display current user
+        const currentUser = AuthService.getCurrentUser();
+        if (currentUser) {
+            document.getElementById('currentUser').textContent = currentUser;
+        }
+        
+        // Logout function
+        function logout() {
+            if (confirm('¿Está seguro que desea cerrar sesión?')) {
+                AuthService.logout();
+                window.location.href = 'pages/login.html';
+            }
+        }
+        
         // Switch between tabs
         function switchTab(tabName, event) {
             // Hide all tabs
