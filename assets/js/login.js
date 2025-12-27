@@ -92,10 +92,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Set initial language button state
-    const currentLang = localStorage.getItem('verano_language') || 'es';
+    const currentLang = localStorage.getItem('verano_estate_lang') || 'es';
     updateLanguageButtons(currentLang);
 
     // Clear error on input
     usernameInput.addEventListener('input', hideError);
     passwordInput.addEventListener('input', hideError);
+
+    // Toggle default credentials visibility
+    window.toggleDefaultCredentials = function(event) {
+        event.preventDefault();
+        const credInfo = document.getElementById('defaultCredsInfo');
+        if (credInfo) {
+            credInfo.style.display = credInfo.style.display === 'none' ? 'block' : 'none';
+        }
+    };
 });

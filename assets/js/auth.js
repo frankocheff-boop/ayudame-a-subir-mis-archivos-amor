@@ -1,6 +1,11 @@
 /**
  * Authentication Module for VERANO ESTATE
  * Handles user authentication and session management
+ * 
+ * SECURITY NOTE: This is a client-side only authentication system
+ * suitable for demo/single-user deployments. For production use with
+ * multiple users and sensitive data, implement proper server-side
+ * authentication with encrypted passwords, JWT tokens, and HTTPS.
  */
 
 const AUTH_CONFIG = {
@@ -46,14 +51,18 @@ const AuthService = {
     },
 
     /**
-     * Simple encode function (in production, use proper encryption)
+     * Simple encode function
+     * NOTE: This provides obfuscation only, not encryption.
+     * For production, use proper JWT tokens or server-side sessions.
      */
     encode(data) {
         return btoa(encodeURIComponent(data).split('').reverse().join(''));
     },
 
     /**
-     * Simple decode function (in production, use proper encryption)
+     * Simple decode function
+     * NOTE: This provides obfuscation only, not encryption.
+     * For production, use proper JWT tokens or server-side sessions.
      */
     decode(data) {
         return decodeURIComponent(atob(data).split('').reverse().join(''));
