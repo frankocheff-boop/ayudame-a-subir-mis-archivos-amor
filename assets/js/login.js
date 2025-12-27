@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Language change handler
     window.changeLanguage = function(lang) {
-        if (typeof window.i18n !== 'undefined' && window.i18n.setLanguage) {
-            window.i18n.setLanguage(lang);
+        if (typeof window.i18n !== 'undefined' && window.i18n.changeLanguage) {
+            window.i18n.changeLanguage(lang);
             updateLanguageButtons(lang);
         }
     };

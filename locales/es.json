@@ -90,8 +90,10 @@
     "rememberMe": "Recordarme",
     "submit": "Iniciar Sesión",
     "defaultInfo": "Usuario por defecto: admin / Contraseña: verano2025",
+    "showDefaultCredentials": "Mostrar credenciales por defecto",
     "emptyFields": "Por favor complete todos los campos",
     "invalidCredentials": "Usuario o contraseña incorrectos",
-    "logout": "Cerrar Sesión"
+    "logout": "Cerrar Sesión",
+    "logoutConfirm": "¿Está seguro que desea cerrar sesión?"
   }
 }

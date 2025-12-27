@@ -44,9 +44,16 @@
             </form>
             
             <div class="login-footer">
-                <p class="default-credentials" data-i18n="login.defaultInfo">
-                    Usuario por defecto: <strong>admin</strong> / Contraseña: <strong>verano2025</strong>
+                <p class="default-credentials">
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('defaultCredsInfo').style.display = document.getElementById('defaultCredsInfo').style.display === 'none' ? 'block' : 'none';" style="color: #2d7a7b; text-decoration: underline; cursor: pointer;">
+                        <span data-i18n="login.showDefaultCredentials">Mostrar credenciales por defecto</span>
+                    </a>
                 </p>
+                <div id="defaultCredsInfo" style="display: none; margin-top: 0.5rem;">
+                    <p class="default-credentials" data-i18n="login.defaultInfo">
+                        Usuario por defecto: <strong>admin</strong> / Contraseña: <strong>verano2025</strong>
+                    </p>
+                </div>
                 <div class="language-selector">
                     <button onclick="changeLanguage('es')" class="lang-btn" data-lang="es">🇪🇸 ES</button>
                     <button onclick="changeLanguage('en')" class="lang-btn" data-lang="en">🇺🇸 EN</button>

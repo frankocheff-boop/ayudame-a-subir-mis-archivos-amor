@@ -26,15 +26,37 @@ const AuthService = {
         const rememberToken = localStorage.getItem(AUTH_CONFIG.REMEMBER_KEY);
         if (rememberToken) {
             try {
-                const userData = JSON.parse(atob(rememberToken));
-                if (userData.username) {
-                    this.createSession(userData.username);
+                // Simple obfuscation - in production, use proper encryption
+                const userData = JSON.parse(this.decode(rememberToken));
+                if (userData.username && userData.timestamp) {
+                    // Check if token is not older than 30 days
+                    const tokenAge = Date.now() - userData.timestamp;
+                    if (tokenAge < 30 * 24 * 60 * 60 * 1000) {
+                        this.createSession(userData.username);
+                    } else {
+                        // Token expired, clear it
+                        localStorage.removeItem(AUTH_CONFIG.REMEMBER_KEY);
+                    }
                 }
             } catch (e) {
                 // Invalid token, clear it
                 localStorage.removeItem(AUTH_CONFIG.REMEMBER_KEY);
             }
         }
+    },
+
+    /**
+     * Simple encode function (in production, use proper encryption)
+     */
+    encode(data) {
+        return btoa(encodeURIComponent(data).split('').reverse().join(''));
+    },
+
+    /**
+     * Simple decode function (in production, use proper encryption)
+     */
+    decode(data) {
+        return decodeURIComponent(atob(data).split('').reverse().join(''));
     },
 
     /**
@@ -69,7 +91,11 @@ const AuthService = {
             this.createSession(username);
             
             if (rememberMe) {
-                const token = btoa(JSON.stringify({ username }));
+                const tokenData = {
+                    username,
+                    timestamp: Date.now()
+                };
+                const token = this.encode(JSON.stringify(tokenData));
                 localStorage.setItem(AUTH_CONFIG.REMEMBER_KEY, token);
             } else {
                 localStorage.removeItem(AUTH_CONFIG.REMEMBER_KEY);

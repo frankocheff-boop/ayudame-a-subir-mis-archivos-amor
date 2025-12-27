@@ -90,8 +90,10 @@
     "rememberMe": "Remember Me",
     "submit": "Sign In",
     "defaultInfo": "Default user: admin / Password: verano2025",
+    "showDefaultCredentials": "Show default credentials",
     "emptyFields": "Please fill in all fields",
     "invalidCredentials": "Invalid username or password",
-    "logout": "Sign Out"
+    "logout": "Sign Out",
+    "logoutConfirm": "Are you sure you want to sign out?"
   }
 }

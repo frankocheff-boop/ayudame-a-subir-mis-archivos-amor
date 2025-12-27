@@ -327,9 +327,21 @@
             document.getElementById('currentUser').textContent = currentUser;
         }
         
+        // Update logout button text based on language
+        const lang = localStorage.getItem('verano_estate_lang') || 'es';
+        const logoutBtn = document.querySelector('.btn-logout');
+        if (logoutBtn) {
+            logoutBtn.textContent = lang === 'es' ? '🚪 Cerrar Sesión' : '🚪 Sign Out';
+        }
+        
         // Logout function
         function logout() {
-            if (confirm('¿Está seguro que desea cerrar sesión?')) {
+            const lang = localStorage.getItem('verano_estate_lang') || 'es';
+            const message = lang === 'es' 
+                ? '¿Está seguro que desea cerrar sesión?' 
+                : 'Are you sure you want to sign out?';
+            
+            if (confirm(message)) {
                 AuthService.logout();
                 window.location.href = 'pages/login.html';
             }
