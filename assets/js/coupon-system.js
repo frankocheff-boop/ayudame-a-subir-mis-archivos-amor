@@ -104,6 +104,13 @@ class CouponSystem {
     return { valid: true, coupon };
   }
 
+  /**
+   * Apply discount based on coupon type
+   * @param {Object} coupon - The coupon to apply
+   * @param {number} cartTotal - The cart subtotal
+   * @param {Array} cart - Array of cart items with structure: {id, title, price, qty, category}
+   * @returns {Object} Discount result with discount amount, new total, and free items
+   */
   static applyDiscount(coupon, cartTotal, cart) {
     let discount = 0;
     let freeItems = [];
@@ -123,6 +130,7 @@ class CouponSystem {
         break;
       
       case 'category':
+        // Filter cart items by category, using safe defaults for missing properties
         const categoryItems = cart.filter(i => i.category && i.category === coupon.category);
         const categoryTotal = categoryItems.reduce((sum, i) => sum + (i.price || 0) * (i.qty || 0), 0);
         discount = categoryTotal * (coupon.value / 100);

@@ -158,7 +158,7 @@ function updateCartTotals() {
     
     // Recalculate discount if coupon is applied
     if (appliedCoupon) {
-        const userId = typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+        const userId = getCurrentUserId();
         const result = CouponSystem.applyDiscount(appliedCoupon, subtotal, cart);
         couponDiscount = result.discount;
     } else {
@@ -182,6 +182,8 @@ function updateCartTotals() {
             discountLine.className = 'flex justify-between text-sm font-mono';
             discountLine.style.cssText = 'color: #4ade80; font-weight: bold;';
             // Create two span elements for safe text insertion
+            // Using textContent instead of innerHTML prevents XSS attacks by treating
+            // the coupon code as plain text rather than executable HTML/JavaScript
             const labelSpan = document.createElement('span');
             const valueSpan = document.createElement('span');
             discountLine.appendChild(labelSpan);
@@ -190,7 +192,7 @@ function updateCartTotals() {
             const totalLine = totalsContainer.querySelector('.border-t');
             totalsContainer.insertBefore(discountLine, totalLine);
         }
-        // Safely set text content
+        // Safely set text content (XSS prevention)
         const spans = discountLine.querySelectorAll('span');
         if (spans.length >= 2) {
             spans[0].textContent = `DESCUENTO (${appliedCoupon.code})`;
@@ -260,7 +262,7 @@ function closeCheckout() {
 
 function processPayment(method) {
     const total = document.getElementById('total-display')?.innerText || '$0.00';
-    const userId = typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+    const userId = getCurrentUserId();
     
     // Registrar uso del cupón
     if (appliedCoupon) {
@@ -296,9 +298,17 @@ function formatMoney(amount) {
 
 // ============= COUPON SYSTEM FUNCTIONS =============
 
+/**
+ * Get the current user ID for coupon tracking
+ * @returns {string} User ID from AuthService or 'guest'
+ */
+function getCurrentUserId() {
+    return typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+}
+
 function applyCoupon() {
     const code = document.getElementById('coupon-input').value.trim();
-    const userId = typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+    const userId = getCurrentUserId();
     const cartTotal = calculateCartTotal();
     
     if (!code) {
@@ -359,7 +369,7 @@ function showCouponMessage(message, type) {
 }
 
 function showAvailableCoupons() {
-    const userId = typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+    const userId = getCurrentUserId();
     const availableCoupons = CouponSystem.getAvailableCoupons(userId, getUserBirthMonth());
     
     const listEl = document.getElementById('coupons-list');
