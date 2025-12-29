@@ -1,0 +1,471 @@
+/* VERANO ESTATE - Sistema de Cupones - Estilos */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+
+:root {
+    --gold: #ffd700;
+    --gold-dark: #daa520;
+    --teal: #2d7a7b;
+    --teal-dark: #1a5f5f;
+    --neon-cyan: #06b6d4;
+    --neon-bright: #22d3ee;
+}
+
+.coupon-page {
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.coupon-header {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    padding: 2rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.coupon-header h1 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--gold);
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5rem;
+}
+
+.coupon-header p {
+    color: #fff;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Sección de input de cupón */
+.coupon-input-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.coupon-input-container {
+    display: flex;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.coupon-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 3px solid var(--teal);
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 2px;
+}
+
+.coupon-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.coupon-input::placeholder {
+    color: #999;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.btn-apply-coupon {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-apply-coupon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+}
+
+.btn-apply-coupon:active {
+    transform: translateY(0);
+}
+
+/* Mensajes de estado */
+.coupon-message {
+    margin-top: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    animation: slideDown 0.3s ease;
+}
+
+.coupon-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.coupon-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cards de cupones */
+.coupons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.coupon-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid transparent;
+}
+
+.coupon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+}
+
+.coupon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--gold);
+}
+
+.coupon-card.used {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.coupon-card.used::after {
+    content: 'USADO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(255, 0, 0, 0.3);
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 5px;
+}
+
+.coupon-emoji {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    text-align: center;
+}
+
+.coupon-code {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--teal);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    letter-spacing: 3px;
+    padding: 0.5rem;
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+    border-radius: 6px;
+}
+
+.coupon-name {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.coupon-description {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.coupon-discount-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: #000;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin: 0.5rem auto;
+    display: block;
+    text-align: center;
+    width: fit-content;
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.coupon-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px dashed #ddd;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.coupon-detail-item {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.coupon-detail-label {
+    font-weight: 600;
+}
+
+.coupon-detail-value {
+    color: var(--teal);
+    font-weight: 700;
+}
+
+/* Sección de puntos de lealtad */
+.loyalty-section {
+    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.loyalty-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.loyalty-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.loyalty-points-display {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    font-family: 'Orbitron', sans-serif;
+}
+
+.loyalty-level {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.loyalty-level-badge {
+    font-size: 3rem;
+}
+
+.loyalty-level-name {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.loyalty-progress-bar {
+    background: rgba(255, 255, 255, 0.2);
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.loyalty-progress-fill {
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    height: 100%;
+    transition: width 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #000;
+    font-size: 0.9rem;
+}
+
+.loyalty-levels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.loyalty-level-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.loyalty-level-card.active {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.loyalty-level-card:hover {
+    transform: scale(1.05);
+}
+
+/* Historial de cupones */
+.coupon-history {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.coupon-history h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--teal);
+    margin-bottom: 1.5rem;
+}
+
+.history-item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-code {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    color: var(--teal);
+}
+
+.history-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.history-amount {
+    font-weight: 700;
+    color: #333;
+}
+
+/* Botones de acción */
+.btn-copy-code {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-copy-code:hover {
+    background: var(--gold);
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* Animación de éxito */
+@keyframes successPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(34, 211, 238, 0);
+    }
+}
+
+.coupon-applied {
+    animation: successPulse 0.6s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .coupon-page {
+        padding: 1rem;
+    }
+    
+    .coupon-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .coupon-input-container {
+        flex-direction: column;
+    }
+    
+    .coupons-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .loyalty-levels-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .loyalty-points-display {
+        font-size: 2rem;
+    }
+    
+    .loyalty-level-name {
+        font-size: 1.5rem;
+    }
+}
