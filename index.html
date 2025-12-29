@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VERANO ESTATE - Sistema Unificado</title>
+    <link rel="stylesheet" href="assets/css/chef-gallery.css">
     <style>
         * {
             margin: 0;
@@ -256,12 +257,15 @@
 <body>
     <!-- Header -->
     <header class="header">
+        <div class="logo-container">
+            <img src="assets/images/branding/logo-franko-chef.svg" alt="Franko Private Chef" class="chef-logo">
+        </div>
         <div class="user-info">
             <span class="user-name">👤 <span id="currentUser"></span></span>
             <button class="btn-logout" onclick="logout()">🚪 Cerrar Sesión</button>
         </div>
         <h1>🌴 VERANO ESTATE 🌴</h1>
-        <p>Sistema de Gestión Integral</p>
+        <p>Chef Franko - Experiencias Gastronómicas Exclusivas</p>
     </header>
     
     <!-- Tabs Container -->
@@ -273,6 +277,9 @@
             </button>
             <button class="tab-btn" onclick="switchTab('guests', event)">
                 📋 Formulario de Huéspedes
+            </button>
+            <button class="tab-btn" onclick="switchTab('especialidades', event)">
+                👨‍🍳 Especialidades del Chef
             </button>
         </div>
         
@@ -295,6 +302,69 @@
             </div>
             <div class="iframe-container" style="display: none;" id="guests-iframe-container">
                 <iframe src="pages/guest-form.html" onload="hideLoading('guests')"></iframe>
+            </div>
+        </div>
+        
+        <!-- Tab Content: Especialidades del Chef -->
+        <div id="especialidades-tab" class="tab-content">
+            <div class="especialidades-container">
+                <div class="especialidades-header">
+                    <h2>Especialidades del Chef Franko</h2>
+                    <p>Creaciones signature que celebran los sabores del Pacífico con elegancia mundial</p>
+                </div>
+                
+                <div class="especialidades-grid">
+                    <!-- Especialidad 1 -->
+                    <div class="especialidad-card" onclick="window.location.href='pages/chef-gallery.html'">
+                        <img src="assets/images/menu/especialidades/camaron-ravioli-gourmet.svg" 
+                             alt="Camarón al Azafrán" 
+                             class="especialidad-image">
+                        <div class="especialidad-content">
+                            <h3>Camarón al Azafrán con Ravioli</h3>
+                            <p class="concept">Fusión de mar y tierra con toques mediterráneos</p>
+                            <p class="description">
+                                Camarón gigante perfectamente marcado con ravioli artesanal 
+                                en salsa de azafrán sobre puré de aguacate y espinaca.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Especialidad 2 -->
+                    <div class="especialidad-card" onclick="window.location.href='pages/chef-gallery.html'">
+                        <img src="assets/images/menu/especialidades/postre-esferico-molecular.svg" 
+                             alt="Esfera de Mango Molecular" 
+                             class="especialidad-image">
+                        <div class="especialidad-content">
+                            <h3>Esfera de Mango Molecular</h3>
+                            <p class="concept">Postre artístico con técnicas moleculares</p>
+                            <p class="description">
+                                Esfera perfecta de mango y maracuyá con técnicas de 
+                                esferificación, presentada sobre piedras zen.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Especialidad 3 -->
+                    <div class="especialidad-card" onclick="window.location.href='pages/chef-gallery.html'">
+                        <img src="assets/images/menu/especialidades/ravioli-artesanal-salsas.svg" 
+                             alt="Ravioli Artesanal Multi-Salsas" 
+                             class="especialidad-image">
+                        <div class="especialidad-content">
+                            <h3>Ravioli Artesanal Multi-Salsas</h3>
+                            <p class="concept">Pasta fresca con armonía de salsas gourmet</p>
+                            <p class="description">
+                                Ravioli translúcido hecho a mano sobre un lienzo de salsas 
+                                decorativas y flores comestibles.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="btn-container">
+                    <a href="pages/chef-gallery.html" class="view-gallery-btn">
+                        Ver Galería Completa →
+                    </a>
+                </div>
             </div>
         </div>
     </div>

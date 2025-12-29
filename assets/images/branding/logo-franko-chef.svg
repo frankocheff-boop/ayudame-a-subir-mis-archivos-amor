@@ -1,0 +1,49 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2332;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d3e50;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="sunsetGlow" cx="50%" cy="30%">
+      <stop offset="0%" style="stop-color:#FF8C42;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#FF8C42;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Main circle background -->
+  <circle cx="200" cy="200" r="195" fill="url(#bgGradient)" stroke="#D4AF37" stroke-width="3"/>
+  
+  <!-- Sunset glow effect -->
+  <circle cx="200" cy="120" r="100" fill="url(#sunsetGlow)"/>
+  
+  <!-- Laurel branches -->
+  <path d="M 100 280 Q 90 260 95 240 Q 100 230 105 240 Q 110 260 100 280" fill="#6B8E23" opacity="0.8"/>
+  <path d="M 110 270 Q 100 250 105 230 Q 110 220 115 230 Q 120 250 110 270" fill="#6B8E23" opacity="0.8"/>
+  <path d="M 300 280 Q 310 260 305 240 Q 300 230 295 240 Q 290 260 300 280" fill="#6B8E23" opacity="0.8"/>
+  <path d="M 290 270 Q 300 250 295 230 Q 290 220 285 230 Q 280 250 290 270" fill="#6B8E23" opacity="0.8"/>
+  
+  <!-- Chef hat -->
+  <ellipse cx="200" cy="160" rx="60" ry="25" fill="#D4AF37"/>
+  <rect x="155" y="160" width="90" height="40" fill="#D4AF37"/>
+  <ellipse cx="200" cy="120" rx="50" ry="40" fill="#FFE4B5"/>
+  <circle cx="180" cy="105" r="15" fill="#FFE4B5"/>
+  <circle cx="220" cy="105" r="15" fill="#FFE4B5"/>
+  <circle cx="200" cy="90" r="15" fill="#FFE4B5"/>
+  
+  <!-- Chile pepper accent -->
+  <path d="M 280 250 Q 285 240 283 235 L 275 238 Q 270 250 268 260 Q 275 258 280 250" fill="#DC143C"/>
+  <path d="M 283 235 Q 283 232 285 230" stroke="#228B22" stroke-width="2" fill="none"/>
+  
+  <!-- Text: FRANKO -->
+  <text x="200" y="220" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#D4AF37" text-anchor="middle" letter-spacing="4">FRANKO</text>
+  
+  <!-- Text: PRIVATE CHEF -->
+  <text x="200" y="245" font-family="Arial, sans-serif" font-size="16" fill="#FFE4B5" text-anchor="middle" letter-spacing="3">PRIVATE CHEF</text>
+  
+  <!-- Decorative stars -->
+  <circle cx="140" cy="210" r="2" fill="#FFE4B5" opacity="0.6"/>
+  <circle cx="260" cy="210" r="2" fill="#FFE4B5" opacity="0.6"/>
+  <circle cx="150" cy="220" r="1.5" fill="#FFE4B5" opacity="0.4"/>
+  <circle cx="250" cy="220" r="1.5" fill="#FFE4B5" opacity="0.4"/>
+</svg>
