@@ -37,6 +37,8 @@ let cart = [];
 let currentCategory = 'All';
 let searchQuery = '';
 let orderCount = 1024;
+let appliedCoupon = null;
+let couponDiscount = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
@@ -148,12 +150,46 @@ function updateCartUI() {
         `).join('');
     }
 
+    updateCartTotals();
+}
+
+function updateCartTotals() {
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    
+    // Recalculate discount if coupon is applied
+    if (appliedCoupon) {
+        const userId = typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+        const result = CouponSystem.applyDiscount(appliedCoupon, subtotal, cart);
+        couponDiscount = result.discount;
+    } else {
+        couponDiscount = 0;
+    }
+    
     const tax = subtotal * 0.16;
-    const total = subtotal + tax;
+    const total = subtotal + tax - couponDiscount;
 
     updateElement('subtotal-display', formatMoney(subtotal));
     updateElement('tax-display', formatMoney(tax));
+    
+    // Show/hide discount line
+    const totalsContainer = document.querySelector('.bg-\\[\\#0f172a\\] .space-y-2');
+    let discountLine = document.getElementById('discount-line');
+    
+    if (appliedCoupon && couponDiscount > 0) {
+        if (!discountLine) {
+            discountLine = document.createElement('div');
+            discountLine.id = 'discount-line';
+            discountLine.className = 'flex justify-between text-sm font-mono';
+            discountLine.style.cssText = 'color: #4ade80; font-weight: bold;';
+            // Insert before the TOTAL line
+            const totalLine = totalsContainer.querySelector('.border-t');
+            totalsContainer.insertBefore(discountLine, totalLine);
+        }
+        discountLine.innerHTML = `<span>DESCUENTO (${appliedCoupon.code})</span><span>-${formatMoney(couponDiscount)}</span>`;
+    } else {
+        if (discountLine) discountLine.remove();
+    }
+    
     updateElement('total-display', formatMoney(total));
     updateElement('btn-total', formatMoney(total));
     updateElement('modal-total', formatMoney(total));
@@ -188,6 +224,9 @@ function changeQty(id, delta) {
 function clearCart() {
     if (cart.length > 0 && confirm('¿RESET SYSTEM DATA?')) {
         cart = [];
+        appliedCoupon = null;
+        couponDiscount = 0;
+        document.getElementById('applied-coupon').style.display = 'none';
         updateCartUI();
     }
 }
@@ -211,8 +250,30 @@ function closeCheckout() {
 
 function processPayment(method) {
     const total = document.getElementById('total-display')?.innerText || '$0.00';
-    alert(`⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${total}`);
+    const userId = typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+    
+    // Registrar uso del cupón
+    if (appliedCoupon) {
+        CouponSystem.recordCouponUse(userId, appliedCoupon.code);
+        
+        // Si es cupón de referido, dar crédito al referidor
+        if (appliedCoupon.referralBonus) {
+            console.log(`Bonus de $${appliedCoupon.referralBonus} acreditado al referidor`);
+        }
+    }
+    
+    // Incrementar contador de órdenes
+    const currentOrderCount = parseInt(localStorage.getItem(`orders_${userId}`) || '0');
+    localStorage.setItem(`orders_${userId}`, (currentOrderCount + 1).toString());
+    
+    const couponInfo = appliedCoupon ? `\nCupón usado: ${appliedCoupon.code}\nDescuento: $${couponDiscount.toFixed(2)}` : '';
+    
+    alert(`⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${total}${couponInfo}`);
+    
+    // Resetear
     cart = [];
+    appliedCoupon = null;
+    couponDiscount = 0;
     orderCount++;
     updateElement('order-id', orderCount);
     closeCheckout();
@@ -221,4 +282,129 @@ function processPayment(method) {
 
 function formatMoney(amount) {
     return '$' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
+// ============= COUPON SYSTEM FUNCTIONS =============
+
+function applyCoupon() {
+    const code = document.getElementById('coupon-input').value.trim();
+    const userId = typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+    const cartTotal = calculateCartTotal();
+    
+    if (!code) {
+        showCouponMessage('Por favor ingresa un código de cupón', 'error');
+        return;
+    }
+
+    const validation = CouponSystem.validateCoupon(code, userId, cartTotal, getUserBirthMonth());
+    
+    if (!validation.valid) {
+        showCouponMessage(validation.message, 'error');
+        return;
+    }
+
+    const result = CouponSystem.applyDiscount(validation.coupon, cartTotal, cart);
+    
+    appliedCoupon = { code: code.toUpperCase(), ...validation.coupon };
+    couponDiscount = result.discount;
+    
+    // Mostrar cupón aplicado
+    document.getElementById('applied-coupon').style.display = 'flex';
+    document.getElementById('applied-coupon-code').textContent = `${code.toUpperCase()} (-$${result.discount.toFixed(2)})`;
+    
+    showCouponMessage(result.message, 'success');
+    updateCartTotals();
+    
+    // Limpiar input
+    document.getElementById('coupon-input').value = '';
+}
+
+function removeCoupon() {
+    appliedCoupon = null;
+    couponDiscount = 0;
+    document.getElementById('applied-coupon').style.display = 'none';
+    showCouponMessage('Cupón removido', 'info');
+    updateCartTotals();
+}
+
+function showCouponMessage(message, type) {
+    const messageEl = document.getElementById('coupon-message');
+    messageEl.style.display = 'block';
+    messageEl.textContent = message;
+    
+    const colors = {
+        success: { bg: 'rgba(34, 197, 94, 0.2)', color: '#4ade80', border: '1px solid #22c55e' },
+        error: { bg: 'rgba(239, 68, 68, 0.2)', color: '#f87171', border: '1px solid #ef4444' },
+        info: { bg: 'rgba(59, 130, 246, 0.2)', color: '#60a5fa', border: '1px solid #3b82f6' }
+    };
+    
+    messageEl.style.background = colors[type].bg;
+    messageEl.style.color = colors[type].color;
+    messageEl.style.border = colors[type].border;
+    
+    setTimeout(() => {
+        messageEl.style.display = 'none';
+    }, 5000);
+}
+
+function showAvailableCoupons() {
+    const userId = typeof AuthService !== 'undefined' ? (AuthService.getCurrentUser() || 'guest') : 'guest';
+    const availableCoupons = CouponSystem.getAvailableCoupons(userId, getUserBirthMonth());
+    
+    const listEl = document.getElementById('coupons-list');
+    
+    if (availableCoupons.length === 0) {
+        listEl.innerHTML = '<p style="text-align: center; color: #64748b; padding: 2rem; font-size: 0.9rem;">No tienes cupones disponibles en este momento 😔</p>';
+    } else {
+        listEl.innerHTML = availableCoupons.map(coupon => {
+            const badgeText = coupon.type === 'percentage' 
+                ? `${coupon.value}% OFF` 
+                : coupon.type === 'fixed' 
+                    ? `$${coupon.value} OFF`
+                    : coupon.type === 'combo'
+                        ? `${coupon.discount}% OFF + GRATIS`
+                        : `${coupon.value}% OFF`;
+            
+            return `
+                <div class="coupon-card" style="border: 2px solid #06b6d4; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative; overflow: hidden; background: #0a101f;">
+                    <div style="position: absolute; top: 10px; right: 10px; background: #ffd700; color: #000; padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: bold; font-size: 0.75rem;">
+                        ${badgeText}
+                    </div>
+                    <h4 style="color: #22d3ee; margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: bold; letter-spacing: 0.05em;">${coupon.code}</h4>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 0.75rem; line-height: 1.4;">${coupon.description}</p>
+                    ${coupon.minPurchase ? `<small style="color: #64748b; display: block; margin-bottom: 0.25rem;">Compra mínima: $${coupon.minPurchase}</small>` : ''}
+                    ${coupon.validUntil ? `<small style="display: block; color: #64748b;">Válido hasta: ${new Date(coupon.validUntil).toLocaleDateString('es-MX')}</small>` : ''}
+                    <button 
+                        onclick="useCoupon('${coupon.code}')" 
+                        style="width: 100%; margin-top: 0.75rem; padding: 0.5rem; background: #06b6d4; color: #000; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem;"
+                        onmouseover="this.style.background='#22d3ee'" 
+                        onmouseout="this.style.background='#06b6d4'"
+                    >
+                        USAR AHORA
+                    </button>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('coupons-modal').style.display = 'block';
+}
+
+function closeCouponsModal() {
+    document.getElementById('coupons-modal').style.display = 'none';
+}
+
+function useCoupon(code) {
+    document.getElementById('coupon-input').value = code;
+    closeCouponsModal();
+    applyCoupon();
+}
+
+function getUserBirthMonth() {
+    // Obtener del perfil del usuario o localStorage
+    return parseInt(localStorage.getItem('userBirthMonth') || '0');
+}
+
+function calculateCartTotal() {
+    return cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 }

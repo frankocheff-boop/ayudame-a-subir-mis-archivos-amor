@@ -1,0 +1,39 @@
+/**
+ * Coupon System Styles for VERANO ESTATE
+ * Modern and elegant coupon UI with animations
+ */
+
+.coupon-section {
+  animation: fadeIn 0.3s ease;
+}
+
+.btn-apply-coupon:hover {
+  background: #1a5f5f !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.coupon-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coupon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(45, 122, 123, 0.3);
+}
+
+#coupons-modal {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #2d7a7b !important;
+  box-shadow: 0 0 0 3px rgba(45, 122, 123, 0.1);
+}
