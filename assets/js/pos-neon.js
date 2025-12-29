@@ -172,7 +172,7 @@ function updateCartTotals() {
     updateElement('tax-display', formatMoney(tax));
     
     // Show/hide discount line
-    const totalsContainer = document.querySelector('.bg-\\[\\#0f172a\\] .space-y-2');
+    const totalsContainer = document.querySelector('.bg-[#0f172a] .space-y-2');
     let discountLine = document.getElementById('discount-line');
     
     if (appliedCoupon && couponDiscount > 0) {
@@ -181,11 +181,21 @@ function updateCartTotals() {
             discountLine.id = 'discount-line';
             discountLine.className = 'flex justify-between text-sm font-mono';
             discountLine.style.cssText = 'color: #4ade80; font-weight: bold;';
+            // Create two span elements for safe text insertion
+            const labelSpan = document.createElement('span');
+            const valueSpan = document.createElement('span');
+            discountLine.appendChild(labelSpan);
+            discountLine.appendChild(valueSpan);
             // Insert before the TOTAL line
             const totalLine = totalsContainer.querySelector('.border-t');
             totalsContainer.insertBefore(discountLine, totalLine);
         }
-        discountLine.innerHTML = `<span>DESCUENTO (${appliedCoupon.code})</span><span>-${formatMoney(couponDiscount)}</span>`;
+        // Safely set text content
+        const spans = discountLine.querySelectorAll('span');
+        if (spans.length >= 2) {
+            spans[0].textContent = `DESCUENTO (${appliedCoupon.code})`;
+            spans[1].textContent = `-${formatMoney(couponDiscount)}`;
+        }
     } else {
         if (discountLine) discountLine.remove();
     }
@@ -310,7 +320,8 @@ function applyCoupon() {
     
     // Mostrar cupón aplicado
     document.getElementById('applied-coupon').style.display = 'flex';
-    document.getElementById('applied-coupon-code').textContent = `${code.toUpperCase()} (-$${result.discount.toFixed(2)})`;
+    const couponCodeEl = document.getElementById('applied-coupon-code');
+    couponCodeEl.textContent = `${code.toUpperCase()} (-$${result.discount.toFixed(2)})`;
     
     showCouponMessage(result.message, 'success');
     updateCartTotals();

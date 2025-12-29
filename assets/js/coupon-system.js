@@ -123,9 +123,14 @@ class CouponSystem {
         break;
       
       case 'category':
-        const categoryItems = cart.filter(i => i.category === coupon.category);
-        const categoryTotal = categoryItems.reduce((sum, i) => sum + i.price * i.qty, 0);
+        const categoryItems = cart.filter(i => i.category && i.category === coupon.category);
+        const categoryTotal = categoryItems.reduce((sum, i) => sum + (i.price || 0) * (i.qty || 0), 0);
         discount = categoryTotal * (coupon.value / 100);
+        break;
+      
+      default:
+        console.error(`Unknown coupon type: ${coupon.type}`);
+        discount = 0;
         break;
     }
 
