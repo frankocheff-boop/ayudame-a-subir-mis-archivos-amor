@@ -102,7 +102,7 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(220, 20, 60, 0.3);
     background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-    color: #000;
+    color: var(--negro-puro);
 }
 
 .btn-apply-coupon:active {
@@ -234,7 +234,7 @@
 .coupon-discount-badge {
     display: inline-block;
     background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-    color: #000;
+    color: var(--negro-puro);
     padding: 0.5rem 1.5rem;
     border-radius: 25px;
     font-weight: 900;
@@ -422,7 +422,7 @@
 
 .btn-copy-code:hover {
     background: var(--gold);
-    color: #000;
+    color: var(--negro-puro);
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
