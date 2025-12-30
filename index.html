@@ -274,6 +274,9 @@
             <button class="tab-btn" onclick="switchTab('guests', event)">
                 📋 Formulario de Huéspedes
             </button>
+            <button class="tab-btn" onclick="switchTab('coupons', event)">
+                💎 Mis Cupones
+            </button>
         </div>
         
         <!-- Tab Content: POS -->
@@ -295,6 +298,17 @@
             </div>
             <div class="iframe-container" style="display: none;" id="guests-iframe-container">
                 <iframe src="pages/guest-form.html" onload="hideLoading('guests')"></iframe>
+            </div>
+        </div>
+        
+        <!-- Tab Content: Coupons -->
+        <div id="coupons-tab" class="tab-content">
+            <div class="loading" id="coupons-loading">
+                <div class="spinner"></div>
+                <p>Cargando Cupones...</p>
+            </div>
+            <div class="iframe-container" style="display: none;" id="coupons-iframe-container">
+                <iframe src="pages/coupon-manager.html" onload="hideLoading('coupons')"></iframe>
             </div>
         </div>
     </div>
