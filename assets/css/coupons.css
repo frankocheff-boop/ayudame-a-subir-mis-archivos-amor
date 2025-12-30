@@ -1,36 +1,36 @@
-/* VERANO ESTATE - Sistema de Cupones - Estilos */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+/* VERANO ESTATE - Sistema de Cupones - Estilos Gourmet */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap');
 
 :root {
-    --gold: #ffd700;
-    --gold-dark: #daa520;
-    --teal: #2d7a7b;
-    --teal-dark: #1a5f5f;
-    --neon-cyan: #06b6d4;
-    --neon-bright: #22d3ee;
+    --rojo-carmin: #DC143C;
+    --rojo-carmin-oscuro: #B01030;
+    --gold: #D4AF37;
+    --gold-dark: #B8941E;
+    --crema: #FFF8F0;
+    --beige-suave: #FAF7F2;
 }
 
 .coupon-page {
-    font-family: 'Rajdhani', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, var(--crema) 0%, var(--beige-suave) 100%);
     min-height: 100vh;
     padding: 2rem;
 }
 
 .coupon-header {
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    background: linear-gradient(135deg, var(--rojo-carmin) 0%, var(--rojo-carmin-oscuro) 100%);
     padding: 2rem;
     text-align: center;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(220, 20, 60, 0.2);
     margin-bottom: 2rem;
 }
 
 .coupon-header h1 {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Playfair Display', serif;
     color: var(--gold);
     font-size: 2.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
     margin-bottom: 0.5rem;
 }
 
@@ -62,17 +62,17 @@
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
-    border: 3px solid var(--teal);
+    border: 3px solid var(--rojo-carmin);
     border-radius: 8px;
     outline: none;
     transition: all 0.3s ease;
-    font-family: 'Orbitron', monospace;
+    font-family: 'Playfair Display', monospace;
     letter-spacing: 2px;
 }
 
 .coupon-input:focus {
     border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
     transform: translateY(-2px);
 }
 
@@ -87,21 +87,22 @@
     font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
-    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    background: linear-gradient(135deg, var(--rojo-carmin), var(--rojo-carmin-oscuro));
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Playfair Display', serif;
     letter-spacing: 1px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(220, 20, 60, 0.2);
 }
 
 .btn-apply-coupon:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 16px rgba(220, 20, 60, 0.3);
     background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    color: #000;
 }
 
 .btn-apply-coupon:active {
@@ -168,7 +169,7 @@
     left: 0;
     right: 0;
     height: 6px;
-    background: linear-gradient(90deg, var(--teal), var(--gold));
+    background: linear-gradient(90deg, var(--rojo-carmin), var(--gold));
 }
 
 .coupon-card:hover {
@@ -203,10 +204,10 @@
 }
 
 .coupon-code {
-    font-family: 'Orbitron', monospace;
+    font-family: 'Playfair Display', monospace;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--teal);
+    color: var(--rojo-carmin);
     text-align: center;
     margin-bottom: 0.5rem;
     letter-spacing: 3px;
@@ -242,8 +243,8 @@
     display: block;
     text-align: center;
     width: fit-content;
-    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
-    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 3px 10px rgba(212, 175, 55, 0.4);
+    font-family: 'Playfair Display', serif;
 }
 
 .coupon-details {
@@ -265,18 +266,18 @@
 }
 
 .coupon-detail-value {
-    color: var(--teal);
+    color: var(--rojo-carmin);
     font-weight: 700;
 }
 
 /* Sección de puntos de lealtad */
 .loyalty-section {
-    background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+    background: linear-gradient(135deg, var(--rojo-carmin-oscuro), var(--rojo-carmin));
     border-radius: 12px;
     padding: 2rem;
     margin-bottom: 2rem;
     color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(220, 20, 60, 0.2);
 }
 
 .loyalty-header {
@@ -285,7 +286,7 @@
 }
 
 .loyalty-header h2 {
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Playfair Display', serif;
     font-size: 2rem;
     color: var(--gold);
     margin-bottom: 0.5rem;
@@ -295,8 +296,8 @@
     font-size: 3rem;
     font-weight: 900;
     color: var(--gold);
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    font-family: 'Playfair Display', serif;
 }
 
 .loyalty-level {
@@ -314,7 +315,7 @@
 .loyalty-level-name {
     font-size: 2rem;
     font-weight: 700;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Playfair Display', serif;
 }
 
 .loyalty-progress-bar {
@@ -355,9 +356,9 @@
 }
 
 .loyalty-level-card.active {
-    background: rgba(255, 215, 0, 0.2);
+    background: rgba(212, 175, 55, 0.2);
     border-color: var(--gold);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 
 .loyalty-level-card:hover {
@@ -373,8 +374,8 @@
 }
 
 .coupon-history h2 {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--teal);
+    font-family: 'Playfair Display', serif;
+    color: var(--rojo-carmin);
     margin-bottom: 1.5rem;
 }
 
@@ -391,9 +392,9 @@
 }
 
 .history-code {
-    font-family: 'Orbitron', monospace;
+    font-family: 'Playfair Display', monospace;
     font-weight: 700;
-    color: var(--teal);
+    color: var(--rojo-carmin);
 }
 
 .history-date {
@@ -408,7 +409,7 @@
 
 /* Botones de acción */
 .btn-copy-code {
-    background: var(--teal);
+    background: var(--rojo-carmin);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -423,6 +424,7 @@
     background: var(--gold);
     color: #000;
     transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
 /* Animación de éxito */
