@@ -66,7 +66,7 @@
     border-radius: 8px;
     outline: none;
     transition: all 0.3s ease;
-    font-family: 'Playfair Display', monospace;
+    font-family: 'Playfair Display', serif;
     letter-spacing: 2px;
 }
 
@@ -204,7 +204,7 @@
 }
 
 .coupon-code {
-    font-family: 'Playfair Display', monospace;
+    font-family: 'Courier New', 'Monaco', monospace;
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--rojo-carmin);
@@ -392,7 +392,7 @@
 }
 
 .history-code {
-    font-family: 'Playfair Display', monospace;
+    font-family: 'Courier New', 'Monaco', monospace;
     font-weight: 700;
     color: var(--rojo-carmin);
 }
