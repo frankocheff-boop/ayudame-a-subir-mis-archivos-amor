@@ -1,0 +1,508 @@
+/* ============================================
+   Rooms Styles - Individual Room Pages
+   For HOME - Franko & SOL Forever
+   ============================================ */
+
+/* Room Page Base */
+.room-page {
+    background: var(--gradiente-hogar);
+    min-height: 100vh;
+    padding-bottom: 2rem;
+}
+
+/* Room Header */
+.room-header {
+    background: var(--azul-noche);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.back-home {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dorado-sol);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+}
+
+.back-home:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: translateY(-50%) translateX(-5px);
+}
+
+.room-title {
+    font-family: var(--font-titulos);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--dorado-sol);
+}
+
+.room-subtitle {
+    font-family: var(--font-handwriting);
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+/* Section Styles */
+section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    font-family: var(--font-titulos);
+    font-size: 2rem;
+    color: var(--azul-noche);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--dorado-sol), var(--naranja-atardecer));
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 3rem;
+    position: relative;
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.timeline-item:nth-child(odd) {
+    flex-direction: row;
+}
+
+.timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.timeline-marker {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    border: 4px solid var(--dorado-sol);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-content {
+    flex: 1;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    margin: 0 2rem;
+    max-width: 500px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-item:nth-child(odd) .timeline-content::before {
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid white;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+
+.timeline-item:nth-child(even) .timeline-content::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-right: 15px solid white;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--dorado-sol);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    font-family: var(--font-titulos);
+    font-size: 1.5rem;
+    color: var(--azul-noche);
+    margin-bottom: 1rem;
+}
+
+.timeline-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Colored timeline items */
+.timeline-item.milestone .timeline-marker {
+    border-color: #4CAF50;
+}
+
+.timeline-item.love .timeline-marker {
+    border-color: var(--rosa-amor);
+}
+
+.timeline-item.emotional .timeline-marker {
+    border-color: #9C27B0;
+}
+
+.timeline-item.funny .timeline-marker {
+    border-color: #FFD700;
+}
+
+.timeline-item.achievement .timeline-marker {
+    border-color: #FF9800;
+}
+
+/* Add Moment Button */
+.add-moment-btn {
+    display: block;
+    margin: 3rem auto;
+    padding: 1.2rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: var(--gradiente-amanecer);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+}
+
+.add-moment-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.6);
+}
+
+/* Achievements Grid */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.achievement-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.achievement-label {
+    font-size: 1rem;
+    color: var(--azul-noche);
+    margin-bottom: 1rem;
+}
+
+.achievement-value {
+    font-family: var(--font-titulos);
+    font-size: 2.5rem;
+    color: var(--dorado-sol);
+    font-weight: 700;
+}
+
+/* Virtual Photo */
+.virtual-photo {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.photo-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    padding: 3rem;
+    background: var(--crema-calido);
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+}
+
+.photo-character {
+    text-align: center;
+}
+
+.char-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.char-name {
+    font-family: var(--font-titulos);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.franko-char .char-name {
+    color: var(--azul-noche);
+}
+
+.sol-char .char-name {
+    color: var(--dorado-sol);
+}
+
+.char-desc {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.photo-heart {
+    font-size: 4rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.photo-caption {
+    font-family: var(--font-handwriting);
+    font-size: 1.3rem;
+    color: var(--azul-noche);
+    font-style: italic;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+    font-family: var(--font-titulos);
+    font-size: 2rem;
+    color: var(--azul-noche);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--azul-noche);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: var(--font-cuerpo);
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--dorado-sol);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: var(--gradiente-amanecer);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.6);
+}
+
+/* Room Footer */
+.room-footer {
+    background: var(--azul-noche);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+.room-footer p {
+    margin: 0.5rem 0;
+}
+
+.room-footer p:first-child {
+    color: var(--crema-calido);
+}
+
+.room-footer p:last-child {
+    font-family: var(--font-handwriting);
+    font-size: 1.2rem;
+    color: var(--dorado-sol);
+}
+
+/* No Data Message */
+.no-data {
+    text-align: center;
+    padding: 3rem;
+    font-size: 1.2rem;
+    color: #999;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .back-home {
+        position: static;
+        display: block;
+        margin-bottom: 1rem;
+        transform: none !important;
+    }
+    
+    .room-title {
+        font-size: 2rem;
+    }
+    
+    .room-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+        flex-direction: row !important;
+    }
+    
+    .timeline-marker {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        position: absolute;
+        left: 5px;
+    }
+    
+    .timeline-content {
+        margin-left: 80px;
+        margin-right: 0;
+        max-width: 100%;
+    }
+    
+    .timeline-content::before {
+        display: none;
+    }
+    
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .photo-placeholder {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .char-icon {
+        font-size: 4rem;
+    }
+    
+    .photo-heart {
+        font-size: 3rem;
+    }
+    
+    .modal-content {
+        padding: 2rem 1.5rem;
+    }
+}
