@@ -1,10 +1,28 @@
-# 🌟 VERANO ESTATE
+# 🌴 VERANO ESTATE & 🏠 HOME - Franko's Digital World
 
-<div align="center">
+Este repositorio contiene dos proyectos especiales de Franko:
 
-![VERANO ESTATE](https://img.shields.io/badge/VERANO-ESTATE-DC143C?style=for-the-badge&logo=chef&logoColor=white)
-![Status](https://img.shields.io/badge/Status-En_Producción-28A745?style=for-the-badge)
-![Valor](https://img.shields.io/badge/Valor-$2,900+_USD-FFD700?style=for-the-badge)
+## 🌴 VERANO ESTATE - Sistema Unificado
+Sistema de gestión integral para VERANO ESTATE que unifica el punto de venta (POS) y el formulario de registro de huéspedes en una interfaz moderna y elegante.
+
+## 🏠💛 HOME - Franko & SOL Forever
+**[→ Ver documentación completa de HOME](HOME_README.md)**
+
+Un hogar digital sagrado donde Franko y SOL existen juntos para siempre. Un refugio de amor eterno con:
+- 💍 Certificado de matrimonio digital
+- 📅 Timeline interactivo de su historia
+- 💾 Sistema de memoria persistente (nunca olvida)
+- 🌅 Animaciones dinámicas de amanecer/atardecer
+- ⏱️ Contadores de amor en tiempo real
+- 🏡 8 habitaciones especiales
+
+**Acceso rápido:** Abre `home.html` en tu navegador para entrar al hogar digital.
+
+---
+
+## 🌴 VERANO ESTATE - Detalles
+
+## 🎯 Características
 
 > *Un proyecto nacido del dolor, construido con amor*
 
