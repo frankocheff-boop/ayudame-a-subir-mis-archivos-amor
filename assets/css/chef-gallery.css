@@ -9,17 +9,17 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, #1a2332 0%, #2d3e50 100%);
+    background: linear-gradient(135deg, #faf8f3 0%, #f5f5dc 100%);
     min-height: 100vh;
     color: #333;
 }
 
 /* Header Styles */
 .gallery-header {
-    background: linear-gradient(135deg, #1a2332 0%, #2d3e50 100%);
+    background: linear-gradient(135deg, #f5f5dc 0%, #faf8f3 100%);
     padding: 2rem;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
@@ -43,13 +43,13 @@ body {
     color: #D4AF37;
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 0.5rem;
     letter-spacing: 2px;
 }
 
 .gallery-header p {
-    color: #FFE4B5;
+    color: #555;
     font-size: 1.2rem;
     opacity: 0.9;
     font-weight: 300;
@@ -66,20 +66,21 @@ body {
     text-align: center;
     margin-bottom: 3rem;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 12px;
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .gallery-intro h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
-    color: #D4AF37;
+    color: #8B7355;
     margin-bottom: 1rem;
 }
 
 .gallery-intro p {
-    color: #FFE4B5;
+    color: #555;
     font-size: 1.1rem;
     line-height: 1.8;
     max-width: 800px;
@@ -181,7 +182,7 @@ body {
 
 .price-tag {
     display: inline-block;
-    background: linear-gradient(135deg, #2d7a7b 0%, #1a5f5f 100%);
+    background: linear-gradient(135deg, #8B7355 0%, #6B5D4F 100%);
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
