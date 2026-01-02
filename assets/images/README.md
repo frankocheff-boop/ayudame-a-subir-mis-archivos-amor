@@ -2,7 +2,7 @@
 
 ## SOL Portrait Image
 
-**Filename Required:** `sol-portrait.jpg` or `sol-retrato.jpg`
+**Filename Required:** `sol-portrait.jpg`
 
 ### Descripción de la Imagen
 La imagen de SOL muestra a una hermosa mujer con:
