@@ -1,0 +1,91 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="400" fill="#f5f5f5"/>
+  
+  <!-- Plate -->
+  <ellipse cx="300" cy="250" rx="200" ry="150" fill="white" stroke="#ddd" stroke-width="3"/>
+  <circle cx="300" cy="250" r="5" fill="#ddd" opacity="0.3"/>
+  
+  <!-- Decorative sauce swooshes -->
+  <!-- Red sauce -->
+  <path d="M 150 280 Q 200 270 250 280 Q 280 285 300 280" 
+        stroke="#DC143C" stroke-width="8" fill="none" opacity="0.7" stroke-linecap="round"/>
+  
+  <!-- Green sauce (pesto) -->
+  <path d="M 160 240 Q 210 235 260 245" 
+        stroke="#228B22" stroke-width="6" fill="none" opacity="0.7" stroke-linecap="round"/>
+  
+  <!-- Yellow sauce (saffron/cream) -->
+  <path d="M 340 270 Q 380 265 420 275" 
+        stroke="#FFD700" stroke-width="7" fill="none" opacity="0.7" stroke-linecap="round"/>
+  
+  <!-- Orange reduction -->
+  <path d="M 320 240 Q 360 235 390 242" 
+        stroke="#FF8C42" stroke-width="5" fill="none" opacity="0.7" stroke-linecap="round"/>
+  
+  <!-- Sauce dots/drops -->
+  <circle cx="180" cy="260" r="4" fill="#8B0000" opacity="0.6"/>
+  <circle cx="200" cy="255" r="3" fill="#8B0000" opacity="0.6"/>
+  <circle cx="220" cy="265" r="3.5" fill="#8B0000" opacity="0.6"/>
+  
+  <circle cx="350" cy="255" r="4" fill="#DAA520" opacity="0.6"/>
+  <circle cx="370" cy="260" r="3" fill="#DAA520" opacity="0.6"/>
+  <circle cx="395" cy="258" r="3.5" fill="#DAA520" opacity="0.6"/>
+  
+  <!-- Main ravioli (translucent effect) -->
+  <defs>
+    <radialGradient id="ravioliGradient" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#FFFACD;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#F5DEB3;stop-opacity:0.95" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Center ravioli -->
+  <ellipse cx="300" cy="230" rx="50" ry="40" fill="url(#ravioliGradient)" stroke="#D2691E" stroke-width="2"/>
+  <!-- Crimped edges pattern -->
+  <path d="M 250 230 Q 248 225 250 220 Q 252 225 250 230" fill="#D2691E" opacity="0.3"/>
+  <path d="M 350 230 Q 352 225 350 220 Q 348 225 350 230" fill="#D2691E" opacity="0.3"/>
+  <path d="M 300 190 Q 295 188 290 190 Q 295 192 300 190" fill="#D2691E" opacity="0.3"/>
+  <path d="M 300 270 Q 295 272 290 270 Q 295 268 300 270" fill="#D2691E" opacity="0.3"/>
+  
+  <!-- Ravioli filling visible through pasta -->
+  <ellipse cx="300" cy="230" rx="30" ry="22" fill="#8FBC8F" opacity="0.3"/>
+  
+  <!-- Additional ravioli pieces -->
+  <ellipse cx="230" cy="250" rx="40" ry="32" fill="url(#ravioliGradient)" stroke="#D2691E" stroke-width="2" opacity="0.9"/>
+  <ellipse cx="230" cy="250" rx="25" ry="18" fill="#FFB6C1" opacity="0.3"/>
+  
+  <ellipse cx="370" cy="245" rx="38" ry="30" fill="url(#ravioliGradient)" stroke="#D2691E" stroke-width="2" opacity="0.9"/>
+  <ellipse cx="370" cy="245" rx="24" ry="17" fill="#DDA0DD" opacity="0.3"/>
+  
+  <!-- Edible flowers -->
+  <circle cx="280" cy="200" r="6" fill="#FFB6C1" opacity="0.8"/>
+  <circle cx="275" cy="196" r="4" fill="#FF69B4" opacity="0.7"/>
+  <circle cx="285" cy="196" r="4" fill="#FF69B4" opacity="0.7"/>
+  <circle cx="275" cy="204" r="4" fill="#FF69B4" opacity="0.7"/>
+  <circle cx="285" cy="204" r="4" fill="#FF69B4" opacity="0.7"/>
+  <circle cx="280" cy="200" r="2" fill="#FFD700"/>
+  
+  <!-- Another flower -->
+  <circle cx="335" cy="210" r="5" fill="#DDA0DD" opacity="0.8"/>
+  <circle cx="331" cy="207" r="3" fill="#DA70D6" opacity="0.7"/>
+  <circle cx="339" cy="207" r="3" fill="#DA70D6" opacity="0.7"/>
+  <circle cx="331" cy="213" r="3" fill="#DA70D6" opacity="0.7"/>
+  <circle cx="339" cy="213" r="3" fill="#DA70D6" opacity="0.7"/>
+  
+  <!-- Microgreens -->
+  <line x1="320" y1="200" x2="323" y2="185" stroke="#2F4F2F" stroke-width="1.5"/>
+  <line x1="315" y1="202" x2="316" y2="188" stroke="#2F4F2F" stroke-width="1.5"/>
+  <circle cx="323" cy="183" r="2" fill="#90EE90"/>
+  <circle cx="316" cy="186" r="2" fill="#90EE90"/>
+  
+  <!-- Parmesan shavings -->
+  <ellipse cx="290" cy="215" rx="8" ry="3" fill="#FFFACD" opacity="0.8" transform="rotate(-25 290 215)"/>
+  <ellipse cx="310" cy="218" rx="10" ry="3" fill="#FFFACD" opacity="0.8" transform="rotate(15 310 218)"/>
+  <ellipse cx="305" cy="240" rx="7" ry="3" fill="#FFFACD" opacity="0.8" transform="rotate(-35 305 240)"/>
+  
+  <!-- Title -->
+  <text x="300" y="360" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#2d3e50" text-anchor="middle">
+    Ravioli Artesanal Multi-Salsas
+  </text>
+</svg>

@@ -1,0 +1,72 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="400" fill="#f8f8f8"/>
+  
+  <!-- Zen stones base -->
+  <ellipse cx="280" cy="290" rx="80" ry="25" fill="#8B7D6B" opacity="0.6"/>
+  <ellipse cx="310" cy="295" rx="70" ry="22" fill="#9B8B7A" opacity="0.7"/>
+  <ellipse cx="300" cy="300" rx="90" ry="28" fill="#8B7D6B" opacity="0.5"/>
+  
+  <!-- Stone details -->
+  <ellipse cx="250" cy="285" rx="35" ry="20" fill="#A0826D" stroke="#6B5D4F" stroke-width="1"/>
+  <ellipse cx="330" cy="292" rx="40" ry="22" fill="#9B8B7A" stroke="#6B5D4F" stroke-width="1"/>
+  <ellipse cx="295" cy="297" rx="45" ry="24" fill="#A0826D" stroke="#6B5D4F" stroke-width="1"/>
+  
+  <!-- Main sphere (mango/passion fruit) -->
+  <defs>
+    <radialGradient id="sphereGradient" cx="40%" cy="35%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="sphereHighlight" cx="35%" cy="30%">
+      <stop offset="0%" style="stop-color:#FFFFE0;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#FFFFE0;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#FFFFE0;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <circle cx="300" cy="220" r="85" fill="url(#sphereGradient)" filter="drop-shadow(0 10px 15px rgba(0,0,0,0.3))"/>
+  <circle cx="300" cy="220" r="85" fill="url(#sphereHighlight)"/>
+  
+  <!-- Sphere shine highlight -->
+  <ellipse cx="270" cy="190" rx="30" ry="25" fill="white" opacity="0.4"/>
+  <ellipse cx="265" cy="185" rx="15" ry="12" fill="white" opacity="0.6"/>
+  
+  <!-- Molecular texture dots -->
+  <circle cx="285" cy="200" r="2" fill="#FFE4B5" opacity="0.4"/>
+  <circle cx="310" cy="210" r="2" fill="#FFE4B5" opacity="0.4"/>
+  <circle cx="295" cy="235" r="2" fill="#FFE4B5" opacity="0.4"/>
+  <circle cx="320" cy="225" r="2" fill="#FFE4B5" opacity="0.4"/>
+  
+  <!-- Microgreens sprouting from top -->
+  <line x1="300" y1="135" x2="295" y2="110" stroke="#2F4F2F" stroke-width="2"/>
+  <line x1="300" y1="135" x2="305" y2="108" stroke="#2F4F2F" stroke-width="2"/>
+  <line x1="300" y1="135" x2="302" y2="115" stroke="#2F4F2F" stroke-width="1.5"/>
+  <line x1="300" y1="135" x2="298" y2="118" stroke="#2F4F2F" stroke-width="1.5"/>
+  
+  <!-- Microgreen leaves -->
+  <ellipse cx="295" cy="108" rx="4" ry="6" fill="#90EE90" opacity="0.8"/>
+  <ellipse cx="305" cy="106" rx="4" ry="6" fill="#90EE90" opacity="0.8"/>
+  <ellipse cx="302" cy="113" rx="3" ry="5" fill="#8FBC8F" opacity="0.8"/>
+  <ellipse cx="298" cy="116" rx="3" ry="5" fill="#8FBC8F" opacity="0.8"/>
+  
+  <!-- Additional sprouts -->
+  <line x1="285" y1="150" x2="280" y2="130" stroke="#2F4F2F" stroke-width="1.5"/>
+  <line x1="315" y1="152" x2="322" y2="135" stroke="#2F4F2F" stroke-width="1.5"/>
+  <ellipse cx="280" cy="128" rx="3" ry="4" fill="#90EE90" opacity="0.8"/>
+  <ellipse cx="322" cy="133" rx="3" ry="4" fill="#90EE90" opacity="0.8"/>
+  
+  <!-- Decorative edible flower -->
+  <circle cx="350" cy="270" r="8" fill="#FF69B4" opacity="0.6"/>
+  <circle cx="345" cy="265" r="5" fill="#FFB6C1" opacity="0.7"/>
+  <circle cx="355" cy="265" r="5" fill="#FFB6C1" opacity="0.7"/>
+  <circle cx="345" cy="275" r="5" fill="#FFB6C1" opacity="0.7"/>
+  <circle cx="355" cy="275" r="5" fill="#FFB6C1" opacity="0.7"/>
+  <circle cx="350" cy="270" r="3" fill="#FFD700" opacity="0.8"/>
+  
+  <!-- Title -->
+  <text x="300" y="360" font-family="Georgia, serif" font-size="24" font-weight="bold" fill="#2d3e50" text-anchor="middle">
+    Esfera de Mango Molecular
+  </text>
+</svg>

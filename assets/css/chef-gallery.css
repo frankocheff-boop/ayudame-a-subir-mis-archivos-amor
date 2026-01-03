@@ -1,0 +1,413 @@
+/* Chef Gallery - Premium Styling */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #faf8f3 0%, #f5f5dc 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Header Styles */
+.gallery-header {
+    background: linear-gradient(135deg, #f5f5dc 0%, #faf8f3 100%);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.logo-container {
+    margin-bottom: 1rem;
+}
+
+.chef-logo {
+    max-height: 100px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.chef-logo:hover {
+    transform: scale(1.05);
+}
+
+.gallery-header h1 {
+    color: #D4AF37;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.gallery-header p {
+    color: #555;
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Gallery Container */
+.gallery-container {
+    max-width: 1400px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.gallery-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.gallery-intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #8B7355;
+    margin-bottom: 1rem;
+}
+
+.gallery-intro p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* Specialty Card */
+.specialty-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    animation: fadeIn 0.6s ease;
+}
+
+.specialty-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+}
+
+.card-image-container {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    background: #f5f5f5;
+}
+
+.specialty-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.specialty-card:hover img {
+    transform: scale(1.1);
+}
+
+.signature-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #1a2332;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.5);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(212, 175, 55, 0.8);
+    }
+}
+
+.card-content {
+    padding: 2rem;
+}
+
+.specialty-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    color: #1a2332;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.concept {
+    color: #FF8C42;
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.description {
+    color: #555;
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+.price-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #8B7355 0%, #6B5D4F 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.chef-note {
+    display: block;
+    text-align: right;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Back Button */
+.back-button {
+    display: inline-block;
+    margin: 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #1a2332;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .gallery-header h1 {
+        font-size: 2rem;
+    }
+    
+    .chef-logo {
+        max-height: 80px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .specialty-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .gallery-intro h2 {
+        font-size: 1.75rem;
+    }
+    
+    .card-image-container {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .gallery-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .chef-logo {
+        max-height: 60px;
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+    }
+    
+    .gallery-container {
+        margin: 2rem auto;
+    }
+}
+
+/* Lazy Loading Effect */
+.specialty-card[loading] {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Logo container for index.html header */
+.header .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.header .chef-logo {
+    max-height: 80px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.header .chef-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Especialidades Tab Content */
+.especialidades-container {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 600px;
+}
+
+.especialidades-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.especialidades-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #1a2332;
+    margin-bottom: 0.5rem;
+}
+
+.especialidades-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.especialidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.especialidad-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.especialidad-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.3);
+}
+
+.especialidad-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.especialidad-content {
+    padding: 1.5rem;
+}
+
+.especialidad-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #1a2332;
+    margin-bottom: 0.5rem;
+}
+
+.especialidad-card .concept {
+    color: #FF8C42;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.especialidad-card .description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.view-gallery-btn {
+    display: inline-block;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #D4AF37 0%, #FFD700 100%);
+    color: #1a2332;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    text-align: center;
+}
+
+.view-gallery-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.5);
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 2rem;
+}
