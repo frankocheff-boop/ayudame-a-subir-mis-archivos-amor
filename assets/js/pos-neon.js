@@ -42,6 +42,8 @@ let cart = [];
 let currentCategory = 'All';
 let searchQuery = '';
 let orderCount = 1024;
+let appliedCoupon = null;
+let couponDiscount = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
@@ -165,6 +167,15 @@ function updateCartUI() {
                 <span class="text-6xl mb-2 grayscale">🛒</span>
                 <p class="titular tracking-widest">TERMINAL VACÍA</p>
             </div>`;
+        // Reset coupon when cart is empty
+        appliedCoupon = null;
+        couponDiscount = 0;
+        const couponInput = document.getElementById('coupon-input');
+        if (couponInput) couponInput.value = '';
+        const couponStatus = document.getElementById('coupon-status');
+        if (couponStatus) {
+            couponStatus.classList.add('hidden');
+        }
     } else {
         container.innerHTML = cart.map((item) => `
             <div class="flex justify-between items-center bg-[#0f172a] p-3 rounded border-l-2 border-cyan-500 shadow-lg animate-pulse-once">
@@ -184,10 +195,30 @@ function updateCartUI() {
     }
 
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-    const tax = subtotal * 0.16;
-    const total = subtotal + tax;
+    
+    // Apply coupon discount if applicable
+    couponDiscount = 0;
+    if (appliedCoupon && window.CouponSystemInstance) {
+        const userId = 'demo-user'; // In production, get from AuthService
+        const discountDetails = window.CouponSystemInstance.applyDiscount(appliedCoupon, subtotal, cart);
+        couponDiscount = discountDetails.discount;
+    }
+    
+    const subtotalAfterDiscount = subtotal - couponDiscount;
+    const tax = subtotalAfterDiscount * 0.16;
+    const total = subtotalAfterDiscount + tax;
 
     updateElement('subtotal-display', formatMoney(subtotal));
+    
+    // Show/hide discount row
+    const discountRow = document.getElementById('discount-row');
+    if (couponDiscount > 0 && discountRow) {
+        discountRow.classList.remove('hidden');
+        updateElement('discount-display', '-' + formatMoney(couponDiscount));
+    } else if (discountRow) {
+        discountRow.classList.add('hidden');
+    }
+    
     updateElement('tax-display', formatMoney(tax));
     updateElement('total-display', formatMoney(total));
     updateElement('btn-total', formatMoney(total));
@@ -245,15 +276,109 @@ function closeCheckout() {
 }
 
 function processPayment(method) {
-    const total = document.getElementById('total-display')?.innerText || '$0.00';
-    alert(`⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${total}`);
+    const totalStr = document.getElementById('total-display')?.innerText || '$0.00';
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    
+    // If coupon was applied, mark it as used and add loyalty points
+    if (appliedCoupon && window.CouponSystemInstance) {
+        const userId = 'demo-user'; // In production, get from AuthService
+        window.CouponSystemInstance.markCouponAsUsed(appliedCoupon.code, userId, subtotal);
+        
+        // Add loyalty points
+        const points = window.CouponSystemInstance.calculateLoyaltyPoints(subtotal, 'purchase');
+        window.CouponSystemInstance.addPointsToUser(userId, points, 'purchase');
+    }
+    
+    let message = `⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${totalStr}`;
+    
+    if (appliedCoupon) {
+        message += `\n\nCoupon: ${appliedCoupon.code}`;
+        message += `\nDiscount: ${formatMoney(couponDiscount)}`;
+    }
+    
+    alert(message);
+    
+    // Reset
     cart = [];
+    appliedCoupon = null;
+    couponDiscount = 0;
     orderCount++;
     updateElement('order-id', orderCount);
+    
+    // Clear coupon input
+    const couponInput = document.getElementById('coupon-input');
+    if (couponInput) couponInput.value = '';
+    const couponStatus = document.getElementById('coupon-status');
+    if (couponStatus) couponStatus.classList.add('hidden');
+    
     closeCheckout();
     updateCartUI();
 }
 
 function formatMoney(amount) {
     return '$' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
+// Apply coupon function
+function applyCoupon() {
+    const couponInput = document.getElementById('coupon-input');
+    const couponStatus = document.getElementById('coupon-status');
+    
+    if (!couponInput || !couponStatus) return;
+    
+    const code = couponInput.value.trim().toUpperCase();
+    
+    if (!code) {
+        showCouponMessage('Por favor ingresa un código', 'error');
+        return;
+    }
+    
+    if (!window.CouponSystemInstance) {
+        showCouponMessage('Sistema de cupones no disponible', 'error');
+        return;
+    }
+    
+    if (cart.length === 0) {
+        showCouponMessage('Agrega productos al carrito primero', 'error');
+        return;
+    }
+    
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    const userId = 'demo-user'; // In production, get from AuthService
+    
+    const validation = window.CouponSystemInstance.validateCoupon(code, userId, subtotal, cart);
+    
+    if (validation.valid) {
+        appliedCoupon = validation.coupon;
+        showCouponMessage(validation.message, 'success');
+        updateCartUI();
+    } else {
+        appliedCoupon = null;
+        couponDiscount = 0;
+        showCouponMessage(validation.message, 'error');
+        updateCartUI();
+    }
+}
+
+// Show coupon message
+function showCouponMessage(message, type) {
+    const couponStatus = document.getElementById('coupon-status');
+    if (!couponStatus) return;
+    
+    couponStatus.textContent = message;
+    couponStatus.className = 'text-xs mt-1 font-bold';
+    
+    if (type === 'success') {
+        couponStatus.classList.add('text-green-400');
+    } else {
+        couponStatus.classList.add('text-red-400');
+    }
+    
+    couponStatus.classList.remove('hidden');
+    
+    setTimeout(() => {
+        if (type === 'error') {
+            couponStatus.classList.add('hidden');
+        }
+    }, 5000);
 }

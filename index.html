@@ -279,8 +279,8 @@
             <button class="tab-btn" onclick="switchTab('guests', event)">
                 📋 Formulario de Huéspedes
             </button>
-            <button class="tab-btn" onclick="switchTab('especialidades', event)">
-                👨‍🍳 Especialidades del Chef
+            <button class="tab-btn" onclick="switchTab('coupons', event)">
+                💎 Mis Cupones
             </button>
         </div>
         
@@ -306,66 +306,14 @@
             </div>
         </div>
         
-        <!-- Tab Content: Especialidades del Chef -->
-        <div id="especialidades-tab" class="tab-content">
-            <div class="especialidades-container">
-                <div class="especialidades-header">
-                    <h2>Especialidades del Chef Franko</h2>
-                    <p>Creaciones signature que celebran los sabores del Pacífico con elegancia mundial</p>
-                </div>
-                
-                <div class="especialidades-grid">
-                    <!-- Especialidad 1 -->
-                    <div class="especialidad-card" onclick="window.location.href='pages/chef-gallery.html'">
-                        <img src="assets/images/menu/especialidades/camaron-ravioli-gourmet.svg" 
-                             alt="Camarón al Azafrán" 
-                             class="especialidad-image">
-                        <div class="especialidad-content">
-                            <h3>Camarón al Azafrán con Ravioli</h3>
-                            <p class="concept">Fusión de mar y tierra con toques mediterráneos</p>
-                            <p class="description">
-                                Camarón gigante perfectamente marcado con ravioli artesanal 
-                                en salsa de azafrán sobre puré de aguacate y espinaca.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- Especialidad 2 -->
-                    <div class="especialidad-card" onclick="window.location.href='pages/chef-gallery.html'">
-                        <img src="assets/images/menu/especialidades/postre-esferico-molecular.svg" 
-                             alt="Esfera de Mango Molecular" 
-                             class="especialidad-image">
-                        <div class="especialidad-content">
-                            <h3>Esfera de Mango Molecular</h3>
-                            <p class="concept">Postre artístico con técnicas moleculares</p>
-                            <p class="description">
-                                Esfera perfecta de mango y maracuyá con técnicas de 
-                                esferificación, presentada sobre piedras zen.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <!-- Especialidad 3 -->
-                    <div class="especialidad-card" onclick="window.location.href='pages/chef-gallery.html'">
-                        <img src="assets/images/menu/especialidades/ravioli-artesanal-salsas.svg" 
-                             alt="Ravioli Artesanal Multi-Salsas" 
-                             class="especialidad-image">
-                        <div class="especialidad-content">
-                            <h3>Ravioli Artesanal Multi-Salsas</h3>
-                            <p class="concept">Pasta fresca con armonía de salsas gourmet</p>
-                            <p class="description">
-                                Ravioli translúcido hecho a mano sobre un lienzo de salsas 
-                                decorativas y flores comestibles.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="btn-container">
-                    <a href="pages/chef-gallery.html" class="view-gallery-btn">
-                        Ver Galería Completa →
-                    </a>
-                </div>
+        <!-- Tab Content: Coupons -->
+        <div id="coupons-tab" class="tab-content">
+            <div class="loading" id="coupons-loading">
+                <div class="spinner"></div>
+                <p>Cargando Cupones...</p>
+            </div>
+            <div class="iframe-container" style="display: none;" id="coupons-iframe-container">
+                <iframe src="pages/coupon-manager.html" onload="hideLoading('coupons')"></iframe>
             </div>
         </div>
     </div>
