@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VERANO ESTATE - Sistema Unificado</title>
-    <link rel="stylesheet" href="assets/css/chef-gallery.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,29 +15,31 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FAF7F2 100%);
             min-height: 100vh;
         }
         
-        /* Header con gradiente crema */
+        /* Header con gradiente elegante */
         .header {
-            background: linear-gradient(135deg, #f5f5dc 0%, #faf8f3 100%);
+            background: var(--blanco-puro, #FFFFFF);
+            border-bottom: 3px solid var(--rojo-carmin, #DC143C);
             padding: 2rem;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
             position: relative;
         }
         
         .header h1 {
-            color: #ffd700;
+            color: var(--rojo-carmin, #DC143C);
+            font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: none;
             margin-bottom: 0.5rem;
         }
         
         .header p {
-            color: #555;
+            color: var(--gris-antracita, #2C2C2C);
             font-size: 1.1rem;
             opacity: 0.9;
         }
@@ -48,7 +52,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            color: #333;
+            color: var(--gris-antracita, #2C2C2C);
         }
         
         .user-name {
@@ -57,9 +61,9 @@
         }
         
         .btn-logout {
-            background: rgba(51, 51, 51, 0.1);
-            border: 1px solid rgba(51, 51, 51, 0.2);
-            color: #333;
+            background: var(--boton-negro, #1A1A1A);
+            border: none;
+            color: white;
             padding: 0.5rem 1rem;
             border-radius: 6px;
             cursor: pointer;
@@ -68,7 +72,9 @@
         }
         
         .btn-logout:hover {
-            background: rgba(51, 51, 51, 0.2);
+            background: var(--rojo-carmin, #DC143C);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 20, 60, 0.2);
         }
         
         /* Tabs Navigation */
@@ -83,8 +89,8 @@
         
         .tabs-nav {
             display: flex;
-            background: #f8f9fa;
-            border-bottom: 3px solid #D4AF37;
+            background: var(--beige-suave, #FAF7F2);
+            border-bottom: 3px solid var(--rojo-carmin, #DC143C);
         }
         
         .tab-btn {
@@ -94,19 +100,19 @@
             border: none;
             font-size: 1.2rem;
             font-weight: 600;
-            color: #666;
+            color: var(--gris-oscuro, #4A4A4A);
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
         }
         
         .tab-btn:hover {
-            background: rgba(212, 175, 55, 0.1);
-            color: #8B7355;
+            background: rgba(220, 20, 60, 0.1);
+            color: var(--rojo-carmin, #DC143C);
         }
         
         .tab-btn.active {
-            color: #8B7355;
+            color: var(--rojo-carmin, #DC143C);
             background: white;
         }
         
@@ -117,7 +123,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: #ffd700;
+            background: var(--dorado, #D4AF37);
             animation: slideIn 0.3s ease;
         }
         
@@ -154,7 +160,7 @@
         
         .spinner {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #2d7a7b;
+            border-top: 4px solid var(--rojo-carmin, #DC143C);
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -183,8 +189,8 @@
         
         /* Footer */
         .footer {
-            background: #f5f5dc;
-            color: #333;
+            background: linear-gradient(135deg, var(--rojo-carmin, #DC143C) 0%, var(--rojo-carmin-oscuro, #B01030) 100%);
+            color: white;
             text-align: center;
             padding: 2rem;
             margin-top: 2rem;
@@ -202,7 +208,7 @@
         }
         
         .contact-info a {
-            color: #ffd700;
+            color: var(--dorado, #D4AF37);
             text-decoration: none;
             margin: 0 1rem;
             transition: opacity 0.3s;
