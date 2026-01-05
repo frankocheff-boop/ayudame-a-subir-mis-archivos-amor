@@ -296,7 +296,7 @@ function processPayment(method) {
     
     // Create ticket data
     const ordenData = {
-        cliente: document.getElementById('cliente-nombre')?.value || 'Mostrador',
+        cliente: 'Mostrador', // Customer name - can be enhanced with input field
         mesero: (typeof AuthService !== 'undefined' && AuthService.getCurrentUser) ? AuthService.getCurrentUser() : 'Sistema',
         items: cart.map(item => ({
             nombre: item.title,
@@ -312,7 +312,7 @@ function processPayment(method) {
         propina: 0, // Can be added later if needed
         total: total,
         metodo: method.toLowerCase(),
-        notas: document.getElementById('notas-especiales')?.value || ''
+        notas: '' // Special notes - can be enhanced with textarea field
     };
     
     // Save ticket to Firebase

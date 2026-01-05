@@ -520,7 +520,7 @@ class TicketPrinter {
           ticket.propina.toFixed(2),
           ticket.total.toFixed(2),
           ticket.metodo,
-          `"${ticket.notas || ''}"` // Comillas para valores con comas
+          `"${ticket.notas || ''}"` // Quotes for values with commas
         ].join(',');
       });
 

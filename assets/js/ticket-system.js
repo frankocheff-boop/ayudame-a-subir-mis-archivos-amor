@@ -107,7 +107,8 @@ class TicketSystem {
       if (this.db) {
         const docRef = await this.db.collection(this.ticketsCollection).add({
           ...ticket,
-          timestamp: getServerTimestamp ? getServerTimestamp() : firebase.firestore.FieldValue.serverTimestamp()
+          timestamp: typeof getServerTimestamp === 'function' ? getServerTimestamp() : 
+                     (typeof firebase !== 'undefined' && firebase.firestore ? firebase.firestore.FieldValue.serverTimestamp() : new Date())
         });
         
         console.log('✅ Ticket guardado en Firebase:', numeroTicket);

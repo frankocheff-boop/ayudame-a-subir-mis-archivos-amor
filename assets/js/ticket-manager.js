@@ -157,10 +157,15 @@ class TicketManagerUI {
    * Limpiar filtros de búsqueda
    */
   async limpiarFiltros() {
-    document.getElementById('search-numero').value = '';
-    document.getElementById('search-fecha-inicio').value = '';
-    document.getElementById('search-fecha-fin').value = '';
-    document.getElementById('search-metodo').value = '';
+    const numeroInput = document.getElementById('search-numero');
+    const fechaInicioInput = document.getElementById('search-fecha-inicio');
+    const fechaFinInput = document.getElementById('search-fecha-fin');
+    const metodoSelect = document.getElementById('search-metodo');
+    
+    if (numeroInput) numeroInput.value = '';
+    if (fechaInicioInput) fechaInicioInput.value = '';
+    if (fechaFinInput) fechaFinInput.value = '';
+    if (metodoSelect) metodoSelect.value = '';
     
     await this.cargarTicketsHoy();
   }
