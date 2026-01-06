@@ -288,6 +288,9 @@
             <button class="tab-btn" onclick="switchTab('coupons', event)">
                 💎 Mis Cupones
             </button>
+            <button class="tab-btn" onclick="switchTab('tickets', event)">
+                🎫 Tickets
+            </button>
         </div>
         
         <!-- Tab Content: POS -->
@@ -320,6 +323,17 @@
             </div>
             <div class="iframe-container" style="display: none;" id="coupons-iframe-container">
                 <iframe src="pages/coupon-manager.html" onload="hideLoading('coupons')"></iframe>
+            </div>
+        </div>
+        
+        <!-- Tab Content: Tickets -->
+        <div id="tickets-tab" class="tab-content">
+            <div class="loading" id="tickets-loading">
+                <div class="spinner"></div>
+                <p>Cargando Sistema de Tickets...</p>
+            </div>
+            <div class="iframe-container" style="display: none;" id="tickets-iframe-container">
+                <iframe src="pages/ticket-manager.html" onload="hideLoading('tickets')"></iframe>
             </div>
         </div>
     </div>

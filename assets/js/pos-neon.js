@@ -279,6 +279,11 @@ function processPayment(method) {
     const totalStr = document.getElementById('total-display')?.innerText || '$0.00';
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
     
+    // Calculate totals
+    const subtotalAfterDiscount = subtotal - couponDiscount;
+    const tax = subtotalAfterDiscount * 0.16;
+    const total = subtotalAfterDiscount + tax;
+    
     // If coupon was applied, mark it as used and add loyalty points
     if (appliedCoupon && window.CouponSystemInstance) {
         const userId = 'demo-user'; // In production, get from AuthService
@@ -289,14 +294,66 @@ function processPayment(method) {
         window.CouponSystemInstance.addPointsToUser(userId, points, 'purchase');
     }
     
-    let message = `⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${totalStr}`;
+    // Create ticket data
+    const ordenData = {
+        cliente: 'Mostrador', // Customer name - can be enhanced with input field
+        mesero: (typeof AuthService !== 'undefined' && AuthService.getCurrentUser) ? AuthService.getCurrentUser() : 'Sistema',
+        items: cart.map(item => ({
+            nombre: item.title,
+            cantidad: item.qty,
+            precio: item.price,
+            categoria: item.category,
+            subtotal: item.price * item.qty
+        })),
+        subtotal: subtotal,
+        descuento: couponDiscount || 0,
+        cupon: appliedCoupon || null,
+        iva: tax,
+        propina: 0, // Can be added later if needed
+        total: total,
+        metodo: method.toLowerCase(),
+        notas: '' // Special notes - can be enhanced with textarea field
+    };
     
-    if (appliedCoupon) {
-        message += `\n\nCoupon: ${appliedCoupon.code}`;
-        message += `\nDiscount: ${formatMoney(couponDiscount)}`;
+    // Save ticket to Firebase
+    if (typeof window.TicketSystemInstance !== 'undefined') {
+        window.TicketSystemInstance.crearTicket(ordenData)
+            .then(resultado => {
+                console.log('✅ Ticket creado:', resultado.ticket.numero);
+                
+                let message = `✅ ORDEN COMPLETADA\n\nTicket: ${resultado.ticket.numero}\nMétodo: ${method}\nTotal: ${totalStr}`;
+                
+                if (appliedCoupon) {
+                    message += `\n\nCupón: ${appliedCoupon.code}`;
+                    message += `\nDescuento: ${formatMoney(couponDiscount)}`;
+                }
+                
+                alert(message);
+                
+                // Ask if user wants to print
+                if (confirm('¿Imprimir ticket?')) {
+                    if (typeof window.TicketPrinterInstance !== 'undefined') {
+                        window.TicketPrinterInstance.imprimir(resultado.id, 'thermal');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('❌ Error al crear ticket:', error);
+                let message = `⚡ PAGO PROCESADO\n\nMethod: ${method}\nTotal: ${totalStr}`;
+                message += '\n\n⚠️ No se pudo guardar el ticket.';
+                alert(message);
+            });
+    } else {
+        // Fallback if ticket system is not available
+        let message = `⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${totalStr}`;
+        
+        if (appliedCoupon) {
+            message += `\n\nCoupon: ${appliedCoupon.code}`;
+            message += `\nDiscount: ${formatMoney(couponDiscount)}`;
+        }
+        
+        alert(message);
     }
-    
-    alert(message);
     
     // Reset
     cart = [];
