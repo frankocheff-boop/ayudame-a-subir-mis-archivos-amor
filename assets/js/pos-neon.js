@@ -22,10 +22,15 @@ const products = [
     { id: 18, title: "Tiramisu", price: 10.00, category: "Sweet", description: "Classic coffee-flavoured dessert.", emoji: "🍰" },
     { id: 19, title: "Chocolate Cake", price: 11.00, category: "Sweet", description: "Served with French Vanilla ice cream.", emoji: "🍫" },
     { id: 20, title: "Almond Cake", price: 12.00, category: "Sweet", description: "Chef Felipe's special with berry coulis.", emoji: "🎂" },
+    // ESPECIALIDADES DEL CHEF
+    { id: 100, title: "Camarón al Azafrán con Ravioli", price: 495.00, category: "Chef Signature", description: "Fusión de mar y tierra con toques mediterráneos", emoji: "⭐", image: "../assets/images/menu/especialidades/camaron-ravioli-gourmet.svg", signature: true },
+    { id: 101, title: "Esfera de Mango Molecular", price: 285.00, category: "Chef Signature", description: "Postre artístico con técnicas moleculares", emoji: "✨", image: "../assets/images/menu/especialidades/postre-esferico-molecular.svg", signature: true },
+    { id: 102, title: "Ravioli Artesanal Multi-Salsas", price: 425.00, category: "Chef Signature", description: "Pasta fresca con armonía de salsas gourmet", emoji: "🌟", image: "../assets/images/menu/especialidades/ravioli-artesanal-salsas.svg", signature: true }
 ];
 
 const categories = [
     { id: "All", name: "ALL SYSTEM", icon: "💠" },
+    { id: "Chef Signature", name: "CHEF SIGNATURE", icon: "👨‍🍳" },
     { id: "Breakfast", name: "BREAKFAST", icon: "🍳" },
     { id: "Soup", name: "SOUPS", icon: "🥣" },
     { id: "Salad", name: "SALADS", icon: "🥗" },
@@ -37,6 +42,8 @@ let cart = [];
 let currentCategory = 'All';
 let searchQuery = '';
 let orderCount = 1024;
+let appliedCoupon = null;
+let couponDiscount = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     renderCategories();
@@ -104,20 +111,50 @@ function renderMenu() {
     
     if (noResults) noResults.classList.add('hidden');
 
-    grid.innerHTML = filtered.map(product => `
-        <div onclick="addToCart(${product.id})" class="neon-card bg-neon-card p-4 rounded border border-slate-700 cursor-pointer relative overflow-hidden group h-36 flex flex-col justify-between select-none">
-            <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-bl-full"></div>
-            
-            <div class="flex justify-between items-start z-10">
-                <span class="text-3xl drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">${product.emoji}</span>
-                <span class="font-mono text-cyan-400 font-bold text-lg drop-shadow-[0_0_3px_rgba(34,211,238,0.5)]">$${product.price}</span>
-            </div>
-            
-            <div class="z-10">
-                <h3 class="font-bold text-gray-100 text-sm uppercase tracking-wide leading-tight group-hover:text-cyan-300 transition">${product.title}</h3>
-            </div>
-        </div>
-    `).join('');
+    grid.innerHTML = filtered.map(product => {
+        const isSignature = product.signature === true;
+        const cardHeight = isSignature ? 'h-48' : 'h-36';
+        
+        if (isSignature && product.image) {
+            // Signature dish card with image
+            return `
+                <div onclick="addToCart(${product.id})" class="neon-card bg-neon-card p-4 rounded border-2 border-yellow-500/50 cursor-pointer relative overflow-hidden group ${cardHeight} flex flex-col justify-between select-none hover:border-yellow-400 transition">
+                    <div class="absolute top-0 right-0 px-2 py-1 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-[10px] font-bold tracking-wider">
+                        ✨ SIGNATURE
+                    </div>
+                    
+                    <div class="flex gap-3 z-10 flex-1">
+                        <div class="w-20 h-20 rounded overflow-hidden flex-shrink-0 border-2 border-yellow-500/30">
+                            <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-bold text-yellow-300 text-sm uppercase tracking-wide leading-tight mb-1">${product.title}</h3>
+                                <p class="text-[10px] text-slate-400 line-clamp-2">${product.description}</p>
+                            </div>
+                            <span class="font-mono text-yellow-400 font-bold text-xl drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]">$${product.price}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            // Regular product card with emoji
+            return `
+                <div onclick="addToCart(${product.id})" class="neon-card bg-neon-card p-4 rounded border border-slate-700 cursor-pointer relative overflow-hidden group ${cardHeight} flex flex-col justify-between select-none">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-bl-full"></div>
+                    
+                    <div class="flex justify-between items-start z-10">
+                        <span class="text-3xl drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">${product.emoji}</span>
+                        <span class="font-mono text-cyan-400 font-bold text-lg drop-shadow-[0_0_3px_rgba(34,211,238,0.5)]">$${product.price}</span>
+                    </div>
+                    
+                    <div class="z-10">
+                        <h3 class="font-bold text-gray-100 text-sm uppercase tracking-wide leading-tight group-hover:text-cyan-300 transition">${product.title}</h3>
+                    </div>
+                </div>
+            `;
+        }
+    }).join('');
 }
 
 function updateCartUI() {
@@ -130,6 +167,15 @@ function updateCartUI() {
                 <span class="text-6xl mb-2 grayscale">🛒</span>
                 <p class="titular tracking-widest">TERMINAL VACÍA</p>
             </div>`;
+        // Reset coupon when cart is empty
+        appliedCoupon = null;
+        couponDiscount = 0;
+        const couponInput = document.getElementById('coupon-input');
+        if (couponInput) couponInput.value = '';
+        const couponStatus = document.getElementById('coupon-status');
+        if (couponStatus) {
+            couponStatus.classList.add('hidden');
+        }
     } else {
         container.innerHTML = cart.map((item) => `
             <div class="flex justify-between items-center bg-[#0f172a] p-3 rounded border-l-2 border-cyan-500 shadow-lg animate-pulse-once">
@@ -149,10 +195,30 @@ function updateCartUI() {
     }
 
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-    const tax = subtotal * 0.16;
-    const total = subtotal + tax;
+    
+    // Apply coupon discount if applicable
+    couponDiscount = 0;
+    if (appliedCoupon && window.CouponSystemInstance) {
+        const userId = 'demo-user'; // In production, get from AuthService
+        const discountDetails = window.CouponSystemInstance.applyDiscount(appliedCoupon, subtotal, cart);
+        couponDiscount = discountDetails.discount;
+    }
+    
+    const subtotalAfterDiscount = subtotal - couponDiscount;
+    const tax = subtotalAfterDiscount * 0.16;
+    const total = subtotalAfterDiscount + tax;
 
     updateElement('subtotal-display', formatMoney(subtotal));
+    
+    // Show/hide discount row
+    const discountRow = document.getElementById('discount-row');
+    if (couponDiscount > 0 && discountRow) {
+        discountRow.classList.remove('hidden');
+        updateElement('discount-display', '-' + formatMoney(couponDiscount));
+    } else if (discountRow) {
+        discountRow.classList.add('hidden');
+    }
+    
     updateElement('tax-display', formatMoney(tax));
     updateElement('total-display', formatMoney(total));
     updateElement('btn-total', formatMoney(total));
@@ -210,15 +276,166 @@ function closeCheckout() {
 }
 
 function processPayment(method) {
-    const total = document.getElementById('total-display')?.innerText || '$0.00';
-    alert(`⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${total}`);
+    const totalStr = document.getElementById('total-display')?.innerText || '$0.00';
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    
+    // Calculate totals
+    const subtotalAfterDiscount = subtotal - couponDiscount;
+    const tax = subtotalAfterDiscount * 0.16;
+    const total = subtotalAfterDiscount + tax;
+    
+    // If coupon was applied, mark it as used and add loyalty points
+    if (appliedCoupon && window.CouponSystemInstance) {
+        const userId = 'demo-user'; // In production, get from AuthService
+        window.CouponSystemInstance.markCouponAsUsed(appliedCoupon.code, userId, subtotal);
+        
+        // Add loyalty points
+        const points = window.CouponSystemInstance.calculateLoyaltyPoints(subtotal, 'purchase');
+        window.CouponSystemInstance.addPointsToUser(userId, points, 'purchase');
+    }
+    
+    // Create ticket data
+    const ordenData = {
+        cliente: 'Mostrador', // Customer name - can be enhanced with input field
+        mesero: (typeof AuthService !== 'undefined' && AuthService.getCurrentUser) ? AuthService.getCurrentUser() : 'Sistema',
+        items: cart.map(item => ({
+            nombre: item.title,
+            cantidad: item.qty,
+            precio: item.price,
+            categoria: item.category,
+            subtotal: item.price * item.qty
+        })),
+        subtotal: subtotal,
+        descuento: couponDiscount || 0,
+        cupon: appliedCoupon || null,
+        iva: tax,
+        propina: 0, // Can be added later if needed
+        total: total,
+        metodo: method.toLowerCase(),
+        notas: '' // Special notes - can be enhanced with textarea field
+    };
+    
+    // Save ticket to Firebase
+    if (typeof window.TicketSystemInstance !== 'undefined') {
+        window.TicketSystemInstance.crearTicket(ordenData)
+            .then(resultado => {
+                console.log('✅ Ticket creado:', resultado.ticket.numero);
+                
+                let message = `✅ ORDEN COMPLETADA\n\nTicket: ${resultado.ticket.numero}\nMétodo: ${method}\nTotal: ${totalStr}`;
+                
+                if (appliedCoupon) {
+                    message += `\n\nCupón: ${appliedCoupon.code}`;
+                    message += `\nDescuento: ${formatMoney(couponDiscount)}`;
+                }
+                
+                alert(message);
+                
+                // Ask if user wants to print
+                if (confirm('¿Imprimir ticket?')) {
+                    if (typeof window.TicketPrinterInstance !== 'undefined') {
+                        window.TicketPrinterInstance.imprimir(resultado.id, 'thermal');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('❌ Error al crear ticket:', error);
+                let message = `⚡ PAGO PROCESADO\n\nMethod: ${method}\nTotal: ${totalStr}`;
+                message += '\n\n⚠️ No se pudo guardar el ticket.';
+                alert(message);
+            });
+    } else {
+        // Fallback if ticket system is not available
+        let message = `⚡ TRANSACTION APPROVED ⚡\n\nMethod: ${method}\nTotal: ${totalStr}`;
+        
+        if (appliedCoupon) {
+            message += `\n\nCoupon: ${appliedCoupon.code}`;
+            message += `\nDiscount: ${formatMoney(couponDiscount)}`;
+        }
+        
+        alert(message);
+    }
+    
+    // Reset
     cart = [];
+    appliedCoupon = null;
+    couponDiscount = 0;
     orderCount++;
     updateElement('order-id', orderCount);
+    
+    // Clear coupon input
+    const couponInput = document.getElementById('coupon-input');
+    if (couponInput) couponInput.value = '';
+    const couponStatus = document.getElementById('coupon-status');
+    if (couponStatus) couponStatus.classList.add('hidden');
+    
     closeCheckout();
     updateCartUI();
 }
 
 function formatMoney(amount) {
     return '$' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+}
+
+// Apply coupon function
+function applyCoupon() {
+    const couponInput = document.getElementById('coupon-input');
+    const couponStatus = document.getElementById('coupon-status');
+    
+    if (!couponInput || !couponStatus) return;
+    
+    const code = couponInput.value.trim().toUpperCase();
+    
+    if (!code) {
+        showCouponMessage('Por favor ingresa un código', 'error');
+        return;
+    }
+    
+    if (!window.CouponSystemInstance) {
+        showCouponMessage('Sistema de cupones no disponible', 'error');
+        return;
+    }
+    
+    if (cart.length === 0) {
+        showCouponMessage('Agrega productos al carrito primero', 'error');
+        return;
+    }
+    
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    const userId = 'demo-user'; // In production, get from AuthService
+    
+    const validation = window.CouponSystemInstance.validateCoupon(code, userId, subtotal, cart);
+    
+    if (validation.valid) {
+        appliedCoupon = validation.coupon;
+        showCouponMessage(validation.message, 'success');
+        updateCartUI();
+    } else {
+        appliedCoupon = null;
+        couponDiscount = 0;
+        showCouponMessage(validation.message, 'error');
+        updateCartUI();
+    }
+}
+
+// Show coupon message
+function showCouponMessage(message, type) {
+    const couponStatus = document.getElementById('coupon-status');
+    if (!couponStatus) return;
+    
+    couponStatus.textContent = message;
+    couponStatus.className = 'text-xs mt-1 font-bold';
+    
+    if (type === 'success') {
+        couponStatus.classList.add('text-green-400');
+    } else {
+        couponStatus.classList.add('text-red-400');
+    }
+    
+    couponStatus.classList.remove('hidden');
+    
+    setTimeout(() => {
+        if (type === 'error') {
+            couponStatus.classList.add('hidden');
+        }
+    }, 5000);
 }

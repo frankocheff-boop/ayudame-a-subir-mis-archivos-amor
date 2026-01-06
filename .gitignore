@@ -1,0 +1,19 @@
+# Backups
+*.backup
+*.bak
+*~
+index-digital-world-backup.html
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp

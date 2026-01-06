@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💎 Mis Cupones - VERANO ESTATE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/coupons.css">
+</head>
+<body class="coupon-page">
+    <!-- Header -->
+    <div class="coupon-header">
+        <h1>💎 MIS CUPONES</h1>
+        <p>Descuentos exclusivos y programa de lealtad</p>
+    </div>
+
+    <!-- Input de cupón -->
+    <div class="coupon-input-section">
+        <h2 style="text-align: center; color: var(--rojo-carmin); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
+            🎫 APLICAR CUPÓN
+        </h2>
+        <div class="coupon-input-container">
+            <input 
+                type="text" 
+                id="coupon-code-input" 
+                class="coupon-input" 
+                placeholder="INGRESA TU CÓDIGO"
+                maxlength="20"
+            >
+            <button class="btn-apply-coupon" onclick="applyCouponCode()">
+                APLICAR
+            </button>
+        </div>
+        <div id="coupon-message" style="display: none;"></div>
+    </div>
+
+    <!-- Sección de puntos de lealtad -->
+    <div class="loyalty-section">
+        <div class="loyalty-header">
+            <h2>⭐ PROGRAMA DE LEALTAD</h2>
+            <div class="loyalty-points-display" id="user-points">0 PTS</div>
+            <div class="loyalty-level" id="current-level">
+                <span class="loyalty-level-badge">🥉</span>
+                <span class="loyalty-level-name">BRONCE</span>
+            </div>
+        </div>
+        
+        <div class="loyalty-progress-bar">
+            <div class="loyalty-progress-fill" id="progress-fill" style="width: 0%;">
+                <span id="progress-text">0%</span>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem;" id="next-level-text">
+            500 puntos para PLATA
+        </p>
+
+        <!-- Niveles de lealtad -->
+        <div class="loyalty-levels-grid">
+            <div class="loyalty-level-card active" id="level-bronce">
+                <div style="font-size: 2rem;">🥉</div>
+                <div style="font-weight: 700; margin-top: 0.5rem;">BRONCE</div>
+                <div style="font-size: 0.9rem; margin-top: 0.3rem;">0-500 pts</div>
+                <div style="font-weight: 700; color: #ffd700; margin-top: 0.3rem;">5% OFF</div>
+            </div>
+            <div class="loyalty-level-card" id="level-plata">
+                <div style="font-size: 2rem;">🥈</div>
+                <div style="font-weight: 700; margin-top: 0.5rem;">PLATA</div>
+                <div style="font-size: 0.9rem; margin-top: 0.3rem;">501-1500 pts</div>
+                <div style="font-weight: 700; color: #ffd700; margin-top: 0.3rem;">10% OFF</div>
+            </div>
+            <div class="loyalty-level-card" id="level-oro">
+                <div style="font-size: 2rem;">🥇</div>
+                <div style="font-weight: 700; margin-top: 0.5rem;">ORO</div>
+                <div style="font-size: 0.9rem; margin-top: 0.3rem;">1501-3000 pts</div>
+                <div style="font-weight: 700; color: #ffd700; margin-top: 0.3rem;">15% OFF</div>
+            </div>
+            <div class="loyalty-level-card" id="level-platino">
+                <div style="font-size: 2rem;">💎</div>
+                <div style="font-weight: 700; margin-top: 0.5rem;">PLATINO</div>
+                <div style="font-size: 0.9rem; margin-top: 0.3rem;">3001+ pts</div>
+                <div style="font-weight: 700; color: #ffd700; margin-top: 0.3rem;">20% OFF</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">💰 Cómo ganar puntos:</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li>💵 $1 MXN gastado = 1 punto</li>
+                <li>👥 Referido exitoso = 200 puntos</li>
+                <li>⭐ Review 5 estrellas = 50 puntos</li>
+                <li>📱 Compartir en redes = 25 puntos</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Cupones disponibles -->
+    <div class="coupon-input-section">
+        <h2 style="text-align: center; color: var(--rojo-carmin); margin-bottom: 1.5rem; font-family: 'Playfair Display', serif;">
+            🎁 CUPONES DISPONIBLES
+        </h2>
+        <div class="coupons-grid" id="available-coupons">
+            <!-- Cupones se renderizan aquí con JavaScript -->
+        </div>
+    </div>
+
+    <!-- Historial de cupones -->
+    <div class="coupon-history">
+        <h2>📜 HISTORIAL DE CUPONES</h2>
+        <div id="coupon-history-list">
+            <p style="text-align: center; color: #999; padding: 2rem;">
+                No has usado ningún cupón todavía
+            </p>
+        </div>
+    </div>
+
+    <!-- Botón de volver -->
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="../index.html" 
+           style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, var(--rojo-carmin), var(--rojo-carmin-oscuro)); color: white; text-decoration: none; border-radius: 8px; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(220, 20, 60, 0.2);">
+            ← VOLVER AL INICIO
+        </a>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/coupon-system.js"></script>
+    <script>
+        // Verificar autenticación
+        if (!AuthService.isAuthenticated()) {
+            window.location.href = 'login.html';
+        }
+
+        // Obtener usuario actual
+        const currentUser = AuthService.getCurrentUser();
+        const userId = currentUser || 'guest';
+
+        // Inicializar sistema de cupones
+        const couponSystem = window.CouponSystemInstance;
+
+        // Cargar datos al iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadLoyaltyInfo();
+            loadAvailableCoupons();
+            loadCouponHistory();
+        });
+
+        // Cargar información de lealtad
+        function loadLoyaltyInfo() {
+            const loyaltyLevel = couponSystem.getCurrentLoyaltyLevel(userId);
+            
+            if (loyaltyLevel) {
+                // Actualizar puntos
+                document.getElementById('user-points').textContent = `${loyaltyLevel.currentPoints} PTS`;
+                
+                // Actualizar nivel actual
+                const currentLevelDiv = document.getElementById('current-level');
+                currentLevelDiv.innerHTML = `
+                    <span class="loyalty-level-badge">${loyaltyLevel.emoji}</span>
+                    <span class="loyalty-level-name">${loyaltyLevel.name.toUpperCase()}</span>
+                `;
+                
+                // Actualizar barra de progreso
+                let progressPercent = 0;
+                if (loyaltyLevel.nextLevelPoints) {
+                    const range = loyaltyLevel.maxPoints - loyaltyLevel.minPoints;
+                    const current = loyaltyLevel.currentPoints - loyaltyLevel.minPoints;
+                    progressPercent = Math.min(100, (current / range) * 100);
+                }
+                
+                document.getElementById('progress-fill').style.width = progressPercent + '%';
+                document.getElementById('progress-text').textContent = Math.round(progressPercent) + '%';
+                
+                // Actualizar texto de siguiente nivel
+                const nextLevelText = document.getElementById('next-level-text');
+                if (loyaltyLevel.nextLevelPoints) {
+                    nextLevelText.textContent = `${loyaltyLevel.pointsToNext} puntos para el siguiente nivel`;
+                } else {
+                    nextLevelText.textContent = '¡Nivel máximo alcanzado! 🎉';
+                }
+                
+                // Marcar nivel activo
+                document.querySelectorAll('.loyalty-level-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                document.getElementById(`level-${loyaltyLevel.name.toLowerCase()}`).classList.add('active');
+            }
+        }
+
+        // Cargar cupones disponibles
+        function loadAvailableCoupons() {
+            const availableCoupons = couponSystem.getAvailableCoupons(userId);
+            const container = document.getElementById('available-coupons');
+            
+            if (availableCoupons.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; color: #999; padding: 2rem;">
+                        No hay cupones disponibles en este momento
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = availableCoupons.map(coupon => {
+                const usageCount = couponSystem.getCouponUsageCount(coupon.code, userId);
+                const isUsed = usageCount >= coupon.maxUses;
+                
+                return `
+                    <div class="coupon-card ${isUsed ? 'used' : ''}" onclick="copyCouponCode('${coupon.code}')">
+                        <span class="coupon-emoji">${coupon.emoji}</span>
+                        <div class="coupon-code">${coupon.code}</div>
+                        <div class="coupon-name">${coupon.name}</div>
+                        <div class="coupon-description">${coupon.description}</div>
+                        <div class="coupon-discount-badge">
+                            ${coupon.type === 'percentage' ? coupon.value + '% OFF' : 
+                              coupon.type === 'fixed' ? '$' + coupon.value + ' OFF' : 
+                              'OFERTA ESPECIAL'}
+                        </div>
+                        <div class="coupon-details">
+                            <div class="coupon-detail-item">
+                                <span class="coupon-detail-label">Mínimo:</span>
+                                <span class="coupon-detail-value">$${coupon.minPurchase} MXN</span>
+                            </div>
+                            ${coupon.expiryDate ? `
+                                <div class="coupon-detail-item">
+                                    <span class="coupon-detail-label">Válido hasta:</span>
+                                    <span class="coupon-detail-value">${new Date(coupon.expiryDate).toLocaleDateString('es-MX')}</span>
+                                </div>
+                            ` : ''}
+                            <div class="coupon-detail-item">
+                                <span class="coupon-detail-label">Usos restantes:</span>
+                                <span class="coupon-detail-value">${coupon.usesRemaining}</span>
+                            </div>
+                        </div>
+                        ${!isUsed ? '<button class="btn-copy-code" onclick="event.stopPropagation(); copyCouponCode(\'' + coupon.code + '\')">📋 COPIAR CÓDIGO</button>' : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Cargar historial de cupones
+        function loadCouponHistory() {
+            const history = couponSystem.getCouponHistory(userId);
+            const container = document.getElementById('coupon-history-list');
+            
+            if (history.length === 0) {
+                container.innerHTML = `
+                    <p style="text-align: center; color: #999; padding: 2rem;">
+                        No has usado ningún cupón todavía
+                    </p>
+                `;
+                return;
+            }
+            
+            container.innerHTML = history.map(item => `
+                <div class="history-item">
+                    <div>
+                        <div class="history-code">${item.code}</div>
+                        <div class="history-date">${new Date(item.date).toLocaleDateString('es-MX', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}</div>
+                    </div>
+                    <div class="history-amount">$${item.orderTotal.toFixed(2)}</div>
+                </div>
+            `).join('');
+        }
+
+        // Aplicar código de cupón
+        function applyCouponCode() {
+            const input = document.getElementById('coupon-code-input');
+            const code = input.value.trim().toUpperCase();
+            const messageDiv = document.getElementById('coupon-message');
+            
+            if (!code) {
+                showMessage('Por favor ingresa un código', 'error');
+                return;
+            }
+            
+            // Validar cupón (con carrito ficticio para prueba)
+            const validation = couponSystem.validateCoupon(code, userId, 600, []);
+            
+            if (validation.valid) {
+                showMessage(validation.message, 'success');
+                input.value = '';
+                
+                // Copiar al portapapeles
+                copyCouponCode(code);
+                
+                // Recargar cupones disponibles
+                setTimeout(() => {
+                    loadAvailableCoupons();
+                }, 1000);
+            } else {
+                showMessage(validation.message, 'error');
+            }
+        }
+
+        // Mostrar mensaje
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('coupon-message');
+            messageDiv.textContent = message;
+            messageDiv.className = 'coupon-message ' + type;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Copiar código al portapapeles
+        function copyCouponCode(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                showMessage(`✅ Código ${code} copiado al portapapeles`, 'success');
+            }).catch(() => {
+                showMessage(`Código: ${code}`, 'success');
+            });
+        }
+
+        // Permitir aplicar con Enter
+        document.getElementById('coupon-code-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                applyCouponCode();
+            }
+        });
+    </script>
+</body>
+</html>

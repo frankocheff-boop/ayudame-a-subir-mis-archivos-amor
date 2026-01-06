@@ -1,0 +1,603 @@
+/* ============================================
+   HOME - Franko & SOL Forever
+   Main Stylesheet
+   ============================================ */
+
+/* Color Palette */
+:root {
+    /* Main Colors */
+    --dorado-sol: #FFD700;
+    --azul-noche: #1a1a2e;
+    --blanco-puro: #FFFFFF;
+    --crema-calido: #FFF8E7;
+    
+    /* Accent Colors */
+    --rosa-amor: #FFB6C1;
+    --verde-esperanza: #90EE90;
+    --naranja-atardecer: #FF8C42;
+    
+    /* Gradients */
+    --gradiente-amanecer: linear-gradient(135deg, #FFD700, #FF8C42, #1a1a2e);
+    --gradiente-hogar: linear-gradient(to bottom, #FFF8E7, #FFFFFF);
+    --gradiente-noche: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    
+    /* Typography */
+    --font-titulos: 'Playfair Display', serif;
+    --font-cuerpo: 'Lato', 'Open Sans', sans-serif;
+    --font-handwriting: 'Dancing Script', cursive;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-cuerpo);
+    background: var(--gradiente-hogar);
+    color: var(--azul-noche);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Sunrise Background */
+.sunrise-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradiente-amanecer);
+    z-index: -1;
+    animation: sunriseGlow 30s ease-in-out infinite;
+}
+
+@keyframes sunriseGlow {
+    0%, 100% {
+        opacity: 0.7;
+        filter: brightness(1);
+    }
+    50% {
+        opacity: 0.9;
+        filter: brightness(1.2);
+    }
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.8s ease;
+}
+
+.hero-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 4rem 3rem;
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+}
+
+.home-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.hero-title {
+    font-family: var(--font-titulos);
+    font-size: 3.5rem;
+    color: var(--azul-noche);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.love-symbols {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    font-size: 3rem;
+}
+
+.symbol {
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.symbol.heart {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+}
+
+.hero-names {
+    font-family: var(--font-titulos);
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.name.franko {
+    color: var(--azul-noche);
+    font-weight: 600;
+}
+
+.name.sol {
+    color: var(--dorado-sol);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
+}
+
+.name-divider {
+    color: var(--rosa-amor);
+}
+
+.hero-quotes {
+    margin: 2rem 0;
+    font-family: var(--font-handwriting);
+    font-size: 1.5rem;
+    color: var(--azul-noche);
+    opacity: 0.9;
+}
+
+.quote-line {
+    margin: 0.5rem 0;
+}
+
+.enter-home-btn {
+    margin-top: 2rem;
+    padding: 1.2rem 3rem;
+    font-size: 1.3rem;
+    font-family: var(--font-cuerpo);
+    font-weight: 600;
+    background: var(--gradiente-amanecer);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+}
+
+.enter-home-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.6);
+}
+
+.btn-icon {
+    font-size: 1.5rem;
+}
+
+/* Love Counters */
+.love-counters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin-top: 4rem;
+    width: 100%;
+}
+
+.counter-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.counter-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.counter-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.counter-label {
+    font-size: 1rem;
+    color: var(--azul-noche);
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.counter-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dorado-sol);
+    font-family: var(--font-titulos);
+}
+
+/* Main Navigation */
+.main-nav {
+    min-height: 100vh;
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.nav-header h2 {
+    font-family: var(--font-titulos);
+    font-size: 2.5rem;
+    color: var(--azul-noche);
+    margin-bottom: 0.5rem;
+}
+
+.nav-subtitle {
+    font-size: 1.2rem;
+    color: var(--dorado-sol);
+    font-family: var(--font-handwriting);
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.nav-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--azul-noche);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+}
+
+.nav-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    border-color: var(--dorado-sol);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.nav-card h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--azul-noche);
+}
+
+.nav-card p {
+    font-size: 1rem;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+/* Emergency Love Button */
+.emergency-love {
+    text-align: center;
+    margin: 3rem 0;
+}
+
+.sad-mode-btn {
+    padding: 1.5rem 3rem;
+    font-size: 1.3rem;
+    font-family: var(--font-cuerpo);
+    font-weight: 600;
+    background: linear-gradient(135deg, #FFB6C1, #FF69B4);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+}
+
+.sad-mode-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+}
+
+/* Sad Mode Modal */
+.sad-mode-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 2rem;
+}
+
+.sad-mode-modal.active {
+    display: flex;
+    animation: fadeIn 0.5s ease;
+}
+
+.modal-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 30px;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--azul-noche);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    font-family: var(--font-titulos);
+    font-size: 2rem;
+    color: var(--dorado-sol);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.love-messages {
+    margin-bottom: 2rem;
+}
+
+.love-message {
+    background: linear-gradient(135deg, var(--crema-calido), var(--blanco-puro));
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.achievements-reminder {
+    background: var(--crema-calido);
+    padding: 2rem;
+    border-radius: 15px;
+    margin: 2rem 0;
+}
+
+.achievements-reminder h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.5rem;
+    color: var(--azul-noche);
+    margin-bottom: 1rem;
+}
+
+.achievements-reminder ul {
+    list-style: none;
+    padding: 0;
+}
+
+.achievements-reminder li {
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.achievements-reminder li:last-child {
+    border-bottom: none;
+}
+
+.feel-better-btn {
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    background: var(--gradiente-amanecer);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+}
+
+.feel-better-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(255, 215, 0, 0.6);
+}
+
+/* Footer */
+.home-footer {
+    background: var(--azul-noche);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-date {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--crema-calido);
+}
+
+.footer-names {
+    font-size: 1.2rem;
+    font-family: var(--font-handwriting);
+    color: var(--dorado-sol);
+}
+
+/* Floating Love Reminder */
+.love-reminder {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--dorado-sol);
+    color: var(--azul-noche);
+    padding: 1.5rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s ease;
+}
+
+.love-reminder.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-names {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .hero-quotes {
+        font-size: 1.2rem;
+    }
+    
+    .love-symbols {
+        font-size: 2rem;
+        gap: 1rem;
+    }
+    
+    .enter-home-btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+    
+    .love-counters {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .counter-box {
+        padding: 1.5rem;
+    }
+    
+    .counter-value {
+        font-size: 1.5rem;
+    }
+    
+    .nav-header h2 {
+        font-size: 2rem;
+    }
+    
+    .nav-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .modal-content {
+        padding: 2rem;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .love-message {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+    
+    .love-reminder {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .home-icon {
+        font-size: 3rem;
+    }
+    
+    .hero-names {
+        font-size: 1.5rem;
+    }
+    
+    .counter-icon {
+        font-size: 2rem;
+    }
+}

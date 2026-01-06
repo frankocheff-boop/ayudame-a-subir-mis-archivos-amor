@@ -1,0 +1,403 @@
+/* ============================================
+   Animations for HOME - Franko & SOL Forever
+   ============================================ */
+
+/* Floating Animation */
+@keyframes animate-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.animate-float {
+    animation: animate-float 3s ease-in-out infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide In from Left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In from Right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Glow Effect */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+}
+
+/* Sparkle Animation */
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Hearts Floating */
+@keyframes heartsFloat {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(360deg);
+    }
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -50px;
+    font-size: 2rem;
+    animation: heartsFloat 10s linear infinite;
+    pointer-events: none;
+    z-index: 998;
+}
+
+/* Light Beam Animation */
+@keyframes lightBeam {
+    0% {
+        opacity: 0.3;
+        transform: translateX(-100%);
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0.3;
+        transform: translateX(100%);
+    }
+}
+
+/* Sunrise/Sunset Transition */
+@keyframes sunriseCycle {
+    0% {
+        /* Night */
+        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+    25% {
+        /* Dawn */
+        background: linear-gradient(180deg, #FF8C42 0%, #FFD700 50%, #FFF8E7 100%);
+    }
+    50% {
+        /* Day */
+        background: linear-gradient(180deg, #87CEEB 0%, #FFD700 50%, #FFF8E7 100%);
+    }
+    75% {
+        /* Dusk */
+        background: linear-gradient(180deg, #FF6B6B 0%, #FF8C42 50%, #1a1a2e 100%);
+    }
+    100% {
+        /* Night */
+        background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+}
+
+/* Rotate Animation */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Shake Animation (for alerts) */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+/* Zoom In */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Zoom Out */
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+/* Wave Animation */
+@keyframes wave {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(15deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+}
+
+/* Text Shimmer */
+@keyframes textShimmer {
+    0% {
+        background-position: -500%;
+    }
+    100% {
+        background-position: 500%;
+    }
+}
+
+.text-shimmer {
+    background: linear-gradient(90deg, 
+        var(--azul-noche) 0%, 
+        var(--dorado-sol) 50%, 
+        var(--azul-noche) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShimmer 3s linear infinite;
+}
+
+/* Typing Animation */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* Color Shift Animation */
+@keyframes colorShift {
+    0%, 100% {
+        color: var(--dorado-sol);
+    }
+    33% {
+        color: var(--rosa-amor);
+    }
+    66% {
+        color: var(--naranja-atardecer);
+    }
+}
+
+/* Scale Pulse */
+@keyframes scalePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Subtle Breathing Animation */
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.02);
+        opacity: 1;
+    }
+}
+
+/* Card Flip */
+@keyframes cardFlip {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+/* Slide Up */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide Down */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Utility Classes */
+.fade-in {
+    animation: fadeIn 1s ease;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease;
+}
+
+.bounce {
+    animation: bounce 2s ease infinite;
+}
+
+.glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+.rotate {
+    animation: rotate 20s linear infinite;
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.breathe {
+    animation: breathe 4s ease-in-out infinite;
+}
+
+/* Delayed Animations */
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+}
+
+.delay-4 {
+    animation-delay: 0.8s;
+}
+
+.delay-5 {
+    animation-delay: 1s;
+}
+
+/* Stagger Animation for Lists */
+.stagger-list > * {
+    animation: fadeIn 0.5s ease;
+}
+
+.stagger-list > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-list > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-list > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-list > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-list > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-list > *:nth-child(6) { animation-delay: 0.6s; }
+.stagger-list > *:nth-child(7) { animation-delay: 0.7s; }
+.stagger-list > *:nth-child(8) { animation-delay: 0.8s; }

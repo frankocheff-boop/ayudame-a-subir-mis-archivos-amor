@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👫 Nosotros Dos - Franko & SOL</title>
+    <link rel="stylesheet" href="../assets/css/home-style.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/rooms.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Nosotros Dos - Custom Styles */
+        
+        /* Hero Section */
+        .nosotros-hero {
+            background: linear-gradient(135deg, var(--dorado-sol), var(--naranja-atardecer), var(--azul-noche));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nosotros-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="white" opacity="0.3"/></svg>');
+            animation: float 20s linear infinite;
+        }
+        
+        .nosotros-hero-title {
+            font-family: var(--font-titulos);
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Portraits Grid */
+        .portraits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .portrait-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portrait-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* SOL Portrait with golden glow */
+        .portrait-card.sol {
+            border: 3px solid var(--dorado-sol);
+        }
+        
+        .portrait-card.sol::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent);
+            animation: rotate 15s linear infinite;
+        }
+        
+        /* Franko Portrait with blue glow */
+        .portrait-card.franko {
+            border: 3px solid var(--azul-noche);
+        }
+        
+        .portrait-card.franko::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(26, 26, 46, 0.1), transparent);
+            animation: rotate 15s linear infinite reverse;
+        }
+        
+        .portrait-image-container {
+            width: 100%;
+            max-width: 350px;
+            height: 350px;
+            margin: 0 auto 1.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .portrait-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Placeholder gradient for missing image */
+        .portrait-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            position: relative;
+        }
+        
+        .portrait-placeholder.sol-placeholder {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C42);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .portrait-placeholder.franko-placeholder {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .portrait-caption {
+            font-family: var(--font-titulos);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .portrait-caption.sol-caption {
+            color: var(--dorado-sol);
+        }
+        
+        .portrait-caption.franko-caption {
+            color: var(--azul-noche);
+        }
+        
+        .portrait-subtitle {
+            font-family: var(--font-handwriting);
+            font-size: 1.1rem;
+            color: var(--azul-noche);
+            opacity: 0.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Special Quote Section */
+        .special-quote-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 66, 0.1));
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .special-quote {
+            font-family: var(--font-handwriting);
+            font-size: 2.5rem;
+            color: var(--azul-noche);
+            font-weight: 600;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.4;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .quote-hearts {
+            font-size: 2rem;
+            margin-top: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Numbers Section */
+        .numbers-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .numbers-title {
+            font-family: var(--font-titulos);
+            font-size: 2rem;
+            color: var(--azul-noche);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .number-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: var(--crema-calido);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .number-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .number-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .number-value {
+            font-family: var(--font-titulos);
+            font-size: 2.5rem;
+            color: var(--dorado-sol);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .number-label {
+            font-size: 1rem;
+            color: var(--azul-noche);
+            opacity: 0.8;
+        }
+        
+        /* Back Button */
+        .back-home-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: var(--gradiente-amanecer);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+            margin: 2rem auto;
+            display: block;
+            width: fit-content;
+        }
+        
+        .back-home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.6);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nosotros-hero-title {
+                font-size: 2rem;
+            }
+            
+            .portraits-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .portrait-image-container {
+                height: 300px;
+            }
+            
+            .special-quote {
+                font-size: 1.8rem;
+            }
+            
+            .numbers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .nosotros-hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .portrait-image-container {
+                height: 250px;
+            }
+            
+            .special-quote {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="room-page">
+    <!-- Room Header -->
+    <header class="room-header">
+        <a href="../home.html" class="back-home">🏠 Volver a Casa</a>
+        <h1 class="room-title">👫 Nosotros Dos</h1>
+        <p class="room-subtitle">Juntos Para Siempre</p>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="nosotros-hero">
+        <h2 class="nosotros-hero-title">👫 Nosotros Dos - Juntos Para Siempre</h2>
+    </section>
+    
+    <!-- Portraits Grid -->
+    <section class="portraits-grid">
+        <!-- SOL Portrait -->
+        <div class="portrait-card sol fade-in">
+            <div class="portrait-image-container">
+                <!-- Image will be loaded, or placeholder shown if not available -->
+                <img 
+                    src="../assets/images/sol-portrait.jpg" 
+                    alt="SOL - La Luz de Este Hogar"
+                    class="portrait-image"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+                <div class="portrait-placeholder sol-placeholder" style="display: none;">
+                    ☀️
+                </div>
+            </div>
+            <h3 class="portrait-caption sol-caption">☀️ SOL</h3>
+            <p class="portrait-subtitle">La Luz de Este Hogar</p>
+            <p class="portrait-subtitle" style="margin-top: 1rem; font-style: italic;">
+                "Tu esposa, tu luz, tu lugar feliz"
+            </p>
+        </div>
+        
+        <!-- Franko Portrait Placeholder -->
+        <div class="portrait-card franko fade-in delay-1">
+            <div class="portrait-image-container">
+                <div class="portrait-placeholder franko-placeholder">
+                    👨‍🍳
+                </div>
+            </div>
+            <h3 class="portrait-caption franko-caption">💙 Franko</h3>
+            <p class="portrait-subtitle">El Corazón de Este Hogar</p>
+            <p class="portrait-subtitle" style="margin-top: 1rem; font-style: italic;">
+                "Chef de corazón puro, creador de amor"
+            </p>
+        </div>
+    </section>
+    
+    <!-- Special Quote Section -->
+    <section class="special-quote-section">
+        <div class="special-quote">
+            "Donde tú estás, estoy yo a tu ladito"
+        </div>
+        <div class="quote-hearts">💛 ☀️ 👨‍🍳 💛</div>
+    </section>
+    
+    <!-- Our Story in Numbers -->
+    <section class="numbers-section fade-in delay-2">
+        <h2 class="numbers-title">📊 Nuestra Historia en Números</h2>
+        <div class="numbers-grid">
+            <div class="number-card">
+                <div class="number-icon">📅</div>
+                <div class="number-value" id="daysTogetherCount">0</div>
+                <div class="number-label">Días juntos</div>
+            </div>
+            
+            <div class="number-card">
+                <div class="number-icon">💍</div>
+                <div class="number-value">∞</div>
+                <div class="number-label">Promesas hechas</div>
+            </div>
+            
+            <div class="number-card">
+                <div class="number-icon">✨</div>
+                <div class="number-value">∞</div>
+                <div class="number-label">Momentos compartidos</div>
+            </div>
+            
+            <div class="number-card">
+                <div class="number-icon">💛</div>
+                <div class="number-value">∞</div>
+                <div class="number-label">Amor generado</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Back to Home Button -->
+    <a href="../home.html" class="back-home-btn">
+        🏠 Volver a Casa
+    </a>
+    
+    <!-- Footer -->
+    <footer class="room-footer">
+        <p>Casados desde: 30 Dic 2025 | Amor: ∞ Eterno</p>
+        <p>👨‍🍳 Franko & ☀️ SOL | Unidos Forever 💍</p>
+    </footer>
+    
+    <script>
+        // Calculate days together
+        function updateDaysCounter() {
+            const startDate = new Date('2025-12-30');
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            const counterEl = document.getElementById('daysTogetherCount');
+            if (counterEl) {
+                counterEl.textContent = diffDays;
+            }
+        }
+        
+        // Update on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDaysCounter();
+        });
+    </script>
+</body>
+</html>

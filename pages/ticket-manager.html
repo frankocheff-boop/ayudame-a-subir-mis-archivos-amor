@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Manager - VERANO ESTATE</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="../assets/css/ticket-system.css">
+</head>
+<body>
+  <!-- Header -->
+  <div class="page-header">
+    <h1>🎫 TICKET MANAGER</h1>
+    <p class="subtitle">Sistema de Gestión de Tickets - VERANO ESTATE</p>
+    <div style="position: absolute; top: 20px; right: 20px;">
+      <a href="../index.html" class="btn btn-secondary">← Volver al Inicio</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Panel de Búsqueda -->
+    <div class="search-panel">
+      <div class="search-row">
+        <input type="text" id="search-numero" placeholder="🔍 Buscar por número de ticket...">
+        <input type="date" id="search-fecha-inicio" placeholder="Fecha inicio">
+        <input type="date" id="search-fecha-fin" placeholder="Fecha fin">
+        <select id="search-metodo">
+          <option value="">Todos los métodos</option>
+          <option value="efectivo">Efectivo</option>
+          <option value="tarjeta">Tarjeta</option>
+          <option value="transferencia">Transferencia</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button id="btn-buscar" class="btn btn-primary">🔍 Buscar</button>
+        <button id="btn-limpiar" class="btn btn-secondary">🔄 Limpiar</button>
+        <button id="btn-exportar" class="btn btn-export">📊 Exportar Excel</button>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="icon">🎫</span>
+        <h3 id="total-tickets">0</h3>
+        <p>Tickets Hoy</p>
+      </div>
+      <div class="stat-card">
+        <span class="icon">💰</span>
+        <h3 id="venta-total">$0.00</h3>
+        <p>Venta Total</p>
+      </div>
+      <div class="stat-card">
+        <span class="icon">📊</span>
+        <h3 id="ticket-promedio">$0.00</h3>
+        <p>Ticket Promedio</p>
+      </div>
+      <div class="stat-card">
+        <span class="icon">🎁</span>
+        <h3 id="propinas">$0.00</h3>
+        <p>Propinas</p>
+      </div>
+    </div>
+
+    <!-- Tabla de Resultados -->
+    <div class="tickets-table-container">
+      <table class="tickets-table" id="tickets-table">
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Fecha/Hora</th>
+            <th>Cliente</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Método</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tickets-tbody">
+          <!-- JS populated -->
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 40px; color: #6B6B6B;">
+              <div class="loading-spinner" style="margin: 0 auto 1rem;"></div>
+              <p>Cargando tickets...</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal de Detalles -->
+  <div id="modal-detalles" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Ticket <span id="modal-numero"></span></h2>
+      <div id="modal-body">
+        <!-- JS populated -->
+      </div>
+      <div class="modal-actions">
+        <button onclick="ticketManagerUI.imprimirTicket()">🖨️ Imprimir</button>
+        <button onclick="ticketManagerUI.enviarWhatsApp()">📱 WhatsApp</button>
+        <button onclick="ticketManagerUI.descargarPDF()">📄 PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  
+  <!-- App Scripts -->
+  <script src="../assets/js/firebase-config.js"></script>
+  <script src="../assets/js/ticket-system.js"></script>
+  <script src="../assets/js/ticket-printer.js"></script>
+  <script src="../assets/js/ticket-manager.js"></script>
+</body>
+</html>
