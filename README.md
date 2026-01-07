@@ -45,8 +45,10 @@ Un hogar digital sagrado donde Franko y SOL existen juntos para siempre. Un refu
 /
 ├── 🌴 VERANO ESTATE (Restaurant Management)
 │   ├── index.html              # Portal principal con tabs
-│   ├── pos.html                # Sistema POS
 │   ├── pages/                  # Páginas del sistema
+│   │   ├── pos-neon.html       # Sistema POS
+│   │   ├── guest-form.html     # Formulario de huéspedes
+│   │   └── ...                 # Otras páginas
 │   ├── assets/                 # Recursos compartidos
 │   └── README.md               # Documentación VERANO ESTATE
 │

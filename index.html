@@ -356,14 +356,24 @@
     <script src="assets/js/auth.js"></script>
     <script>
         // Check authentication on page load
-        if (!AuthService.isAuthenticated()) {
+        if (typeof AuthService === 'undefined') {
+            console.warn('AuthService no está definido — saltando la verificación de autenticación.');
+        } else if (!AuthService.isAuthenticated()) {
             window.location.href = 'pages/login.html';
         }
         
         // Display current user
-        const currentUser = AuthService.getCurrentUser();
-        if (currentUser) {
-            document.getElementById('currentUser').textContent = currentUser;
+        if (typeof AuthService !== 'undefined') {
+            const currentUser = AuthService.getCurrentUser();
+            if (currentUser) {
+                document.getElementById('currentUser').textContent = currentUser;
+            }
+        } else {
+            // Fallback if AuthService is not defined
+            const userElement = document.getElementById('currentUser');
+            if (userElement) {
+                userElement.textContent = 'Usuario';
+            }
         }
         
         // Update logout button text based on language
@@ -375,6 +385,13 @@
         
         // Logout function
         function logout() {
+            if (typeof AuthService === 'undefined') {
+                console.warn('AuthService no está definido — no se puede cerrar sesión.');
+                // Just redirect to login page
+                window.location.href = 'pages/login.html';
+                return;
+            }
+            
             const lang = localStorage.getItem('verano_estate_lang') || 'es';
             const message = lang === 'es' 
                 ? '¿Está seguro que desea cerrar sesión?' 
