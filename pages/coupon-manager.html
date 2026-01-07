@@ -127,13 +127,20 @@
     <script src="../assets/js/coupon-system.js"></script>
     <script>
         // Verificar autenticación
-        if (!AuthService.isAuthenticated()) {
+        if (typeof AuthService === 'undefined') {
+            console.warn('AuthService no está definido — saltando la verificación de autenticación.');
+        } else if (!AuthService.isAuthenticated()) {
             window.location.href = 'login.html';
         }
 
         // Obtener usuario actual
-        const currentUser = AuthService.getCurrentUser();
-        const userId = currentUser || 'guest';
+        let currentUser = 'guest';
+        let userId = 'guest';
+        
+        if (typeof AuthService !== 'undefined') {
+            currentUser = AuthService.getCurrentUser();
+            userId = currentUser || 'guest';
+        }
 
         // Inicializar sistema de cupones
         const couponSystem = window.CouponSystemInstance;
