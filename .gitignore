@@ -17,3 +17,7 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Node.js
+node_modules/
+.env
