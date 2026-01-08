@@ -37,6 +37,9 @@ async function updateReservation(req, res) {
       [name, start_date, end_date, villa_type, nights, data || {}, id]
     );
     const q = await db.query('SELECT * FROM reservations WHERE id = $1', [id]);
+    if (q.rowCount === 0) {
+      return res.status(404).json({ error: 'Reservation not found' });
+    }
     res.json({ reservation: q.rows[0] });
   } catch (err) {
     console.error(err);
