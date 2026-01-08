@@ -4,7 +4,7 @@
 
 <head><!-- LOGO DEL CHEF -->
 <div class="text-center my-8">
-  <img src="https://images.unsplash.com/photo-1604908177522-3d4b6f8f2d9e?q=80&w=800&auto=format&fit=crop" 
+  <img src="https://https://imgur.com/a/qbP90fq
        alt="Logo Chef Franko Salgado" 
        class="w-32 h-auto mx-auto mb-4 rounded-full shadow-md" />
   <h1 class="text-3xl font-serif text-negro-azabache">Chef Franko Salgado</h1>
@@ -13,7 +13,7 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Weekly Menu - Chef Franko at Verano Estate</title>
+  <title>Weekly Menu - Chef Franko CHEF4YOU </title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
@@ -1841,4 +1841,6 @@ Cart Summary --><div id="floatingCart" class="cart-summary hidden">
 </body>
 
 </html>
+
+
 
