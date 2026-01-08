@@ -29,6 +29,7 @@ Socket.io:
 - Eventos útiles: join_reservation_room, leave_reservation_room, reservation_updated
 
 Siguientes pasos recomendados:
+- Añadir rate limiting (express-rate-limit) para proteger endpoints de autenticación
 - Añadir validación (Joi / express-validator)
 - Implementar migraciones (db-migrate / Prisma / Sequelize)
 - Tests e integración continua
