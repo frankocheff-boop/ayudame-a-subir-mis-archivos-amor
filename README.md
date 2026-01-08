@@ -1,6 +1,8 @@
 # 🌴 VERANO ESTATE & 🏠 HOME - Franko's Digital World
 
-> **🆘 ¿No sabes qué hacer? [→ LEE LA GUÍA DE AYUDA AQUÍ](HELP.md)**
+> **🆘 ¿No sabes qué hacer?**
+> 1. **[→ EMPIEZA AQUÍ (Ultra Rápido)](EMPIEZA_AQUI.md)** ⚡
+> 2. **[→ LEE LA GUÍA COMPLETA](HELP.md)** 📖
 
 Este repositorio contiene dos proyectos especiales de Franko:
 
