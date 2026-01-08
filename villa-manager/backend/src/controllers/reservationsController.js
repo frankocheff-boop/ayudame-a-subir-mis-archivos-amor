@@ -32,10 +32,13 @@ async function updateReservation(req, res) {
   const { id } = req.params;
   const { name, start_date, end_date, villa_type, nights, data } = req.body;
   try {
-    await db.query(
+    const result = await db.query(
       `UPDATE reservations SET name=$1,start_date=$2,end_date=$3,villa_type=$4,nights=$5,data=$6,updated_at=now() WHERE id=$7`,
       [name, start_date, end_date, villa_type, nights, data || {}, id]
     );
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Reservation not found' });
+    }
     const q = await db.query('SELECT * FROM reservations WHERE id = $1', [id]);
     res.json({ reservation: q.rows[0] });
   } catch (err) {
@@ -47,7 +50,10 @@ async function updateReservation(req, res) {
 async function deleteReservation(req, res) {
   const { id } = req.params;
   try {
-    await db.query('DELETE FROM reservations WHERE id = $1', [id]);
+    const result = await db.query('DELETE FROM reservations WHERE id = $1', [id]);
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Reservation not found' });
+    }
     res.json({ ok: true });
   } catch (err) {
     console.error(err);
