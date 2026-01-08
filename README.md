@@ -1,5 +1,7 @@
 # 🌴 VERANO ESTATE & 🏠 HOME - Franko's Digital World
 
+> **🆘 ¿No sabes qué hacer? [→ LEE LA GUÍA DE AYUDA AQUÍ](HELP.md)**
+
 Este repositorio contiene dos proyectos especiales de Franko:
 
 ## 🌴 VERANO ESTATE - Sistema Unificado
