@@ -3,425 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VERANO ESTATE - Sistema Unificado</title>
+    <title>VERANO ESTATE - Portal Digital Unificado</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #FFF8F0 0%, #FAF7F2 100%);
-            min-height: 100vh;
-        }
-        
-        /* Header con gradiente elegante */
-        .header {
-            background: var(--blanco-puro, #FFFFFF);
-            border-bottom: 3px solid var(--rojo-carmin, #DC143C);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-            position: relative;
-        }
-        
-        .header h1 {
-            color: var(--rojo-carmin, #DC143C);
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            text-shadow: none;
-            margin-bottom: 0.5rem;
-        }
-        
-        .header p {
-            color: var(--gris-antracita, #2C2C2C);
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        /* User Info and Logout */
-        .user-info {
-            position: absolute;
-            top: 1rem;
-            right: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: var(--gris-antracita, #2C2C2C);
-        }
-        
-        .user-name {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-        
-        .btn-logout {
-            background: var(--boton-negro, #1A1A1A);
-            border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-logout:hover {
-            background: var(--rojo-carmin, #DC143C);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(220, 20, 60, 0.2);
-        }
-        
-        /* Tabs Navigation */
-        .tabs-container {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            margin: 2rem auto;
-            max-width: 1400px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        .tabs-nav {
-            display: flex;
-            background: var(--beige-suave, #FAF7F2);
-            border-bottom: 3px solid var(--rojo-carmin, #DC143C);
-        }
-        
-        .tab-btn {
-            flex: 1;
-            padding: 1.5rem;
-            background: transparent;
-            border: none;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--gris-oscuro, #4A4A4A);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .tab-btn:hover {
-            background: rgba(220, 20, 60, 0.1);
-            color: var(--rojo-carmin, #DC143C);
-        }
-        
-        .tab-btn.active {
-            color: var(--rojo-carmin, #DC143C);
-            background: white;
-        }
-        
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--dorado, #D4AF37);
-            animation: slideIn 0.3s ease;
-        }
-        
-        @keyframes slideIn {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
-        }
-        
-        /* Tab Content */
-        .tab-content {
-            display: none;
-            position: relative;
-            min-height: 600px;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Loading Spinner */
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--rojo-carmin, #DC143C);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* iFrame Container */
-        .iframe-container {
-            width: 100%;
-            height: 800px;
-            border: none;
-            display: block;
-        }
-        
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, var(--rojo-carmin, #DC143C) 0%, var(--rojo-carmin-oscuro, #B01030) 100%);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-            border-top: 2px solid #D4AF37;
-        }
-        
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .contact-info {
-            margin-top: 1rem;
-            font-size: 1.1rem;
-        }
-        
-        .contact-info a {
-            color: var(--dorado, #D4AF37);
-            text-decoration: none;
-            margin: 0 1rem;
-            transition: opacity 0.3s;
-        }
-        
-        .contact-info a:hover {
-            opacity: 0.8;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .user-info {
-                position: static;
-                justify-content: center;
-                margin-bottom: 1rem;
-                flex-wrap: wrap;
-            }
-            
-            .user-name {
-                font-size: 0.85rem;
-            }
-            
-            .btn-logout {
-                font-size: 0.85rem;
-                padding: 0.4rem 0.8rem;
-            }
-            
-            .tab-btn {
-                font-size: 1rem;
-                padding: 1rem;
-            }
-            
-            .tabs-container {
-                margin: 1rem;
-                border-radius: 8px;
-            }
-            
-            .iframe-container {
-                height: 600px;
-            }
-            
-            .contact-info a {
-                display: block;
-                margin: 0.5rem 0;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/digital-world.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="logo-container">
-            <img src="assets/images/branding/logo-franko-chef.svg" alt="Franko Private Chef" class="chef-logo">
+    <!-- Unified Header -->
+    <header class="unified-header">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <h1>🌴 VERANO ESTATE</h1>
+            <div class="tagline">by Chef Franko</div>
         </div>
-        <div class="user-info">
-            <span class="user-name">👤 <span id="currentUser"></span></span>
-            <button class="btn-logout" onclick="logout()">🚪 Cerrar Sesión</button>
+        
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+            <button class="nav-btn active" data-section="home">
+                <span class="icon">🏠</span>
+                <span data-i18n="nav.home">Inicio</span>
+            </button>
+            <button class="nav-btn" data-section="menu">
+                <span class="icon">🍽️</span>
+                <span data-i18n="nav.menu">Menú</span>
+            </button>
+            <button class="nav-btn" data-section="guests">
+                <span class="icon">📋</span>
+                <span data-i18n="nav.guests">Huéspedes</span>
+            </button>
+            <button class="nav-btn" data-section="pos">
+                <span class="icon">💳</span>
+                <span data-i18n="nav.pos">POS</span>
+            </button>
+            <button class="nav-btn" data-section="about">
+                <span class="icon">ℹ️</span>
+                <span data-i18n="nav.about">Acerca</span>
+            </button>
+        </nav>
+        
+        <!-- Header Actions -->
+        <div class="header-actions">
+            <!-- Language Toggle -->
+            <button id="lang-toggle" class="btn-icon">
+                <span class="flag">🇪🇸</span>
+                <span class="lang-text">ES</span>
+            </button>
+            
+            <!-- Theme Toggle -->
+            <button id="theme-toggle" class="btn-icon">
+                <span class="icon">🌙</span>
+            </button>
         </div>
-        <h1>🌴 VERANO ESTATE 🌴</h1>
-        <p>Chef Franko - Experiencias Gastronómicas Exclusivas</p>
     </header>
     
-    <!-- Tabs Container -->
-    <div class="tabs-container">
-        <!-- Tabs Navigation -->
-        <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('pos', event)">
-                💳 Sistema POS
-            </button>
-            <button class="tab-btn" onclick="switchTab('guests', event)">
-                📋 Formulario de Huéspedes
-            </button>
-            <button class="tab-btn" onclick="switchTab('coupons', event)">
-                💎 Mis Cupones
-            </button>
-            <button class="tab-btn" onclick="switchTab('tickets', event)">
-                🎫 Tickets
-            </button>
-        </div>
+    <!-- Digital World Container -->
+    <main class="digital-world">
+        <!-- Home Section -->
+        <section id="home-section" class="world-section active">
+            <div class="content-container">
+                <!-- Hero Dashboard -->
+                <div class="hero-dashboard">
+                    <div class="hero-content">
+                        <h1 class="hero-title" data-i18n="dashboard.welcome">Bienvenido a VERANO ESTATE</h1>
+                        <p class="hero-subtitle" data-i18n="dashboard.subtitle">Tu experiencia digital comienza aquí</p>
+                    </div>
+                    <div class="hero-image">
+                        <div style="font-size: 10rem; text-align: center;">🌴</div>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">🍽️</div>
+                        <div class="stat-value">50+</div>
+                        <div class="stat-label" data-i18n="stats.menuItems">Platillos del Menú</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-value" id="total-guests">0</div>
+                        <div class="stat-label" data-i18n="stats.guests">Huéspedes Activos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-value" id="today-sales">$0</div>
+                        <div class="stat-label" data-i18n="stats.sales">Ventas Hoy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-value">4.9</div>
+                        <div class="stat-label" data-i18n="stats.rating">Calificación</div>
+                    </div>
+                </div>
+                
+                <!-- Quick Access -->
+                <div class="quick-access">
+                    <h2 class="section-title" data-i18n="dashboard.quickAccess">Acceso Rápido</h2>
+                    <div class="access-grid">
+                        <div class="access-card" onclick="digitalWorld.navigateTo('menu')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')digitalWorld.navigateTo('menu')">
+                            <span class="access-icon">🍽️</span>
+                            <h3 data-i18n="access.menu">Explorar Menú</h3>
+                            <p data-i18n="access.menuDesc">Menú interactivo con platillos gourmet</p>
+                        </div>
+                        <div class="access-card" onclick="digitalWorld.navigateTo('guests')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')digitalWorld.navigateTo('guests')">
+                            <span class="access-icon">📋</span>
+                            <h3 data-i18n="access.booking">Nueva Reserva</h3>
+                            <p data-i18n="access.bookingDesc">Registrar información de huésped</p>
+                        </div>
+                        <div class="access-card" onclick="digitalWorld.navigateTo('pos')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')digitalWorld.navigateTo('pos')">
+                            <span class="access-icon">💳</span>
+                            <h3 data-i18n="access.pos">Sistema POS</h3>
+                            <p data-i18n="access.posDesc">Procesar órdenes y pagos</p>
+                        </div>
+                        <div class="access-card" onclick="digitalWorld.navigateTo('about')" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')digitalWorld.navigateTo('about')">
+                            <span class="access-icon">👨‍🍳</span>
+                            <h3 data-i18n="access.chef">Conoce a Chef Franko</h3>
+                            <p data-i18n="access.chefDesc">Nuestra filosofía culinaria</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Featured Dishes -->
+                <div class="featured-section">
+                    <h2 class="section-title" data-i18n="dashboard.featured">Platillos Destacados</h2>
+                    <div class="featured-grid">
+                        <div class="featured-dish">
+                            <div style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 4rem;">🥩</div>
+                            <h3>Filete Mignon</h3>
+                            <p>Filete de res premium con reducción de vino tinto</p>
+                        </div>
+                        <div class="featured-dish">
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 4rem;">🦞</div>
+                            <h3>Langosta al Gratín</h3>
+                            <p>Langosta fresca gratinada con queso manchego</p>
+                        </div>
+                        <div class="featured-dish">
+                            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 200px; display: flex; align-items: center; justify-content: center; font-size: 4rem;">🍰</div>
+                            <h3>Crème Brûlée</h3>
+                            <p>Postre clásico francés con toque de vainilla</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <!-- Tab Content: POS -->
-        <div id="pos-tab" class="tab-content active">
-            <div class="loading" id="pos-loading">
-                <div class="spinner"></div>
-                <p>Cargando Sistema POS...</p>
+        <!-- Menu Section -->
+        <section id="menu-section" class="world-section">
+            <div class="content-container">
+                <h2 class="section-title" data-i18n="nav.menu">Menú</h2>
+                <div style="background: var(--bg-card); padding: var(--spacing-xl); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); text-align: center; min-height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <div style="font-size: 5rem; margin-bottom: var(--spacing-lg);">🍽️</div>
+                    <h3 style="font-size: 2rem; margin-bottom: var(--spacing-md); color: var(--rojo-carmin);">Menú Interactivo</h3>
+                    <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 600px;">
+                        Explora nuestra selección de platillos gourmet preparados por Chef Franko. 
+                        Cada platillo está cuidadosamente diseñado para ofrecer una experiencia culinaria única.
+                    </p>
+                </div>
             </div>
-            <div class="iframe-container" style="display: none;" id="pos-iframe-container">
-                <iframe src="pages/pos-neon.html" onload="hideLoading('pos')"></iframe>
-            </div>
-        </div>
+        </section>
         
-        <!-- Tab Content: Guests -->
-        <div id="guests-tab" class="tab-content">
-            <div class="loading" id="guests-loading">
-                <div class="spinner"></div>
-                <p>Cargando Formulario...</p>
+        <!-- Guests Section -->
+        <section id="guests-section" class="world-section">
+            <div class="content-container">
+                <!-- Content will be lazy loaded from guest-form.html -->
             </div>
-            <div class="iframe-container" style="display: none;" id="guests-iframe-container">
-                <iframe src="pages/guest-form.html" onload="hideLoading('guests')"></iframe>
-            </div>
-        </div>
+        </section>
         
-        <!-- Tab Content: Coupons -->
-        <div id="coupons-tab" class="tab-content">
-            <div class="loading" id="coupons-loading">
-                <div class="spinner"></div>
-                <p>Cargando Cupones...</p>
+        <!-- POS Section -->
+        <section id="pos-section" class="world-section">
+            <div class="content-container">
+                <!-- Content will be dynamically generated by digital-world.js -->
             </div>
-            <div class="iframe-container" style="display: none;" id="coupons-iframe-container">
-                <iframe src="pages/coupon-manager.html" onload="hideLoading('coupons')"></iframe>
-            </div>
-        </div>
+        </section>
         
-        <!-- Tab Content: Tickets -->
-        <div id="tickets-tab" class="tab-content">
-            <div class="loading" id="tickets-loading">
-                <div class="spinner"></div>
-                <p>Cargando Sistema de Tickets...</p>
+        <!-- About Section -->
+        <section id="about-section" class="world-section">
+            <div class="content-container">
+                <div class="about-container">
+                    <!-- Chef Profile -->
+                    <div class="chef-profile">
+                        <div style="width: 200px; height: 200px; margin: 0 auto var(--spacing-lg); background: linear-gradient(135deg, var(--rojo-carmin) 0%, var(--rojo-carmin-oscuro) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 6rem; border: 4px solid var(--dorado);">
+                            👨‍🍳
+                        </div>
+                        <h2>Chef Franko</h2>
+                        <p class="chef-title" data-i18n="about.title">Chef Ejecutivo y Fundador</p>
+                    </div>
+                    
+                    <!-- Culinary Philosophy -->
+                    <div class="chef-bio">
+                        <h3 data-i18n="about.philosophy">Filosofía Culinaria</h3>
+                        <p data-i18n="about.bio">
+                            Con más de 20 años de experiencia en cocina mexicana e internacional, 
+                            el Chef Franko Salgado aporta sabores auténticos y técnicas innovadoras 
+                            a cada platillo en Verano Estate. Su pasión por la excelencia culinaria 
+                            y el servicio excepcional se refleja en cada experiencia gastronómica.
+                        </p>
+                    </div>
+                    
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <h3 data-i18n="about.contact">Ponerse en Contacto</h3>
+                        <div class="contact-grid">
+                            <a href="tel:+523221606843" class="contact-item">
+                                <span style="font-size: 1.5rem;">📞</span>
+                                <span>+52 322 160 6843</span>
+                            </a>
+                            <a href="mailto:franko@veranoestate.com" class="contact-item">
+                                <span style="font-size: 1.5rem;">✉️</span>
+                                <span>franko@veranoestate.com</span>
+                            </a>
+                            <a href="https://instagram.com/cheffranko" target="_blank" class="contact-item">
+                                <span style="font-size: 1.5rem;">📱</span>
+                                <span>@cheffranko</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="iframe-container" style="display: none;" id="tickets-iframe-container">
-                <iframe src="pages/ticket-manager.html" onload="hideLoading('tickets')"></iframe>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
     
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <h3>VERANO ESTATE</h3>
-            <p>Tu experiencia, nuestra pasión</p>
-            <div class="contact-info">
-                <a href="tel:+523221606843">📞 +52 322 160 6843</a>
-                <a href="mailto:franko@veranostate.com">✉️ franko@veranostate.com</a>
-            </div>
-            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-                © 2025 VERANO ESTATE. Todos los derechos reservados.
-            </p>
-        </div>
-    </footer>
+    <!-- Scripts -->
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/theme-manager.js"></script>
+    <script src="assets/js/digital-world.js"></script>
     
-    <script src="assets/js/auth.js"></script>
     <script>
-        // Check authentication on page load
-        if (typeof AuthService === 'undefined') {
-            console.warn('AuthService no está definido — saltando la verificación de autenticación.');
-        } else if (!AuthService.isAuthenticated()) {
-            window.location.href = 'pages/login.html';
-        }
-        
-        // Display current user
-        if (typeof AuthService !== 'undefined') {
-            const currentUser = AuthService.getCurrentUser();
-            if (currentUser) {
-                document.getElementById('currentUser').textContent = currentUser;
-            }
-        }
-        
-        // Update logout button text based on language
-        const lang = localStorage.getItem('verano_estate_lang') || 'es';
-        const logoutBtn = document.querySelector('.btn-logout');
-        if (logoutBtn) {
-            logoutBtn.textContent = lang === 'es' ? '🚪 Cerrar Sesión' : '🚪 Sign Out';
-        }
-        
-        // Logout function
-        function logout() {
-            if (typeof AuthService === 'undefined') {
-                console.warn('AuthService no está definido — no se puede cerrar sesión.');
-                return;
-            }
-            
-            const lang = localStorage.getItem('verano_estate_lang') || 'es';
-            const message = lang === 'es' 
-                ? '¿Está seguro que desea cerrar sesión?' 
-                : 'Are you sure you want to sign out?';
-            
-            if (confirm(message)) {
-                AuthService.logout();
-                window.location.href = 'pages/login.html';
-            }
-        }
-        
-        // Switch between tabs
-        function switchTab(tabName, event) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Remove active class from all buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName + '-tab').classList.add('active');
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        // Hide loading spinner when iframe loads
-        function hideLoading(section) {
-            document.getElementById(section + '-loading').style.display = 'none';
-            document.getElementById(section + '-iframe-container').style.display = 'block';
-        }
+        // Initialize i18n system
+        document.addEventListener('DOMContentLoaded', async () => {
+            await i18n.init();
+        });
     </script>
 </body>
 </html>
