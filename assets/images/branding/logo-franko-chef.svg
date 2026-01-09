@@ -1,49 +1,69 @@
-<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background circle with gradient -->
+<svg width="600" height="600" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a2332;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#2d3e50;stop-opacity:1" />
+    <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C3922E;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F7E3A1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C3922E;stop-opacity:1" />
     </linearGradient>
-    <radialGradient id="sunsetGlow" cx="50%" cy="30%">
-      <stop offset="0%" style="stop-color:#FF8C42;stop-opacity:0.8" />
-      <stop offset="100%" style="stop-color:#FF8C42;stop-opacity:0" />
+    <radialGradient id="dark-background" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#1B2631;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0E151C;stop-opacity:1" />
     </radialGradient>
+    <linearGradient id="tripadvisor-green" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00AF87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#008F6B;stop-opacity:1" />
+    </linearGradient>
   </defs>
+
+  <circle cx="300" cy="300" r="280" fill="url(#dark-background)" stroke="url(#gold-gradient)" stroke-width="10"/>
+
+  <g transform="translate(300, 150) scale(0.8)">
+    <circle cx="0" cy="60" r="50" fill="#F4D03F" stroke="url(#gold-gradient)" stroke-width="3"/>
+    <path d="M-100,80 Q-50,40 0,80 Q50,120 100,80 T200,80" fill="none" stroke="#1ABC9C" stroke-width="8" stroke-linecap="round"/>
+    <path d="M-90,100 Q-40,60 10,100 Q60,140 110,100 T210,100" fill="none" stroke="#16A085" stroke-width="8" stroke-linecap="round"/>
+    <path d="M-100,120 Q-50,80 0,120 Q50,160 100,120 T200,120" fill="none" stroke="#1ABC9C" stroke-width="8" stroke-linecap="round"/>
+    <path d="M-60,-40 C-80,-80 -20,-120 20,-100 C40,-120 100,-100 100,-60 C120,-40 100,0 80,20 L-40,20 C-60,0 -80,-20 -60,-40 Z" fill="#FFFFFF" stroke="url(#gold-gradient)" stroke-width="3"/>
+    <path d="M-40,20 L80,20 L70,50 L-50,50 Z" fill="#FFFFFF" stroke="url(#gold-gradient)" stroke-width="3"/>
+    <g transform="translate(-100, -20) scale(0.7)">
+      <path d="M0,0 Q20,-20 40,0 Q60,20 40,40 Q20,60 0,40 Q-20,20 0,0 Z" fill="#1ABC9C" stroke="url(#gold-gradient)" stroke-width="3"/>
+      <path d="M20,0 Q30,-10 25,-20" fill="none" stroke="url(#gold-gradient)" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <text x="300" y="300" text-anchor="middle" font-family="serif" font-size="52" font-weight="bold" fill="url(#gold-gradient)" style="text-shadow: 2px 2px 4px black;">
+    CHEF 4 YOU
+  </text>
   
-  <!-- Main circle background -->
-  <circle cx="200" cy="200" r="195" fill="url(#bgGradient)" stroke="#D4AF37" stroke-width="3"/>
+  <text x="300" y="350" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#D4AF37" text-anchor="middle" letter-spacing="4">
+    FRANKO
+  </text>
   
-  <!-- Sunset glow effect -->
-  <circle cx="200" cy="120" r="100" fill="url(#sunsetGlow)"/>
+  <text x="300" y="375" font-family="Arial, sans-serif" font-size="14" fill="#FFE4B5" text-anchor="middle" letter-spacing="3">
+    PRIVATE CHEF
+  </text>
   
-  <!-- Laurel branches -->
-  <path d="M 100 280 Q 90 260 95 240 Q 100 230 105 240 Q 110 260 100 280" fill="#6B8E23" opacity="0.8"/>
-  <path d="M 110 270 Q 100 250 105 230 Q 110 220 115 230 Q 120 250 110 270" fill="#6B8E23" opacity="0.8"/>
-  <path d="M 300 280 Q 310 260 305 240 Q 300 230 295 240 Q 290 260 300 280" fill="#6B8E23" opacity="0.8"/>
-  <path d="M 290 270 Q 300 250 295 230 Q 290 220 285 230 Q 280 250 290 270" fill="#6B8E23" opacity="0.8"/>
-  
-  <!-- Chef hat -->
-  <ellipse cx="200" cy="160" rx="60" ry="25" fill="#D4AF37"/>
-  <rect x="155" y="160" width="90" height="40" fill="#D4AF37"/>
-  <ellipse cx="200" cy="120" rx="50" ry="40" fill="#FFE4B5"/>
-  <circle cx="180" cy="105" r="15" fill="#FFE4B5"/>
-  <circle cx="220" cy="105" r="15" fill="#FFE4B5"/>
-  <circle cx="200" cy="90" r="15" fill="#FFE4B5"/>
-  
-  <!-- Chile pepper accent -->
-  <path d="M 280 250 Q 285 240 283 235 L 275 238 Q 270 250 268 260 Q 275 258 280 250" fill="#DC143C"/>
-  <path d="M 283 235 Q 283 232 285 230" stroke="#228B22" stroke-width="2" fill="none"/>
-  
-  <!-- Text: FRANKO -->
-  <text x="200" y="220" font-family="Georgia, serif" font-size="42" font-weight="bold" fill="#D4AF37" text-anchor="middle" letter-spacing="4">FRANKO</text>
-  
-  <!-- Text: PRIVATE CHEF -->
-  <text x="200" y="245" font-family="Arial, sans-serif" font-size="16" fill="#FFE4B5" text-anchor="middle" letter-spacing="3">PRIVATE CHEF</text>
-  
-  <!-- Decorative stars -->
-  <circle cx="140" cy="210" r="2" fill="#FFE4B5" opacity="0.6"/>
-  <circle cx="260" cy="210" r="2" fill="#FFE4B5" opacity="0.6"/>
-  <circle cx="150" cy="220" r="1.5" fill="#FFE4B5" opacity="0.4"/>
-  <circle cx="250" cy="220" r="1.5" fill="#FFE4B5" opacity="0.4"/>
+  <circle cx="240" cy="340" r="3" fill="#FFE4B5" opacity="0.6"/>
+  <circle cx="360" cy="340" r="3" fill="#FFE4B5" opacity="0.6"/>
+
+  <g transform="translate(300, 460) scale(0.4)">
+    <circle cx="0" cy="0" r="100" fill="url(#tripadvisor-green)"/>
+    <path d="M-60,-20 A20,20 0 1,1 -20,-20 A20,20 0 1,1 -60,-20 M20,-20 A20,20 0 1,1 60,-20 A20,20 0 1,1 20,-20" fill="#FFFFFF"/>
+    <path d="M-40,-20 Q0,-60 40,-20 Q0,20 -40,-20" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+    <circle cx="-40" cy="-20" r="12" fill="#1B2631"/>
+    <circle cx="40" cy="-20" r="12" fill="#1B2631"/>
+    <text x="0" y="130" text-anchor="middle" font-family="sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">Tripadvisor</text>
+    <text x="0" y="160" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#FFFFFF">Travellers' Choice™</text>
+    <text x="0" y="190" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF">Awards 2025</text>
+  </g>
+
+  <g transform="translate(300, 500)" fill="url(#gold-gradient)">
+    <path d="M-120,0 Q-140,-40 -180,-60 L-170,-70 Q-130,-50 -110,-10 L-120,0" />
+    <path d="M-100,10 Q-120,-30 -160,-50 L-150,-60 Q-110,-40 -90,0 L-100,10" />
+    <path d="M-80,20 Q-100,-20 -140,-40 L-130,-50 Q-90,-30 -70,10 L-80,20" />
+    <path d="M-60,30 Q-80,-10 -120,-30 L-110,-40 Q-70,-20 -50,20 L-60,30" />
+    <path d="M120,0 Q140,-40 180,-60 L170,-70 Q130,-50 110,-10 L120,0" transform="scale(-1,1)"/>
+    <path d="M100,10 Q120,-30 160,-50 L150,-60 Q110,-40 90,0 L100,10" transform="scale(-1,1)"/>
+    <path d="M80,20 Q100,-20 140,-40 L130,-50 Q90,-30 70,10 L80,20" transform="scale(-1,1)"/>
+    <path d="M60,30 Q80,-10 120,-30 L110,-40 Q70,-20 50,20 L60,30" transform="scale(-1,1)"/>
+  </g>
 </svg>
