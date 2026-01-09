@@ -11,6 +11,12 @@
     "pos": "POS",
     "about": "Acerca"
   },
+  "dashboard": {
+    "welcome": "Bienvenido a VERANO ESTATE",
+    "subtitle": "Tu experiencia digital comienza aquí",
+    "quickAccess": "Acceso Rápido",
+    "featured": "Platillos Destacados"
+  },
   "home": {
     "welcome": "Bienvenido a Verano Estate",
     "subtitle": "Tu ecosistema digital completo para excelencia culinaria",

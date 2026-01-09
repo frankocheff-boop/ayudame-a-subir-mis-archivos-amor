@@ -11,6 +11,12 @@
     "pos": "POS",
     "about": "About"
   },
+  "dashboard": {
+    "welcome": "Welcome to VERANO ESTATE",
+    "subtitle": "Your digital experience starts here",
+    "quickAccess": "Quick Access",
+    "featured": "Featured Dishes"
+  },
   "home": {
     "welcome": "Welcome to Verano Estate",
     "subtitle": "Your complete digital ecosystem for culinary excellence",
