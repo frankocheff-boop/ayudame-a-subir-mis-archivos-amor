@@ -18,13 +18,6 @@ Thumbs.db
 *.tmp
 *.temp
 
-# Node.js / Backend
+# Node.js
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
 .env
-.env.local
-.env.*.local
