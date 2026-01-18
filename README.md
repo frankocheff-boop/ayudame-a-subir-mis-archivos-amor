@@ -1,67 +1,48 @@
-# Chef Franko - Verano Estate
+# Verano State - Sistema de Restaurante
 
-Sistema de gestión unificado para Chef Franko en Verano Estate, Puerto Vallarta.
+Este repositorio contiene múltiples interfaces web para un sistema de punto de venta (POS) y menú de restaurante.
 
-## 📋 Sistema Unificado
+## Archivos del Proyecto
 
-Este repositorio contiene un sistema unificado que integra todas las aplicaciones de gestión en una sola interfaz con pestañas:
+### 🍽️ Sistemas POS
 
-### 🏠 [Sistema Unificado](index.html)
-Plataforma central con navegación por pestañas que incluye:
+- **`index.html`** - Sistema POS principal con diseño NEON cyberpunk
+  - Interfaz moderna con tema oscuro y efectos neón
+  - Sistema de categorías de menú
+  - Carrito de compras interactivo
+  - Procesamiento de pagos (efectivo y tarjeta)
 
-#### 🍽️ Sistema POS (Punto de Venta)
-Sistema para gestionar:
-- Menú de productos del restaurante
-- Comandas y órdenes
-- Procesamiento de pagos (Efectivo, Tarjeta, Cargo Habitación, Transferencia)
-- Historial de transacciones
-- Impresión de tickets
+- **`franko.html`** - Sistema POS alternativo
+  - Interfaz de punto de venta con estilo moderno
+  - Funcionalidad de impresión de tickets
 
-**Características:**
-- Interfaz moderna con Tailwind CSS
-- Categorías de menú (Entradas, Fuertes, Bebidas, Postres)
-- Cálculo automático de IVA (16%)
-- Múltiples métodos de pago
-- Persistencia de datos en localStorage
+### 📋 Menús y Formularios
 
-#### 📝 Formulario de Huéspedes
-Formulario para registro de información que incluye:
-- Información básica del grupo
-- Transporte desde/hacia aeropuerto
-- Asignación de habitaciones
-- Servicios adicionales
-- Actividades especiales
-- Provisiones y bebidas
+- **`ramazote.html`** - Menú interactivo 2025
+  - Experiencia de menú con diseño elegante
+  - Integración con Chart.js para visualizaciones
+  - Tipografías Playfair Display y Lato
 
-**Características:**
-- Diseño responsive
-- Integración con Formspree
-- Envío por WhatsApp
-- Registro individual por habitación
+- **`html-soft-restaurante.html`** - Sistema de restaurante
+  - Interfaz completa de restaurante
+
+- **`formulario-guest-form.html`** - Formulario para huéspedes
+  - Formulario de registro o reservaciones
 
 ## 🚀 Uso
 
-1. Abrir `index.html` en cualquier navegador web
-2. Usar las pestañas superiores para cambiar entre el Sistema POS y el Formulario de Huéspedes
-3. Todas las funcionalidades están integradas en una sola página
-4. Las páginas funcionan sin necesidad de servidor (archivos estáticos)
+1. Abre cualquier archivo HTML en un navegador web moderno
+2. Los estilos utilizan Tailwind CSS (cargado desde CDN)
+3. No requiere instalación de dependencias
 
-## 🎨 Tecnologías
+## 🎨 Características
 
-- HTML5
-- Tailwind CSS
-- JavaScript (Vanilla)
-- Ionicons
-- Formspree (para formularios)
-- iframes para integración modular
-
-## 📱 Contacto
-
-**VERANO STATE by chef franko**
-- 📞 +52 322 160 6843
-- 📧 franko@veranostate.com
-- 📸 [@veranostate](https://www.instagram.com/veranostate/)
+- Diseño responsive
+- Temas modernos (cyberpunk neón, elegante)
+- Interactividad completa con JavaScript
+- Sistemas de carrito y pago
+- Búsqueda y filtrado de productos
 
 ---
 
-© 2025 VERANO STATE. Todos los derechos reservados.
+_Organizado y documentado con amor_ ❤️

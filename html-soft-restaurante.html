@@ -1,0 +1,676 @@
+html-soft -restaurante
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Verano PRO - Sistema de Gestión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #1e293b;
+        }
+
+        /* Estilo Botón Soft Restaurant */
+        .btn-soft {
+            box-shadow: 0 4px 0 #0f172a;
+            transition: all 0.1s;
+        }
+
+        .btn-soft:active {
+            box-shadow: 0 0 0 #0f172a;
+            transform: translateY(4px);
+        }
+
+        /* Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        /* Animaciones */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<head></head> body { font-family: 'Inter', sans-serif; }
+/* Ocultar scrollbar para diseño limpio tipo App */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 3px; }
+.dish-card:active { transform: scale(0.95); }
+</style>
+</head>
+
+<body class="bg-gray-100 h-screen overflow-hidden flex text-gray-800">
+
+    <div class="flex-1 flex flex-col h-full relative">
+
+        <div class="bg-white p-4 shadow-sm flex justify-between items-center z-10">
+            <div>
+                <h1 class="text-2xl font-extrabold text-indigo-700 tracking-tight">FRANKO POS ⚡</h1>
+                <p class="text-xs text-gray-500" id="datetime">Cargando fecha...</p>
+            </div>
+            <div class="flex gap-2">
+                <div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold flex items-center">
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span> Online
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 p-2 border-b flex gap-2 overflow-x-auto whitespace-nowrap" id="category-container">
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 bg-gray-100">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="menu-grid">
+            </div>
+        </div>
+    </div>
+
+    <div class="w-96 bg-white shadow-2xl h-full flex flex-col border-l border-gray-200 relative z-20">
+
+        <div class="p-4 bg-indigo-50 border-b border-indigo-100">
+            <div class="flex justify-between items-center mb-2">
+                <h2 class="font-bold text-lg">Orden #<span id="order-id">001</span></h2>
+                <button onclick="clearCart()" class="text-red-500 text-sm hover:text-red-700 font-semibold">🗑️
+                    Borrar</button>
+            </div>
+            <div class="flex gap-2">
+                <button
+                    class="flex-1 bg-white border border-indigo-200 text-indigo-600 py-1 rounded text-sm hover:bg-indigo-100">Mesa
+                    4</button>
+                <button
+                    class="flex-1 bg-white border border-indigo-200 text-indigo-600 py-1 rounded text-sm hover:bg-indigo-100">Llevar</button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-4 space-y-3" id="cart-items">
+            <div class="h-full flex flex-col items-center justify-center text-gray-400 opacity-50">
+                <span class="text-6xl mb-2">🛒</span>
+                <p>No hay productos</p>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 p-4 border-t border-gray-200">
+            <div class="space-y-1 mb-4 text-sm">
+                <div class="flex justify-between text-gray-600">
+                    <span>Subtotal</span>
+                    <span id="subtotal-display">$0.00</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                    <span>IVA (16%)</span>
+                    <span id="tax-display">$0.00</span>
+                </div>
+                <div class="flex justify-between font-bold text-xl text-gray-900 mt-2 pt-2 border-t border-gray-300">
+                    <span>Total</span>
+                    <span id="total-display">$0.00</span>
+                </div>
+            </div>
+
+            <button onclick="openCheckout()"
+                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transform transition hover:-translate-y-1 flex justify-between px-6">
+                <span>COBRAR</span>
+                <span id="btn-total">$0.00</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="checkout-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 transform transition-all scale-100">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Procesar Pago</h3>
+                <button onclick="closeCheckout()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+
+            <div class="text-center mb-8">
+                <p class="text-gray-500 uppercase text-xs font-bold tracking-wider">Total a Pagar</p>
+                <p class="text-4xl font-extrabold text-indigo-600" id="modal-total">$0.00</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mb-6">
+                <button onclick="processPayment('Efectivo')"
+                    class="p-4 border-2 border-gray-100 rounded-xl hover:border-green-500 hover:bg-green-50 transition flex flex-col items-center gap-2 group">
+                    <span class="text-2xl group-hover:scale-110 transition">💵</span>
+                    <span class="font-bold text-gray-600 group-hover:text-green-600">Efectivo</span>
+                </button>
+                <button onclick="processPayment('Tarjeta')"
+                    class="p-4 border-2 border-gray-100 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition flex flex-col items-center gap-2 group">
+                    <span class="text-2xl group-hover:scale-110 transition">💳</span>
+                    <span class="font-bold text-gray-600 group-hover:text-blue-600">Tarjeta</span>
+                </button>
+            </div>
+            <script>
+                // --- 1. BASE DE DATOS (SIMULADA) ---
+                const products = [
+                    { id: 1, name: "breadfast por person", price: 120, category: "food", emoji: "🍔" },
+                    { id: 2, name: "lunche por person", price: 180, category: "food", emoji: "🍕" },
+                    { id: 3, name: "cenas gourtme 3)tiempos", price: 595, category: "food", emoji: "🌮" },
+                    { id: 4, name: "barra libre gold", price: 110, category: "food", emoji: "🥗" },
+                    { id: 5, name: "Papas Fritas", price: 60, category: "sides", emoji: "🍟" },
+                    { id: 6, name: "Coca Cola", price: 35, category: "drinks", emoji: "🥤" },
+                    { id: 7, name: "Cerveza Artesanal", price: 80, category: "drinks", emoji: "🍺" },
+                    { id: 8, name: "Aguas Fresca", price: 40, category: "drinks", emoji: "🧃" },
+                    { id: 9, name: "desyunos premiun", price: 285, category: "dessert", emoji: "🍰" },
+                    { id: 10, name: "Café ulyimo dia", price: 45, category: "drinks", emoji: "☕" },
+                ];
+
+                const categories = [
+                    { id: "all", name: "Todos", icon: "🍽️" },
+                    { id: "food", name: "Comida", icon: "🥘" },
+                    { id: "drinks", name: "Bebidas", icon: "🥤" },
+                    { id: "sides", name: "Extras", icon: "🍟" },
+                    { id: "dessert", name: "Postres", icon: "🍰" }
+                ];
+
+                let cart = [];
+                let currentCategory = 'all';
+                let orderCount = 1;
+
+                // --- 2. INICIALIZACIÓN ---
+                document.addEventListener('DOMContentLoaded', () => {
+                    renderCategories();
+                    renderMenu();
+                    updateDateTime();
+                    setInterval(updateDateTime, 1000);
+                });
+
+                function updateDateTime() {
+                    const now = new Date();
+                    document.getElementById('datetime').innerText = now.toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                }
+
+                // --- 3. RENDERIZADO ---
+                function renderCategories() {
+                    const container = document.getElementById('category-container');
+                    container.innerHTML = categories.map(cat => `
+                <button onclick="filterMenu('${cat.id}')" 
+                    class="px-4 py-2 rounded-lg font-semibold text-sm transition 
+                    ${currentCategory === cat.id ? 'bg-indigo-600 text-white shadow-md' : 'bg-white text-gray-600 hover:bg-gray-200'}">
+                    ${cat.icon} ${cat.name}
+                </button>
+            `).join('');
+                }
+
+                function filterMenu(catId) {
+                    currentCategory = catId;
+                    renderCategories();
+                    renderMenu();
+                }
+
+                function renderMenu() {
+                    const grid = document.getElementById('menu-grid');
+                    const filtered = currentCategory === 'all'
+                        ? products
+                        : products.filter(p => p.category === currentCategory);
+
+                    grid.innerHTML = filtered.map(product => `
+                <div onclick="addToCart(${product.id})" class="dish-card bg-white p-4 rounded-2xl shadow hover:shadow-lg cursor-pointer transition duration-200 border border-transparent hover:border-indigo-300 flex flex-col items-center text-center h-48 justify-between select-none">
+                    <div class="text-5xl mb-2 transform transition hover:scale-110">${product.emoji}</div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 leading-tight mb-1">${product.name}</h3>
+                        <p class="text-indigo-600 font-extrabold">$${product.price.toFixed(2)}</p>
+                    </div>
+                </div>
+            `).join('');
+                }
+
+                function updateCartUI() {
+                    const container = document.getElementById('cart-items');
+
+                    if (cart.length === 0) {
+                        container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-gray-400 opacity-50">
+                        <span class="text-6xl mb-2">🛒</span>
+                        <p>Orden vacía</p>
+                    </div>`;
+                    } else {
+                        container.innerHTML = cart.map((item, index) => `
+                    <div class="flex justify-between items-center bg-white p-3 rounded-lg shadow-sm border border-gray-100 animate-fadeIn">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm text-gray-800">${item.name}</h4>
+                            <p class="text-xs text-gray-500">$${item.price} x ${item.qty}</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <p class="font-bold text-gray-800">$${(item.price * item.qty).toFixed(2)}</p>
+                            <div class="flex flex-col gap-1">
+                                <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 bg-gray-200 rounded text-xs hover:bg-green-200 text-green-700 font-bold">+</button>
+                                <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 bg-gray-200 rounded text-xs hover:bg-red-200 text-red-700 font-bold">-</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                    }
+
+                    // Cálculos
+                    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                    const tax = subtotal * 0.16;
+                    const total = subtotal + tax;
+
+                    document.getElementById('subtotal-display').innerText = formatMoney(subtotal);
+                    document.getElementById('tax-display').innerText = formatMoney(tax);
+                    document.getElementById('total-display').innerText = formatMoney(total);
+                    document.getElementById('btn-total').innerText = formatMoney(total);
+                    document.getElementById('modal-total').innerText = formatMoney(total);
+                }
+
+                // --- 4. LÓGICA DEL CARRITO ---
+                function addToCart(id) {
+                    const product = products.find(p => p.id === id);
+                    const existing = cart.find(c => c.id === id);
+
+                    if (existing) {
+                        existing.qty++;
+                    } else {
+                        cart.push({ ...product, qty: 1 });
+                    }
+
+                    // Efecto de sonido simple (opcional)
+                    // new Audio('beep.mp3').play().catch(e=>{}); 
+                    updateCartUI();
+                }
+
+                function changeQty(id, delta) {
+                    const itemIndex = cart.findIndex(c => c.id === id);
+                    if (itemIndex === -1) return;
+
+                    cart[itemIndex].qty += delta;
+
+                    if (cart[itemIndex].qty <= 0) {
+                        cart.splice(itemIndex, 1);
+                    }
+                    updateCartUI();
+                }
+
+                function clearCart() {
+                    if (confirm('¿Estás seguro de borrar la orden actual?')) {
+                        cart = [];
+                        updateCartUI();
+                    }
+                }
+
+                // --- 5. PROCESO DE PAGO ---
+                function openCheckout() {
+                    if (cart.length === 0) {
+                        alert("El carrito está vacío.");
+                        return;
+                    }
+                    document.getElementById('checkout-modal').classList.remove('hidden');
+                    document.getElementById('checkout-modal').classList.add('flex');
+                }
+
+                function closeCheckout() {
+                    document.getElementById('checkout-modal').classList.add('hidden');
+                    document.getElementById('checkout-modal').classList.remove('flex');
+                }
+
+                function processPayment(method) {
+                    const total = document.getElementById('total-display').innerText;
+
+                    // Simulación de procesamiento
+                    const btnText = method === 'Tarjeta' ? 'Conectando con terminal...' : 'Abriendo cajón...';
+
+                    alert(`✅ PAGO APROBADO\n\nMétodo: ${method}\nTotal: ${total}\n\n¡Imprimiendo recibo!`);
+
+                    // Resetear para la siguiente orden
+                    cart = [];
+                    orderCount++;
+                    document.getElementById('order-id').innerText = orderCount.toString().padStart(3, '0');
+                    closeCheckout();
+                    updateCartUI();
+                }
+
+                function formatMoney(amount) {
+                    return '$' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                }
+                <button onclick="closeCheckout()" class="w-full py-3 text-gray-500 font-semibold hover:bg-gray-100 rounded-lg">Cancelar</button>
+        </div >
+    </div >
+                    <body class="text-white h-screen overflow-hidden flex flex-col">
+
+                        <header class="bg-slate-900 p-2 flex justify-between items-center border-b border-slate-700 h-14">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-blue-600 p-2 rounded font-bold">VILLA VERANO PRO</div>
+                                <div class="text-sm text-gray-400">Usuario: <span class="text-white font-bold">Chef Franko</span></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <button onclick="toggleAdminMode()" class="text-xs bg-slate-700 px-3 py-1 rounded hover:bg-slate-600 border border-slate-500">
+                                    👁️ Ver Costos (Admin)
+                                </button>
+                                <div id="clock" class="font-mono text-xl font-bold text-blue-400">00:00</div>
+                            </div>
+                        </header>
+
+                        <div class="flex-1 flex overflow-hidden relative">
+
+                            <div id="view-tables" class="absolute inset-0 bg-slate-800 z-20 p-6 fade-in flex flex-col">
+                                <h2 class="text-2xl font-bold mb-6 text-center border-b border-slate-600 pb-2">SELECCIONAR MESA</h2>
+
+                                <div class="flex gap-4 mb-6 justify-center">
+                                    <button class="px-6 py-2 bg-blue-600 rounded-t-lg font-bold">TERRAZA</button>
+                                    <button class="px-6 py-2 bg-slate-700 rounded-t-lg text-gray-400 hover:bg-slate-600">COMEDOR</button>
+                                    <button class="px-6 py-2 bg-slate-700 rounded-t-lg text-gray-400 hover:bg-slate-600">BARRA</button>
+                                </div>
+
+                                <div class="grid grid-cols-4 gap-6 max-w-4xl mx-auto w-full">
+                                    <button onclick="openTable(1)" class="btn-soft bg-green-600 h-32 rounded-lg flex flex-col items-center justify-center hover:bg-green-500">
+                                        <ion-icon name="restaurant" class="text-4xl mb-2"></ion-icon>
+                                        <span class="font-bold text-xl">MESA 1</span>
+                                        <span class="text-xs mt-1 text-green-200">Libre</span>
+                                    </button>
+                                    <button onclick="openTable(2)" class="btn-soft bg-green-600 h-32 rounded-lg flex flex-col items-center justify-center hover:bg-green-500">
+                                        <ion-icon name="restaurant" class="text-4xl mb-2"></ion-icon>
+                                        <span class="font-bold text-xl">MESA 2</span>
+                                        <span class="text-xs mt-1 text-green-200">Libre</span>
+                                    </button>
+                                    <button onclick="openTable(3)" class="btn-soft bg-red-600 h-32 rounded-lg flex flex-col items-center justify-center hover:bg-red-500 relative">
+                                        <div class="absolute top-2 right-2 bg-white text-red-600 text-xs px-1 rounded font-bold">Ocupada</div>
+                                        <ion-icon name="people" class="text-4xl mb-2"></ion-icon>
+                                        <span class="font-bold text-xl">MESA 3</span>
+                                        <span class="text-xs mt-1 text-red-200">$1,240.00</span>
+                                    </button>
+                                    <button onclick="openTable(4)" class="btn-soft bg-green-600 h-32 rounded-lg flex flex-col items-center justify-center hover:bg-green-500">
+                                        <ion-icon name="restaurant" class="text-4xl mb-2"></ion-icon>
+                                        <span class="font-bold text-xl">MESA 4</span>
+                                        <span class="text-xs mt-1 text-green-200">Libre</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="view-pos" class="flex w-full h-full hidden">
+
+                                <div class="w-3/4 flex flex-col border-r border-slate-700 bg-slate-800">
+                                    <div class="h-16 bg-slate-900 flex items-center px-2 gap-2 overflow-x-auto" id="category-bar">
+                                    </div>
+
+                                    <div class="flex-1 p-4 overflow-y-auto grid grid-cols-4 gap-3 content-start" id="menu-grid">
+                                    </div>
+
+                                    <div class="h-14 bg-slate-900 flex items-center justify-between px-4 border-t border-slate-700">
+                                        <button onclick="showTables()" class="bg-orange-600 hover:bg-orange-500 px-6 py-2 rounded font-bold text-white flex items-center gap-2">
+                                            <ion-icon name="arrow-back"></ion-icon> SALIR A MESAS
+                                        </button>
+                                        <span class="text-gray-400 text-sm">Mesa Actual: <span id="current-table-label" class="text-white font-bold text-lg">#1</span></span>
+                                    </div>
+                                </div>
+
+                                <div class="w-1/4 bg-slate-100 text-slate-900 flex flex-col shadow-2xl relative z-10">
+                                    <div class="bg-blue-800 text-white p-3 font-bold flex justify-between">
+                                        <span>Cuenta</span>
+                                        <span id="ticket-table-num">Mesa 1</span>
+                                    </div>
+
+                                    <div id="cart-items" class="flex-1 overflow-y-auto p-2 space-y-1 text-sm">
+                                    </div>
+
+                                    <div class="bg-white border-t border-slate-300 p-3">
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span>Subtotal:</span>
+                                            <span id="lbl-subtotal" class="font-bold">$0.00</span>
+                                        </div>
+                                        <div class="flex justify-between text-xl font-bold text-blue-800 mb-3">
+                                            <span>TOTAL:</span>
+                                            <span id="lbl-total">$0.00</span>
+                                        </div>
+
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <button onclick="printCommand()" class="bg-slate-700 text-white py-3 rounded font-bold hover:bg-slate-600 text-sm">
+                                                COCINA
+                                            </button>
+                                            <button onclick="payOrder()" class="bg-green-600 text-white py-3 rounded font-bold hover:bg-green-500 text-sm">
+                                                PAGAR
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="modal-mods" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center">
+                            <div class="bg-slate-800 p-6 rounded-lg w-96 border border-slate-600 shadow-2xl">
+                                <h3 class="text-xl font-bold mb-4 text-center" id="mod-title">Modificadores</h3>
+                                <div class="grid grid-cols-2 gap-3 mb-4" id="mod-options">
+                                </div>
+                                <button onclick="closeMods()" class="w-full bg-red-600 py-3 rounded font-bold hover:bg-red-500">Cancelar</button>
+                            </div>
+                        </div>
+
+                        <script>
+        // --- DATOS REALES (De tu PDF + Lógica SoftRestaurant) ---
+                            const menuDB = [
+                            // Fuertes
+                            {id: 10, name: "Puntas de Res", price: 14.00, cost: 3.41, category: "Fuertes", mods: ["Término Medio", "3/4", "Bien Cocido"] },
+                            {id: 12, name: "Lomito de Res", price: 38.00, cost: 10.41, category: "Fuertes", mods: ["Término Medio", "3/4", "Bien Cocido"] },
+                            {id: 13, name: "Ossobuco", price: 30.00, cost: 6.94, category: "Fuertes", mods: ["Con Puré", "Con Verduras"] },
+                            {id: 16, name: "Linguini Frutti Mare", price: 29.00, cost: 5.34, category: "Fuertes", mods: ["Sin Queso", "Extra Picante"] },
+                            // Desayunos
+                            {id: 1, name: "Huevos Rancheros", price: 10.00, cost: 0.49, category: "Desayuno", mods: ["Huevo Tierno", "Bien Cocido"] },
+                            {id: 3, name: "Chilaquiles", price: 13.00, cost: 2.81, category: "Desayuno", mods: ["Verdes", "Rojos", "Con Pollo", "Con Huevo"] },
+                            // Bebidas
+                            {id: 99, name: "Coca Cola", price: 3.00, cost: 0.50, category: "Bebidas", mods: ["Con Hielo", "Sin Hielo"] },
+                            {id: 98, name: "Margarita", price: 12.00, cost: 2.00, category: "Bebidas", mods: ["Sal", "Sin Sal"] }
+                            ];
+
+                            let currentTable = 1;
+                            let cart = { }; // Estructura: {tableId: [items] }
+                            let adminMode = false;
+
+                            // --- INICIO ---
+                            function init() {
+                                updateClock();
+                            setInterval(updateClock, 60000);
+                            renderCategories("Desayuno");
+        }
+
+                            // --- NAVEGACIÓN ---
+                            function openTable(tableId) {
+                                currentTable = tableId;
+                            document.getElementById('view-tables').classList.add('hidden');
+                            document.getElementById('view-pos').classList.remove('hidden');
+                            document.getElementById('current-table-label').innerText = `#${tableId}`;
+                            document.getElementById('ticket-table-num').innerText = `Mesa ${tableId}`;
+                            renderCart();
+        }
+
+                            function showTables() {
+                                document.getElementById('view-pos').classList.add('hidden');
+                            document.getElementById('view-tables').classList.remove('hidden');
+        }
+
+                            function updateClock() {
+            const now = new Date();
+                            document.getElementById('clock').innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        }
+
+                            // --- MENÚ Y PRODUCTOS ---
+                            function renderCategories(activeCat) {
+            const cats = [...new Set(menuDB.map(i => i.category))];
+                            const bar = document.getElementById('category-bar');
+            bar.innerHTML = cats.map(c => `
+                            <button onclick="renderMenu('${c}')"
+                                class="px-4 py-2 rounded font-bold whitespace-nowrap transition ${c === activeCat ? 'bg-blue-600 text-white shadow-lg' : 'bg-slate-700 text-slate-300 hover:bg-slate-600'}">
+                                ${c.toUpperCase()}
+                            </button>
+                            `).join('');
+                            renderMenu(activeCat);
+        }
+
+                            function renderMenu(cat) {
+            const grid = document.getElementById('menu-grid');
+                            grid.innerHTML = '';
+            const items = menuDB.filter(i => i.category === cat);
+
+            items.forEach(item => {
+                // Cálculo de Margen para el Chef (Modo Admin)
+                const margin = ((item.price - item.cost) / item.price * 100).toFixed(0);
+                            const marginColor = margin < 30 ? 'text-red-400' : 'text-green-400'; // Alerta si margen es bajo
+
+                            const costInfo = adminMode
+                            ? `<div class="text-xs mt-1 bg-slate-900 p-1 rounded border border-slate-600">
+                                Costo: $${item.cost} | Mg: <span class="${marginColor}">${margin}%</span>
+                            </div>`
+                            : '';
+
+                            const btn = document.createElement('button');
+                            btn.className = "btn-soft bg-slate-700 hover:bg-blue-600 p-3 rounded-lg text-left flex flex-col justify-between h-28 relative group";
+                btn.onclick = () => checkModifiers(item);
+                            btn.innerHTML = `
+                            <span class="font-bold text-sm leading-tight">${item.name}</span>
+                            <div>
+                                <span class="text-xl font-bold text-yellow-400">$${item.price.toFixed(2)}</span>
+                                ${costInfo}
+                            </div>
+                            <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100">
+                                <ion-icon name="add-circle" class="text-2xl text-white"></ion-icon>
+                            </div>
+                            `;
+                            grid.appendChild(btn);
+            });
+        }
+
+                            function toggleAdminMode() {
+                                adminMode = !adminMode;
+                            // Re-renderizar la categoría actual para mostrar/ocultar costos
+                            const currentCatBtn = document.querySelector('#category-bar .bg-blue-600');
+                            const currentCat = currentCatBtn ? currentCatBtn.innerText.toLowerCase() : 'desayuno';
+                            // Capitalizar primera letra para que coincida
+                            const catFormatted = currentCat.charAt(0).toUpperCase() + currentCat.slice(1).toLowerCase();
+                            renderMenu(catFormatted);
+        }
+
+                            // --- MODIFICADORES (Lógica tipo SoftRestaurant) ---
+                            function checkModifiers(item) {
+            if (item.mods && item.mods.length > 0) {
+                                showModsModal(item);
+            } else {
+                                addItemToCart(item, ""); // Sin notas
+            }
+        }
+
+                            function showModsModal(item) {
+            const modal = document.getElementById('modal-mods');
+                            const container = document.getElementById('mod-options');
+                            document.getElementById('mod-title').innerText = `¿Cómo desea: ${item.name}?`;
+                            container.innerHTML = '';
+
+            item.mods.forEach(mod => {
+                const btn = document.createElement('button');
+                            btn.className = "bg-slate-600 hover:bg-blue-500 py-4 rounded font-bold text-white transition";
+                            btn.innerText = mod;
+                btn.onclick = () => {
+                                addItemToCart(item, mod);
+                            closeMods();
+                };
+                            container.appendChild(btn);
+            });
+
+                            // Opción "Normal"
+                            const normalBtn = document.createElement('button');
+                            normalBtn.className = "bg-green-600 hover:bg-green-500 py-4 rounded font-bold text-white col-span-2";
+                            normalBtn.innerText = "NORMAL / SIN CAMBIOS";
+            normalBtn.onclick = () => {
+                                addItemToCart(item, "");
+                            closeMods();
+            };
+                            container.appendChild(normalBtn);
+
+                            modal.classList.remove('hidden');
+        }
+
+                            function closeMods() {
+                                document.getElementById('modal-mods').classList.add('hidden');
+        }
+
+                            // --- CARRITO / COMANDA ---
+                            function addItemToCart(item, note) {
+            if (!cart[currentTable]) cart[currentTable] = [];
+
+                            cart[currentTable].push({
+                                ...item,
+                                note: note,
+                            idUnique: Date.now() // ID único para borrar individualmente
+            });
+                            renderCart();
+        }
+
+                            function renderCart() {
+            const container = document.getElementById('cart-items');
+                            container.innerHTML = '';
+
+                            const items = cart[currentTable] || [];
+
+            items.forEach((item, index) => {
+                const noteHtml = item.note ? `<div class="text-xs text-blue-600 italic">-> ${item.note}</div>` : '';
+
+                            const row = document.createElement('div');
+                            row.className = "flex justify-between items-start border-b border-slate-200 pb-1 mb-1";
+                            row.innerHTML = `
+                            <div class="w-3/4">
+                                <div class="font-bold text-slate-800">${item.name}</div>
+                                ${noteHtml}
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold">$${item.price.toFixed(2)}</div>
+                                <button onclick="removeItem(${index})" class="text-red-500 text-xs hover:underline">[X]</button>
+                            </div>
+                            `;
+                            container.appendChild(row);
+            });
+
+                            updateTotals(items);
+        }
+
+                            function removeItem(index) {
+                                cart[currentTable].splice(index, 1);
+                            renderCart();
+        }
+
+                            function updateTotals(items) {
+            const subtotal = items.reduce((acc, i) => acc + i.price, 0);
+                            const total = subtotal; // Simplificado (en México SoftRestaurant muestra Total con IVA incluido generalmente)
+
+                            document.getElementById('lbl-subtotal').innerText = `$${(subtotal * 0.84).toFixed(2)}`; // Base antes de IVA aprox
+                            document.getElementById('lbl-total').innerText = `$${total.toFixed(2)}`;
+        }
+
+                            function printCommand() {
+            if(!cart[currentTable] || cart[currentTable].length === 0) return;
+                            alert("🖨️ ENVIANDO A COCINA...\n\n(Aquí saldría el ticket térmico)");
+        }
+
+                            function payOrder() {
+            if(!cart[currentTable] || cart[currentTable].length === 0) return;
+                            const total = document.getElementById('lbl-total').innerText;
+                            if(confirm(`¿Cobrar ${total} a la Mesa ${currentTable}?`)) {
+                                cart[currentTable] = []; // Limpiar mesa
+                            renderCart();
+                            showTables();
+                            alert("¡Cobro Exitoso! Mesa Liberada.");
+            }
+        }
+
+                            init();
+            </script>
+</body>
+
+</html>
